@@ -7,9 +7,9 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.7.0
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 
-Floatbox Plus is a plugin that implements Floatbox by [Byron McGregor](http://randomous.com/tools/floatbox/) (a javascript similar to Lightview) and is based on the WP-Plugin "Lightview Plus" by [Thorsten Puzich](http://www.puzich.com/wordpress-plugins/lightview). Please read installation instructions on [my website](http://blog.splash.de/plugins/floatbox-plus)
+Floatbox Plus is a plugin that implements Floatbox by Byron McGregor (a javascript similar to Lightview/Lightbox/Shadowbox) to create nice overlay display images/videos.
 
 == Description ==
 
@@ -26,7 +26,9 @@ Please read installation instructions carefully.
 
 This plugin automatically enhance image links to use Floatbox.
 
-No other (external) JavaScript-Libraries are needed.
+No other (external) JavaScript-Libraries are needed, less incompatible with other plugins...
+
+Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
 
 Floatbox Plus is based on the WP-Plugin "Lightview Plus" by [Thorsten Puzich](http://www.puzich.com/wordpress-plugins/lightview).
 
@@ -43,9 +45,21 @@ Floatbox Plus is based on the WP-Plugin "Lightview Plus" by [Thorsten Puzich](ht
 
 No!
 
+= Possible to use this plugin with other plugins (like referrer detector) using the JQuery-Library? =
+
+Yes, Floatbox doesn't depend on external JavaScript-Libraries and is therefor compatible to referrer detector.
+
+= Is it possible to change the options of floatbox.js without editing the file itself? =
+
+Yes and no, actually only some options (theme selection + animation options) can be adjusted at the plugin options page.
+
 == Changelog ==
 
-`0.1.1
+`0.1.2
+- [NEW] change (some) floatbox options at plugin options page
+- [NEW] Updatenotices
+- [FIX] Backup and restore of floatbox during auto update of the plugin
+0.1.1
 - update (lightview: 2.0.3 -> 2.1.0)
 0.1.0
 - initial release`

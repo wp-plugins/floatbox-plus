@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 0.1.1
+Version: 0.1.2
 Description: Used to overlay images on the webpage and to automatically add links to images. Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> which is licensed under the terms of Creative Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/) and therefor it isn't included (not GPL compatible). Read installation instructions on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt. <strong>Floatbox Plus is delivered without floatbox-javascript. Please read the installation instructions on my website/readme.txt</strong>.
 */
 
@@ -13,6 +13,9 @@ global $wp_version;
 define('WPV27', version_compare($wp_version, '2.7', '>='));
 
 class floatbox_plus {
+
+    // version
+    var $version = '0.1.2';
 
     // put all options in
     var $options = array();
@@ -41,6 +44,14 @@ class floatbox_plus {
 
         // uninstall features
         register_deactivation_hook(__FILE__, array(&$this, 'uninstall'));
+
+        // quick and dirty fix for wp 2.7
+        if (WPV27 == true) {
+            add_action('admin_head', array(&$this, 'backup_before_update'), 10, 2);
+        }
+
+        // nagscreen at plugins page
+        add_action( 'after_plugin_row', array(&$this, 'plugin_version_nag') );
 
         // add wp-filter
         add_filter('the_content', array(&$this, 'change_content'), 150);
@@ -87,13 +98,46 @@ class floatbox_plus {
 		$this->video['local']['link'] = "<a title=\"Video File\" href=\"".get_option('siteurl')."###VID###\">Download Video</a>";
 	}
 
+    // quick and dirty fix for wp2.7/auto update: seems that there is no hook during the update system that can be used
+    function backup_before_update() {
+        if( preg_match('/upgrade-plugin(.*)plugin=floatbox-plus/i', $_SERVER['QUERY_STRING']) ) {
+            $this->uninstall();
+        }
+    }
+
+    // nagscreen at plugins page, based on the code of cformsII by Oliver Seidel
+    function plugin_version_nag($plugin) {
+        if (preg_match('/floatbox-plus/i',$plugin)) {
+            $checkfile = "http://blog.splash.de/_chk/floatbox-plus.$this->version.chk";
+            $this->plugin_version_get($checkfile);
+        }
+    }
+    function plugin_version_get($checkfile, $tr=false) {
+        $vcheck = wp_remote_fopen($checkfile);
+
+        if($vcheck) {
+            $status = explode('@', $vcheck);
+            $theVersion = $status[1];
+            $theMessage = $status[3];
+            if( $theMessage ) {
+                if($tr == true)
+                    echo '</tr><tr>';
+                $msg = __("Updatenotice for:", "floatboxplus").' <strong>'.$theVersion.'</strong><br />'.$theMessage;
+                echo '<td colspan="5" class="plugin-update" style="line-height:1.2em;">'.$msg.'</td>';
+            }
+            if (version_compare($theVersion, $this->version) == 1) {
+                $checkfile = "http://blog.splash.de/_chk/floatbox-plus.$theVersion.chk";
+                $this->plugin_version_get($checkfile, true);
+            }
+        }
+    }
 
     function AdminMenu()
     {
         $hook = add_options_page('FloatBox Plus', (version_compare($GLOBALS['wp_version'], '2.6.999', '>') ? '<img src="' . @plugins_url('floatbox-plus/icon.png') . '" width="10" height="10" alt="Floatbox Plus - Icon" />' : '') . 'Floatbox Plus', 8, 'floatbox_plus', array(&$this, 'OptionsMenu'));
         if (function_exists('add_contextual_help') === true) {
             add_contextual_help($hook,
-                sprintf('<a href="http://trac.splash.de/floatboxplus">%s</a><br /><a href="http://blog.splash.de/plugin/floatboxplus/">%s</a>',
+                sprintf('<a href="http://trac.splash.de/floatboxplus">%s</a><br /><a href="http://blog.splash.de/plugin/floatbox-plus/">%s</a>',
                     __('Ticketsystem/Wiki', 'floatboxplus'),
                     __('Plugin-Homepage', 'floatboxplus')
                 )
@@ -109,6 +153,16 @@ class floatbox_plus {
                         'load_gallery' => true,
                         'show_video' => true,
                         'backup_floatbox' => true,
+                        'fb_options' => true,           // floatbox
+                        'fb_theme' => 'auto',           // general
+                        'fb_doAnimations' => true,      // animations
+                        'fb_resizeDuration' => 3.5,
+                        'fb_imageFadeDuration' => 3.5,
+                        'fb_overlayFadeDuration' => 4,
+                        'fb_splitResize' => 'no',
+                        'fb_startAtClick' => true,
+                        'fb_zoomImageStart' => true,
+                        'fb_liveImageResize' => false,
                         'video_showlink' => true,
                         'video_smallink' => true,
 						'video_preview_width'=> '300',
@@ -148,6 +202,29 @@ class floatbox_plus {
 		// add option, if they does not exist
 		if(empty($this->options['video_preview_width']))
 			$this->options['video_preview_width'] = $this->options['video_width'];
+
+        // floatbox: general options
+		if(empty($this->options['fb_options']))
+			$this->options['fb_options'] = false;
+		if(empty($this->options['fb_theme']))
+			$this->options['fb_theme'] = 'auto';
+        // floatbox: animation options
+		if(empty($this->options['fb_doAnimations']))
+			$this->options['fb_doAnimations'] = true;
+		if(empty($this->options['fb_resizeDuration']))
+			$this->options['fb_resizeDuration'] = 3.5;
+		if(empty($this->options['fb_imageFadeDuration']))
+			$this->options['fb_imageFadeDuration'] = 3.5;
+		if(empty($this->options['fb_overlayFadeDuration']))
+			$this->options['fb_overlayFadeDuration'] = 4;
+		if(empty($this->options['fb_splitResize']))
+			$this->options['fb_splitResize'] = 'no';
+		if(empty($this->options['fb_startAtClick']))
+			$this->options['fb_startAtClick'] = true;
+		if(empty($this->options['fb_zoomImageStart']))
+			$this->options['fb_zoomImageStart'] = true;
+		if(empty($this->options['fb_liveImageResize']))
+			$this->options['fb_liveImageResize'] = false;
 
 		// update options
 		update_option('floatbox_plus', serialize($this->options));
@@ -545,6 +622,22 @@ class floatbox_plus {
         $path = get_option('siteurl')."/wp-content/plugins/floatbox-plus";
 
         $script = "\n<!-- FloatBox Plus Plugin -->\n";
+        // floatbox options
+        if ($this->options['fb_options'] == true) {
+            $script .= "<script type=\"text/javascript\">\nfbPageOptions =  {\n";
+            // general options
+            $script .= "theme: '".$this->options['fb_theme']."',\n";
+            // animation options
+            $script .= "doAnimations: ".$this->boolToString($this->options['fb_doAnimations']).",\n";
+            $script .= "resizeDuration: ".$this->options['fb_resizeDuration'].",\n";
+            $script .= "imageFadeDuration: ".$this->options['fb_imageFadeDuration'].",\n";
+            $script .= "overlayFadeDuration: ".$this->options['fb_overlayFadeDuration'].",\n";
+            $script .= "splitResize: '".$this->options['fb_splitResize']."',\n";
+            $script .= "startAtClick: ".$this->boolToString($this->options['fb_startAtClick']).",\n";
+            $script .= "zoomImageStart: ".$this->boolToString($this->options['fb_zoomImageStart']).",\n";
+            $script .= "liveImageResize: ".$this->boolToString($this->options['fb_liveImageResize']).",\n";
+            $script .= "};\n</script>\n";
+        }
         $script .= "<script type=\"text/javascript\" src=\"$path/floatbox/floatbox.js\"></script>\n";
         $script .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"$path/floatbox/floatbox.css\" media=\"screen\" />\n";
         $script .= "<!-- FloatBox Plus Plugin -->\n";
@@ -556,6 +649,49 @@ class floatbox_plus {
     {
 
         if (!empty($_POST)) {
+
+            // floatbox: general options
+            if($_POST['fb_options'] == 'true') {
+                $this->options['fb_options'] = true;
+            } else {
+                $this->options['fb_options'] = false;
+            }
+            if(!empty($_POST['fb_theme'])) {
+                $this->options['fb_theme'] = $_POST['fb_theme'];
+            }
+            // floatbox: animation options
+            if($_POST['fb_doAnimations'] == 'true') {
+                $this->options['fb_doAnimations'] = true;
+            } else {
+                $this->options['fb_doAnimations'] = false;
+            }
+            // if(!empty($_POST['fb_resizeDuration']))
+                $this->options['fb_resizeDuration'] = $_POST['fb_resizeDuration'];
+
+            // if(!empty($_POST['fb_imageFadeDuration']))
+                $this->options['fb_imageFadeDuration'] = $_POST['fb_imageFadeDuration'];
+
+            // if(!empty($_POST['fb_overlayFadeDuration']))
+                $this->options['fb_overlayFadeDuration'] = $_POST['fb_overlayFadeDuration'];
+
+            if(!empty($_POST['fb_splitResize']))
+                $this->options['fb_splitResize'] = $_POST['fb_splitResize'];
+
+            if($_POST['fb_startAtClick'] == 'true') {
+                $this->options['fb_startAtClick'] = true;
+            } else {
+                $this->options['fb_startAtClick'] = false;
+            }
+            if($_POST['fb_zoomImageStart'] == 'true') {
+                $this->options['fb_zoomImageStart'] = true;
+            } else {
+                $this->options['fb_zoomImageStart'] = false;
+            }
+            if($_POST['fb_liveImageResize'] == 'true') {
+                $this->options['fb_liveImageResize'] = true;
+            } else {
+                $this->options['fb_liveImageResize'] = false;
+            }
 
             // option 'load_gallery'
             if($_POST['load_gallery'] == 'true') {
@@ -629,7 +765,7 @@ class floatbox_plus {
             // echo error if floatbox js / css isn't copied to plugin dir
 
             if(!$this->check_javascript()) {
-                echo '<div id="message" class="error"><p><strong>' . __('FloatBox Javascript and/or CSS isn\'t copied to the plugin directory. See installation instructions for further details.', 'floatboxplus') . '</strong></p></div>';
+                echo '<div id="message" class="error"><p><strong>' . __('FloatBox Javascript and/or CSS isn\'t copied to the plugin directory. See installation instructions for further details.<br />This is also necessary if you just upgraded from Version 0.1.1 to 0.1.2, sorry for that. I hope the autobackup will work now again.', 'floatboxplus') . '</strong></p></div>';
             }
             ?>
 
@@ -692,6 +828,157 @@ class floatbox_plus {
 
             </tbody>
         </table>
+
+        <h3><?php _e('Floatbox Options', 'floatboxplus'); ?></h3>
+
+        <table class="form-table">
+            <tbody>
+                <?php // activate the floatbox options ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('Change the options of floatbox.js?', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="fb_options" size="1">
+                            <option value="true" <?php if ($this->options['fb_options'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
+                            <option value="false" <?php if ($this->options['fb_options'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('Overwrite the settings in floatbox.js with the values set here.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                <?php // floatbox theme ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('Theme', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="fb_theme" size="1">
+                            <option value="auto" <?php if ($this->options['fb_theme'] == 'auto' ) { ?>selected="selected"<?php } ?>><?php _e('auto', 'floatboxplus'); ?></option>
+                            <option value="black" <?php if ($this->options['fb_theme'] == 'black' ) { ?>selected="selected"<?php } ?>><?php _e('black', 'floatboxplus'); ?></option>
+                            <option value="white" <?php if ($this->options['fb_theme'] == 'white' ) { ?>selected="selected"<?php } ?>><?php _e('white', 'floatboxplus'); ?></option>
+                            <option value="blue" <?php if ($this->options['fb_theme'] == 'blue' ) { ?>selected="selected"<?php } ?>><?php _e('blue', 'floatboxplus'); ?></option>
+                            <option value="yellow" <?php if ($this->options['fb_theme'] == 'yellow' ) { ?>selected="selected"<?php } ?>><?php _e('yellow', 'floatboxplus'); ?></option>
+                            <option value="red" <?php if ($this->options['fb_theme'] == 'red' ) { ?>selected="selected"<?php } ?>><?php _e('red', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('Color theme. \'Auto\' will use the black theme for images, white for iframe content, and blue for flash and quicktime.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                <?php // activate the floatbox options ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('doAnimations', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="fb_doAnimations" size="1">
+                            <option value="true" <?php if ($this->options['fb_doAnimations'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
+                            <option value="false" <?php if ($this->options['fb_doAnimations'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('Shorthand for resizeDuration=0, imageFadeDuration=0 and zoomImageStart=false.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                        <?php // resizeDuration ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php echo _e('resizeDuration', 'floatboxplus'); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" value="<?php echo $this->options['fb_resizeDuration'] ?>" name="fb_resizeDuration" id="fb_resizeDuration" size="5" maxlength="3" />
+                        <br />
+                        <?php _e('Controls the speed at which animated resizing occurs. 0 = no resize animation, 1 is fast, 10 is slooow. These are unit-less numbers, and don\'t equate to a fixed time period. Larger size changes will take longer than smaller size changes.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                        <?php // imageFadeDuration ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php echo _e('imageFadeDuration', 'floatboxplus'); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" value="<?php echo $this->options['fb_imageFadeDuration'] ?>" name="fb_imageFadeDuration" id="fb_imageFadeDuration" size="5" maxlength="3" />
+                        <br />
+                        <?php _e('Controls the speed of the opacity fade-in for images as they come into the display. 0 = no image fade-in, 1 is fast, 10 is slooow. These too are unit-less numbers.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                        <?php // fb_overlayFadeDuration ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php echo _e('overlayFadeDuration', 'floatboxplus'); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" value="<?php echo $this->options['fb_overlayFadeDuration'] ?>" name="fb_overlayFadeDuration" id="fb_overlayFadeDuration" size="5" maxlength="3" />
+                        <br />
+                        <?php _e('Controls the speed of the opacity fade-in and fade-out for the translucent overlay which covers the host page. 0 = no overlay fading in or out, 1 is fast, 10 is slooow.  Unit-less.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                <?php // splitResize ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('splitResize', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="fb_splitResize" size="1">
+                            <option value="no" <?php if ($this->options['fb_splitResize'] == 'no' ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                            <option value="auto" <?php if ($this->options['fb_splitResize'] == 'auto' ) { ?>selected="selected"<?php } ?>><?php _e('auto', 'floatboxplus'); ?></option>
+                            <option value="wh" <?php if ($this->options['fb_splitResize'] == 'wh' ) { ?>selected="selected"<?php } ?>><?php _e('wh', 'floatboxplus'); ?></option>
+                            <option value="hw" <?php if ($this->options['fb_splitResize'] == 'hw' ) { ?>selected="selected"<?php } ?>><?php _e('hw', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('Default animated resizing of floatbox resizes width, height, top and left simultaneously. The settings other than \'no\' give sequenced animation where the X and Y dimensions are resized seperately. The two options \'wh\' and \'hw\' force either width or height to always go first. The better splitResize option is probably \'auto\'.  This will always do the smallest dimension first. Using a splitResize of auto prevents unaesthetic resize behaviour of initially bloating up in the larger dimension.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                <?php // startAtClick ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('startAtClick', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="fb_startAtClick" size="1">
+                            <option value="true" <?php if ($this->options['fb_startAtClick'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
+                            <option value="false" <?php if ($this->options['fb_startAtClick'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('If true (and resizeDuration is not 0) floatbox will expand out from the clicked anchor and shrink back to that anchor when closed. If false, floatbox will start and end from the center of the screen.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                <?php // zoomImageStart ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('zoomImageStart', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="fb_zoomImageStart" size="1">
+                            <option value="true" <?php if ($this->options['fb_zoomImageStart'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
+                            <option value="false" <?php if ($this->options['fb_zoomImageStart'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('If true (and resizeDuration is not 0) images will expand out from the clicked thumbnail on start and collapse back to the thumbnail on exit.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                <?php // liveImageResize ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('liveImageResize', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="fb_liveImageResize" size="1">
+                            <option value="true" <?php if ($this->options['fb_liveImageResize'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
+                            <option value="false" <?php if ($this->options['fb_liveImageResize'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('If true (and resizeDuration is not 0) images will remain displayed while they are being resized. If false they will be hidden during a resize and the "loading" gif displayed in their place.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+            </tbody>
+         </table>
 
         <h3><?php _e('Video Options', 'floatboxplus'); ?></h3>
 
@@ -784,7 +1071,7 @@ class floatbox_plus {
                 </tr>
             </tbody>
         </table>
-
+        <input type="hidden" name="fb_submit" id="fb_submit" value="1" />
         <p class="submit">
             <input type="submit" name="Submit" value="<?php _e('Update Options »', 'floatboxplus'); ?>" />
         </p>
@@ -835,6 +1122,12 @@ class floatbox_plus {
 		else
 			return $link;
 	}
+
+    function boolToString($bool) {
+        if ($bool == 0)
+            return 'false';
+        return 'true';
+    }
 } // end class
 
 //initalize class
