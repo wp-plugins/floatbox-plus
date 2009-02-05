@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 0.1.2
+Version: 0.1.3
 Description: Used to overlay images on the webpage and to automatically add links to images. Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> which is licensed under the terms of Creative Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/) and therefor it isn't included (not GPL compatible). Read installation instructions on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt. <strong>Floatbox Plus is delivered without floatbox-javascript. Please read the installation instructions on my website/readme.txt</strong>.
 */
 
@@ -15,7 +15,7 @@ define('WPV27', version_compare($wp_version, '2.7', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '0.1.2';
+    var $version = '0.1.3';
 
     // put all options in
     var $options = array();
@@ -374,7 +374,7 @@ class floatbox_plus {
         // $pattern['title'] = "/<a(.*)[^title=](.*?)><img(.*?)title=('|\")([A-Za-z0-9\/_\.\~\:-]*?)('|\")([^\>]*?)><\/a>/i";
         // <img class="alignright size-medium wp-image-25" title="blog.splash.de" src="http://testdrive.splash.de/wp/wp-content/uploads/2008/09/blogsplashde-300x180.jpg" alt="blogsplashde" height="180" width="300">
         $pattern['title'] = "/<a([^\>]*)><img(.*?)title=\"([^\"]*)\"([^\>]*)><\/a>/ui";
-        $replacement = '<a$1 title="$3"><img$2title="$3"$4></a>';
+        $replacement = '<a$1 rev="caption:`$3`"><img$2title="$3"$4></a>';
         // $replacement='REPLACEMENT';
         $content = preg_replace($pattern['title'], $replacement, $content);
 

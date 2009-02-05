@@ -7,7 +7,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.7.0
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 
 Floatbox Plus is a plugin that implements Floatbox by Byron McGregor (a javascript similar to Lightview/Lightbox/Shadowbox) to create nice overlay display images/videos.
 
@@ -55,7 +55,10 @@ Yes and no, actually only some options (theme selection + animation options) can
 
 == Changelog ==
 
-`0.1.2
+`0.1.3
+- [FIX] using captions instead of title
+- [FIX] NextGen Gallery: HTML in comments... (#5)
+0.1.2
 - [NEW] change (some) floatbox options at plugin options page
 - [NEW] Updatenotices
 - [FIX] Backup and restore of floatbox during auto update of the plugin
