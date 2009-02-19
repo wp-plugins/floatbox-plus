@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 0.1.3
+Version: 0.1.4
 Description: Used to overlay images on the webpage and to automatically add links to images. Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> which is licensed under the terms of Creative Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/) and therefor it isn't included (not GPL compatible). Read installation instructions on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt. <strong>Floatbox Plus is delivered without floatbox-javascript. Please read the installation instructions on my website/readme.txt</strong>.
 */
 
@@ -15,7 +15,7 @@ define('WPV27', version_compare($wp_version, '2.7', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '0.1.3';
+    var $version = '0.1.4';
 
     // put all options in
     var $options = array();
@@ -619,12 +619,14 @@ class floatbox_plus {
     }
 
     function add_header() {
-        $path = get_option('siteurl')."/wp-content/plugins/floatbox-plus";
+        $path = plugins_url()."/floatbox-plus";
 
         $script = "\n<!-- FloatBox Plus Plugin -->\n";
+        $script .= "<script type=\"text/javascript\">\nfbPageOptions =  {\n";
+        $script .= "urlGraphics: '".$path."/floatbox/graphics/',\n";
+        $script .= "urlLanguages: '".$path."/floatbox/languages/',\n";
         // floatbox options
         if ($this->options['fb_options'] == true) {
-            $script .= "<script type=\"text/javascript\">\nfbPageOptions =  {\n";
             // general options
             $script .= "theme: '".$this->options['fb_theme']."',\n";
             // animation options
@@ -636,8 +638,8 @@ class floatbox_plus {
             $script .= "startAtClick: ".$this->boolToString($this->options['fb_startAtClick']).",\n";
             $script .= "zoomImageStart: ".$this->boolToString($this->options['fb_zoomImageStart']).",\n";
             $script .= "liveImageResize: ".$this->boolToString($this->options['fb_liveImageResize']).",\n";
-            $script .= "};\n</script>\n";
         }
+        $script .= "};\n</script>\n";
         $script .= "<script type=\"text/javascript\" src=\"$path/floatbox/floatbox.js\"></script>\n";
         $script .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"$path/floatbox/floatbox.css\" media=\"screen\" />\n";
         $script .= "<!-- FloatBox Plus Plugin -->\n";
@@ -1057,7 +1059,7 @@ class floatbox_plus {
 							<?php _e('Choose the width of the preview images for the videos', 'floatboxplus'); ?>
 						</td>
 					</tr>
-                    
+
                         <?php // Video Width ?>
                 <tr valign="top">
                     <th scope="row">

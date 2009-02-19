@@ -3,30 +3,32 @@ Contributors: Oliver Schaal
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus/
-Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overlay
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=C2RBCTVPU9QKJ&lc=DE&item_name=splash%2ede&item_number=WordPress%20Plugin%3a%20Floatbox%20Plus&cn=Mitteilung%20an%20den%20Entwickler&no_shipping=1&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
+Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overlay, fancybox, thickbox
 License: GPL v3, see LICENSE
 Requires at least: 2.5
-Tested up to: 2.7.0
-Stable tag: 0.1.3
+Tested up to: 2.7.1
+Stable tag: 0.1.4
 
-Floatbox Plus is a plugin that implements Floatbox by Byron McGregor (a javascript similar to Lightview/Lightbox/Shadowbox) to create nice overlay display images/videos.
+Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
 == Description ==
 
-Floatbox Plus is a plugin that implements Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> (a javascript similar to Lightview).
+Floatbox Plus is a plugin that implements Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> (a javascript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox).
 Floatbox Plus is used to create overlay display images/videos (only youtube/vimeo) on the webpage and to automatically add the correct overlay links to images.
 Floatbox Plus permits users to view larger versions of images/videos without having to leave the current page, and is also able to display
 simple slideshows. Floatbox Plus captures the image title for display in the overlay.
+
+This plugin automatically enhance image links to use Floatbox, videos from youtube/vimeo can be inserted via wysiwyg-editor-plugin.
+
+No other (external) JavaScript-Libraries (like Mootools/Prototype, Scriptaculous/JQuery) are needed. Unlike Lightview Plus
+this plugin should work with other plugins using prototyp/scriptaculous like Referrer Detector (the reason, why i made this fork).
 
 Cause Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed
 under the terms of Creative Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/)
 it is not included (not GPL compatible).
 
 Please read installation instructions carefully.
-
-This plugin automatically enhance image links to use Floatbox.
-
-No other (external) JavaScript-Libraries are needed, less incompatible with other plugins...
 
 Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
 
@@ -55,7 +57,9 @@ Yes and no, actually only some options (theme selection + animation options) can
 
 == Changelog ==
 
-`0.1.3
+`0.1.4
+- [FIX] URL to language files/graphics of floatbox
+0.1.3
 - [FIX] using captions instead of title
 - [FIX] NextGen Gallery: HTML in comments... (#5)
 0.1.2
