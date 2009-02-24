@@ -5,8 +5,8 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 0.1.4
-Description: Used to overlay images on the webpage and to automatically add links to images. Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> which is licensed under the terms of Creative Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/) and therefor it isn't included (not GPL compatible). Read installation instructions on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt. <strong>Floatbox Plus is delivered without floatbox-javascript. Please read the installation instructions on my website/readme.txt</strong>.
+Version: 0.2.0
+Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
 global $wp_version;
@@ -15,7 +15,7 @@ define('WPV27', version_compare($wp_version, '2.7', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '0.1.4';
+    var $version = '0.2.0';
 
     // put all options in
     var $options = array();
@@ -70,6 +70,16 @@ class floatbox_plus {
             add_action('admin_print_scripts', array(&$this, 'add_admin_header'));
         }
 
+        // plugin page links
+        add_filter(
+            'plugin_action_links',
+            array(
+                $this,
+                'set_plugin_actions'
+                ),
+            10,
+            2
+            );
 
 		// define object targets and links
 		$this->video['youtube']['height'] = floor($this->options['video_width']*14/17);
@@ -97,6 +107,23 @@ class floatbox_plus {
 		$this->video['local']['target'] = "<object classid=\"clsid:22D6f312-B0F6-11D0-94AB-0080C74C7E95\" codebase=\"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-oleobject\"><param name=\"filename\" value=\"".get_option('siteurl')."###VID###\" /><param name=\"autostart\" value=\"false\" /><param name=\"showcontrols\" value=\"true\" /><!--[if !IE]> <--><object data=\"".get_option('siteurl')."###VID###\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-mplayer2\"><param name=\"pluginurl\" value=\"http://www.microsoft.com/Windows/MediaPlayer/\" /><param name=\"ShowControls\" value=\"true\" /><param name=\"ShowStatusBar\" value=\"true\" /><param name=\"ShowDisplay\" value=\"true\" /><param name=\"Autostart\" value=\"0\" /></object><!--> <![endif]--></object><br />";
 		$this->video['local']['link'] = "<a title=\"Video File\" href=\"".get_option('siteurl')."###VID###\">Download Video</a>";
 	}
+
+    function set_plugin_actions($links, $file) {
+        $plugin = plugin_basename(__FILE__);
+        if ($file == $plugin && !$this->check_javascript()) {
+            return array_merge(
+                array(
+                    sprintf(
+                        '<a href="options-general.php?page=%s">%s</a>',
+                        dirname($plugin).'/floatbox-download.php',
+                        __('Download floatbox(.js)', 'floatboxplus') . '<br />'
+                        )
+                    ),
+                $links
+                );
+        }
+        return $links;
+    }
 
     // quick and dirty fix for wp2.7/auto update: seems that there is no hook during the update system that can be used
     function backup_before_update() {
@@ -765,9 +792,15 @@ class floatbox_plus {
 
             <?php
             // echo error if floatbox js / css isn't copied to plugin dir
-
+            $plugin = plugin_basename(__FILE__);
             if(!$this->check_javascript()) {
-                echo '<div id="message" class="error"><p><strong>' . __('FloatBox Javascript and/or CSS isn\'t copied to the plugin directory. See installation instructions for further details.<br />This is also necessary if you just upgraded from Version 0.1.1 to 0.1.2, sorry for that. I hope the autobackup will work now again.', 'floatboxplus') . '</strong></p></div>';
+                echo '<div id="message" class="error"><p><strong>' . __('FloatBox Javascript isn\'t copied to the plugin directory. See installation instructions for further details <br />or try the new download option: ', 'floatboxplus') . '</strong>';
+                printf(
+                        '<a href="options-general.php?page=%s">%s</a>',
+                        dirname($plugin).'/floatbox-download.php',
+                        __('Download floatbox(.js) from randomous.com', 'floatboxplus') . '<br />'
+                        );
+                echo '</p></div>';
             }
             ?>
 
@@ -982,6 +1015,8 @@ class floatbox_plus {
             </tbody>
          </table>
 
+        <p><?php _e('For more information about the many other options floatbox offers (and which aren\'t integrated yet in the plugin), take a look at the homepage:', 'floatboxplus'); ?> <a href="http://randomous.com/tools/floatbox/">Link</a></p>
+
         <h3><?php _e('Video Options', 'floatboxplus'); ?></h3>
 
         <table class="form-table">
@@ -1059,7 +1094,7 @@ class floatbox_plus {
 							<?php _e('Choose the width of the preview images for the videos', 'floatboxplus'); ?>
 						</td>
 					</tr>
-
+                    
                         <?php // Video Width ?>
                 <tr valign="top">
                     <th scope="row">
