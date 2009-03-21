@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 0.2.0
+Version: 0.3.0
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -15,7 +15,7 @@ define('WPV27', version_compare($wp_version, '2.7', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '0.2.0';
+    var $version = '0.3.0';
 
     // put all options in
     var $options = array();
@@ -37,8 +37,8 @@ class floatbox_plus {
 
         // get options
         $this->options = get_option('floatbox_plus');
-        (!is_array($this->options)) ? $this->options = unserialize($this->options) : false;
-
+        (!is_array($this->options) && !empty($this->options)) ? $this->options = unserialize($this->options) : $this->options = false;
+        
         // install default options
         register_activation_hook(__FILE__, array(&$this, 'install'));
 
@@ -175,7 +175,7 @@ class floatbox_plus {
     function install()
     {
         //add default options
-        if ($this->options == false) {
+        if (empty($this->options)) {
             add_option('floatbox_plus', serialize(array(
                         'load_gallery' => true,
                         'show_video' => true,
@@ -197,10 +197,10 @@ class floatbox_plus {
                         'video_separator' => '- ',
                         'video_showinfeed' => true
                     )));
+        } else {
+            // update options for old installs
+            $this->update();
         }
-
-		// update options for old installs
-		$this->update();
 
         // restore floatbox javascript, if backup exists and not already installed
         $bkp_folder = dirname(__FILE__) . '/../' . $this->bkp_folder;
@@ -611,14 +611,9 @@ class floatbox_plus {
 
 				$api_link = 'http://vimeo.com/api/clip/' . $id . '.xml';
 
-				// is simplexml available? Get preview image from vimeo
-				if(function_exists(simplexml_load_file)) {
-					$clip = simplexml_load_file($api_link);
-					$output = $clip->clip->thumbnail_large;
-				} else {
-					// $output = get_option('siteurl') . '/wp-content/plugins/floatbox-plus/img/preview_image.png';
-                    return false;
-				}
+                // Get preview image from vimeo
+				$clip = simplexml_load_file($api_link);
+				$output = $clip->clip->thumbnail_large;
 
 				// check response, if nothing in output -> standard image
 				if(empty($output))
@@ -1166,6 +1161,18 @@ class floatbox_plus {
         return 'true';
     }
 } // end class
+
+/*
+   if function simplexml_load_file is not compiled into php
+   use simplexml.class.php
+*/
+if(!function_exists("simplexml_load_file")) {
+	require_once('libs/simplexml.class.php');
+    function simplexml_load_file($file) {
+        $sx = new simplexml;
+        return $sx->xml_load_file($file);
+    }
+}
 
 //initalize class
 if (class_exists('floatbox_plus'))

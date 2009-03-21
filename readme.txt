@@ -66,7 +66,10 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
-`0.2.0
+`0.3.0
+- [NEW] simplexml_load_file support for PHP4 and PHP5, where it is not compiled with
+- [FIX] adding default values
+0.2.0
 - [NEW] direct download of floatbox.js inside the plugin, no more manual upload needed
 0.1.4
 - [FIX] URL to language files/graphics of floatbox
