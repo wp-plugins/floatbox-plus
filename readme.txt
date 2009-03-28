@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.7.1
-Stable tag: 0.3.0
+Stable tag: 0.3.1
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -66,7 +66,9 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
-`0.3.0
+`0.3.1
+- [FIX] showing YouTube HQ videos direct in HQ mode
+0.3.0
 - [NEW] simplexml_load_file support for PHP4 and PHP5, where it is not compiled with
 - [FIX] adding default values
 0.2.0
