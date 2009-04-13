@@ -126,6 +126,12 @@ if ($floatbox_plus->check_javascript()) {
     } else {
         // show form...
         ?>
+        <h3>Download disabled</h3>
+        <p>Due to changes in the licensing the download is actually disabled. Sorry</p>
+        <p>I'll try to reenable this possibility (as soon as possible).</p>
+        <p></p>
+        <p>For more information/download of floatbox check out the website of <a href="http://randomous.com/floatbox/home">floatbox</a>.</p>
+<!--
         <form action="options-general.php?page=<?php echo dirname(plugin_basename(__FILE__)).'/floatbox-download.php'; ?>" method="post">
             <h3>License Terms</h3>
             <p class="submit">
@@ -147,6 +153,7 @@ please consider making a fair <a href="http://randomous.com/tools/floatbox/donat
             </p>
 
         </form>
+-->
         <?php
     }
 }
