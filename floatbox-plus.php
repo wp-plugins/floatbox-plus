@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 0.3.2
+Version: 0.3.3
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -15,7 +15,7 @@ define('WPV27', version_compare($wp_version, '2.7', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '0.3.2';
+    var $version = '0.3.3';
 
     // put all options in
     var $options = array();
@@ -645,8 +645,6 @@ class floatbox_plus {
 
         $script = "\n<!-- FloatBox Plus Plugin -->\n";
         $script .= "<script type=\"text/javascript\">\nfbPageOptions =  {\n";
-        $script .= "urlGraphics: '".$path."/floatbox/graphics/',\n";
-        $script .= "urlLanguages: '".$path."/floatbox/languages/',\n";
         // floatbox options
         if ($this->options['fb_options'] == true) {
             // general options
@@ -661,6 +659,9 @@ class floatbox_plus {
             $script .= "zoomImageStart: ".$this->boolToString($this->options['fb_zoomImageStart']).",\n";
             $script .= "liveImageResize: ".$this->boolToString($this->options['fb_liveImageResize']).",\n";
         }
+        // path, won't be necessary for floatbox 3.50
+        $script .= "urlGraphics: '".$path."/floatbox/graphics/',\n";
+        $script .= "urlLanguages: '".$path."/floatbox/languages/'\n";
         $script .= "};\n</script>\n";
         $script .= "<script type=\"text/javascript\" src=\"$path/floatbox/floatbox.js\"></script>\n";
         $script .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"$path/floatbox/floatbox.css\" media=\"screen\" />\n";
