@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.7.1
-Stable tag: 0.3.3
+Stable tag: 0.3.4
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -66,7 +66,9 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
-`0.3.3
+`0.3.4
+- [FIX] YouTube HQ
+0.3.3
 - [Fix] Floatbox plus causing Error on IE7 - Expected identifier, string or number #10
 0.3.2
 - [FIX] direct download disabled, due to changes in the licensing of floatbox
