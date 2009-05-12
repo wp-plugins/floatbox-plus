@@ -14,6 +14,8 @@ Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbo
 
 == Description ==
 
+> This plugin is made for floatbox 3.24 (and below), if you want to use it with floatbox 3.50 or higher, please use the following patch: [patch/instructions](http://board.splash.de/showthread.php?t=11165)
+
 Floatbox Plus is a plugin that implements Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> (a javascript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox).
 Floatbox Plus is used to create overlay display images/videos (only youtube/vimeo) on the webpage and to automatically add the correct overlay links to images.
 Floatbox Plus permits users to view larger versions of images/videos without having to leave the current page, and is also able to display
@@ -28,9 +30,6 @@ Cause Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor<
 under the terms of Creative Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/)
 it is not included (not GPL compatible). You have two options, let the plugin download/install floatbox for you or
 do a manual installation of floatbox on your own (see installations instructions).
-
-This plugin is made for floatbox 3.24 (and below), if you want to use it with
-floatbox 3.50 or higher, please use the following patch: [patch/instructions](http://board.splash.de/showthread.php?t=11165)
 
 Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
 For Support, please use the [forum](http://board.splash.de/forumdisplay.php?f=103).
@@ -51,6 +50,11 @@ or (manual installation of floatbox)
 4. Activate the plugin through the 'Plugins' menu in the WordPress admin
 
 == Frequently Asked Questions ==
+
+= Can I use this plugin with floatbox 3.50 or higher? =
+
+This plugin is made for floatbox 3.24 (and below), if you want to use it with
+floatbox 3.50 or higher, please use the following patch: [patch/instructions](http://board.splash.de/showthread.php?t=11165)
 
 = Can I use this plugin and Lightview Plus (other any other plugin with similar function) at the same time? =
 
