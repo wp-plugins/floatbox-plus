@@ -29,6 +29,9 @@ under the terms of Creative Commons Attribution 3.0 License (http://creativecomm
 it is not included (not GPL compatible). You have two options, let the plugin download/install floatbox for you or
 do a manual installation of floatbox on your own (see installations instructions).
 
+This plugin is made for floatbox 3.24 (and below), if you want to use it with
+floatbox 3.50 or higher, please use the following patch: [patch/instructions](http://board.splash.de/showthread.php?t=11165)
+
 Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
 For Support, please use the [forum](http://board.splash.de/forumdisplay.php?f=103).
 
