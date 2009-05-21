@@ -46,7 +46,7 @@ or (manual installation of floatbox)
 
 1. Upload the 'floatbox-plus' folder to '/wp-content/plugins/'
 2. Download Floatbox from http://randomous.com/tools/floatbox/download.php
-3. Upload the 'floatbox' folder to '/wp-content/plugins/floatbox-plus/ (Only floatbox.css/.js, framebox.js and the folders graphics and languages are needed)
+3. Extract the downloaded zip file and upload the hole 'floatbox' folder to '/wp-content/plugins/floatbox-plus/floatbox/
 4. Activate the plugin through the 'Plugins' menu in the WordPress admin
 
 == Frequently Asked Questions ==
