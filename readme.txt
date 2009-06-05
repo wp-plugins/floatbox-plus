@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.7.1
-Stable tag: 0.3.4
+Stable tag: 1.0.0
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -73,7 +73,12 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
-`0.3.4
+`1.0.0
+- [NEW] videogallery (#7)
+- [NEW] compatibility for floatbox 3.50 and above/older versions are still supported (#14)
+- [FIX] compatibility fix for wordpress 2.8 (2.5++) (#12)
+- [FIX] Updated video links, with caption title (+ validation error fixed) (#13)
+0.3.4
 - [FIX] YouTube HQ
 0.3.3
 - [Fix] Floatbox plus causing Error on IE7 - Expected identifier, string or number #10

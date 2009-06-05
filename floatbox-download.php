@@ -29,7 +29,7 @@ function fbp_download($feedback = '') {
 	//And the same for the Content directory.
 	$content_dir = $wp_filesystem->wp_content_dir();
 	if( empty($content_dir) )
-		return new WP_Error('fs_no_content_dir', __('Unable to locate WordPress Content directory (wp-content).'));
+		return new WP_Error('fs_no_content_dir', __('Unable to locate WordPress Content directory (wp - content).'));
 
 	$plugins_dir = trailingslashit( $plugins_dir );
 	$content_dir = trailingslashit( $content_dir );
