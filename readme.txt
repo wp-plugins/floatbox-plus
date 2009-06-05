@@ -14,7 +14,7 @@ Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbo
 
 == Description ==
 
-> This plugin is made for floatbox 3.24 (and below), if you want to use it with floatbox 3.50 or higher, please use the following patch: [patch/instructions](http://board.splash.de/showthread.php?t=11165)
+> Please go to the options page and set which version of floatbox you use! Otherwise the plugin may not work properly.
 
 Floatbox Plus is a plugin that implements Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> (a javascript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox).
 Floatbox Plus is used to create overlay display images/videos (only youtube/vimeo) on the webpage and to automatically add the correct overlay links to images.
