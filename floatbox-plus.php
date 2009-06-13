@@ -5,17 +5,18 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 1.0.0
+Version: 1.1.0
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
 global $wp_version;
 define('WPV27', version_compare($wp_version, '2.7', '>='));
+define('WPV28', version_compare($wp_version, '2.8', '>='));
 
 class floatbox_plus {
 
     // version
-    var $version = '1.0.0';
+    var $version = '1.1.0';
 
     // put all options in
     var $options = array();
@@ -38,7 +39,7 @@ class floatbox_plus {
         // get options
         $this->options = get_option('floatbox_plus');
         (!is_array($this->options) && !empty($this->options)) ? $this->options = unserialize($this->options) : $this->options = false;
-        
+
         // install default options
         register_activation_hook(__FILE__, array(&$this, 'install'));
 
@@ -60,6 +61,11 @@ class floatbox_plus {
         add_action('wp_head', array(&$this, 'add_header'));
         add_action('admin_menu', array(&$this, 'AdminMenu'));
 
+        if (WPV28) {
+            add_action('wp_enqueue_scripts', array(&$this, 'enqueueJS'));
+            add_action('wp_enqueue_scripts', array(&$this, 'enqueueStyle'));
+        }
+
         //add wp-shortcodes
         if($this->options['load_gallery'] && WPV27 == false)
         add_filter('attachment_link', array(&$this, 'direct_image_urls_for_galleries'), 10, 2);
@@ -67,7 +73,11 @@ class floatbox_plus {
         // add MCE Editor Button
         if($this->options['show_video']) {
             add_action('init', array(&$this, 'mceinit'));
-            add_action('admin_print_scripts', array(&$this, 'add_admin_header'));
+            if (WPV28) {
+                add_action('admin_enqueue_scripts', array(&$this, 'enqueueAdmin'));
+            } else {
+                add_action('admin_print_scripts', array(&$this, 'add_admin_header'));
+            }
         }
 
         // plugin page links
@@ -668,11 +678,21 @@ class floatbox_plus {
             $script .= "urlLanguages: '".$path."/floatbox/languages/'\n";
         }
         $script .= "};\n</script>\n";
-        $script .= "<script type=\"text/javascript\" src=\"$path/floatbox/floatbox.js\"></script>\n";
-        $script .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"$path/floatbox/floatbox.css\" media=\"screen\" />\n";
+        if (WPV28 == false) {
+            $script .= "<script type=\"text/javascript\" src=\"$path/floatbox/floatbox.js\"></script>\n";
+            $script .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"$path/floatbox/floatbox.css\" media=\"screen\" />\n";
+        }
         $script .= "<!-- FloatBox Plus Plugin -->\n";
 
         echo $script;
+    }
+
+    function enqueueJS(){
+        wp_enqueue_script('floatbox', plugins_url('/floatbox-plus/floatbox/floatbox.js'), null , $this->version, true);
+    }
+
+    function enqueueStyle(){
+        wp_enqueue_style('floatbox', plugins_url('/floatbox-plus/floatbox/floatbox.css'), false, $this->version, 'screen');
     }
 
     function OptionsMenu()
@@ -1118,7 +1138,7 @@ class floatbox_plus {
 							<?php _e('Choose the width of the preview images for the videos', 'floatboxplus'); ?>
 						</td>
 					</tr>
-                    
+
                         <?php // Video Width ?>
                 <tr valign="top">
                     <th scope="row">
@@ -1169,6 +1189,14 @@ class floatbox_plus {
 
     function add_admin_header() {
         echo "<script type='text/javascript' src='".WP_PLUGIN_URL."/floatbox-plus/floatbox-plus.js'></script>\n";
+    }
+
+    function enqueueAdmin($hook_suffix) {
+        // print '<!-- enqueueAdmin: '.$hook_suffix.' -->';
+        $fbp_admin_pages = array('post-new.php', 'post.php');
+        if(in_array($hook_suffix, $fbp_admin_pages)) {
+            wp_enqueue_script('wp-polls-admin', plugins_url('/floatbox-plus/floatbox-plus.js'), null , $this->version, true);
+        }
     }
 
 	function direct_image_urls_for_galleries( $link, $id ) {
