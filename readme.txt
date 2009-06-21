@@ -73,36 +73,54 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
-`1.1.0
-- [FIX] WP <2.8 compatibility/enqueue js/cssfiles
-1.0.0
-- [NEW] videogallery (#7)
-- [NEW] compatibility for floatbox 3.50 and above/older versions are still supported (#14)
-- [FIX] compatibility fix for wordpress 2.8 (2.5++) (#12)
-- [FIX] Updated video links, with caption title (+ validation error fixed) (#13)
-0.3.4
-- [FIX] YouTube HQ
-0.3.3
-- [Fix] Floatbox plus causing Error on IE7 - Expected identifier, string or number #10
-0.3.2
-- [FIX] direct download disabled, due to changes in the licensing of floatbox
-0.3.1
-- [FIX] showing YouTube HQ videos direct in HQ mode
-0.3.0
-- [NEW] simplexml_load_file support for PHP4 and PHP5, where it is not compiled with
-- [FIX] adding default values
-0.2.0
-- [NEW] direct download of floatbox.js inside the plugin, no more manual upload needed
-0.1.4
-- [FIX] URL to language files/graphics of floatbox
-0.1.3
-- [FIX] using captions instead of title
-- [FIX] NextGen Gallery: HTML in comments... (#5)
-0.1.2
-- [NEW] change (some) floatbox options at plugin options page
-- [NEW] Updatenotices
-- [FIX] Backup and restore of floatbox during auto update of the plugin
-0.1.1
-- update (lightview: 2.0.3 -> 2.1.0)
-0.1.0
-- initial release`
+= 1.1.0 =
+* [FIX] WP <2.8 compatibility/enqueue js/cssfiles
+* [more information](http://blog.splash.de/2009/06/14/floatbox-plus-1-1-0-cssjs-ladefunktion-angepasst/)
+
+= 1.0.0 =
+* [NEW] videogallery (#7)
+* [NEW] compatibility for floatbox 3.50 and above/older versions are still supported (#14)
+* [FIX] compatibility fix for wordpress 2.8 (2.5++) (#12)
+* [FIX] Updated video links, with caption title (+ validation error fixed) (#13)
+
+= 0.3.4 =
+* [FIX] YouTube HQ
+
+= 0.3.3 =
+* [FIX] Floatbox plus causing Error on IE7 - Expected identifier, string or number #10
+
+= 0.3.2 =
+* [FIX] direct download disabled, due to changes in the licensing of floatbox
+
+= 0.3.1 =
+* [FIX] showing YouTube HQ videos direct in HQ mode
+
+= 0.3.0 =
+* [NEW] simplexml_load_file support for PHP4 and PHP5, where it is not compiled with
+* [FIX] adding default values
+
+= 0.2.0 =
+* [NEW] direct download of floatbox.js inside the plugin, no more manual upload needed
+* [more information](http://blog.splash.de/2009/02/25/floatbox-plus-020-integrierte-download-option-fur-floatbox/)
+
+= 0.1.4 =
+* [FIX] URL to language files/graphics of floatbox
+* [more information](http://blog.splash.de/2009/02/20/floatbox-plus-014-bugfix-release/)
+
+= 0.1.3 =
+* [FIX] using captions instead of title
+* [FIX] NextGen Gallery: HTML in comments... (#5)
+* [more information](http://blog.splash.de/2009/02/06/floatbox-plus-013-caption-anstatt-title-und-damit-hoffentlich-weniger-probleme/)
+
+= 0.1.2 =
+* [NEW] change (some) floatbox options at plugin options page
+* [NEW] Updatenotices
+* [FIX] Backup and restore of floatbox during auto update of the plugin
+* [more information](http://blog.splash.de/2009/02/01/floatbox-plus-012-backuprestore-floatbox-optinen/)
+
+= 0.1.1 =
+* update (lightview: 2.0.3 -> 2.1.0)
+
+= 0.1.0 =
+* initial release
+* [more information](http://blog.splash.de/2009/01/29/floatbox-plus/)
