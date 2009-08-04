@@ -9,213 +9,499 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
 "X-Poedit-Basepath: .\n"
+"X-Poedit-Bookmarks: \n"
 "X-Poedit-SearchPath-0: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus\n"
+"X-Textdomain-Support: yes"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:117
-msgid "Lightview Plus"
-msgstr "Lightview Plus"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:137
+#: floatbox-plus-popup.php:137
+#@ floatboxplus
 msgid "Select video portal:"
 msgstr "Wähle Video Portal"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:168
+#: floatbox-plus-popup.php:170
+#@ floatbox_plus
 msgid "Insert video ID:"
 msgstr "Gebe Video ID ein"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:182
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:240
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:338
+#: floatbox-plus-popup.php:184
+#: floatbox-plus-popup.php:242
+#: floatbox-plus-popup.php:340
+#@ floatbox_plus
 msgid "Show video without link"
 msgstr "Video ohne Link anzeigen"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:188
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:246
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:344
+#: floatbox-plus-popup.php:190
+#: floatbox-plus-popup.php:248
+#: floatbox-plus-popup.php:346
+#@ floatbox_plus
 msgid "Link text:"
 msgstr "Linktext:"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:198
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:256
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:353
+#: floatbox-plus-popup.php:200
+#: floatbox-plus-popup.php:258
+#: floatbox-plus-popup.php:355
+#@ floatbox_plus
 msgid "Insert"
 msgstr "Einfügen"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:200
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:258
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:309
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:355
+#: floatbox-plus-popup.php:202
+#: floatbox-plus-popup.php:260
+#: floatbox-plus-popup.php:311
+#: floatbox-plus-popup.php:357
+#@ floatbox_plus
 msgid "Cancel"
 msgstr "Abbruch"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:219
+#: floatbox-plus-popup.php:221
+#@ floatbox_plus
 msgid "Select video file:"
 msgstr "Wähle Video Datei"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:277
+#: floatbox-plus-popup.php:279
+#@ floatbox_plus
 msgid "Local video file:"
 msgstr "Lokale Video Datei"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:287
+#: floatbox-plus-popup.php:289
+#@ floatbox_plus
 msgid "Title:"
 msgstr "Titel:"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:297
+#: floatbox-plus-popup.php:299
+#@ floatbox_plus
 msgid "Description:"
 msgstr "Beschreibung:"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:307
+#: floatbox-plus-popup.php:309
+#@ floatbox_plus
 msgid "Upload"
 msgstr "Upload"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus-popup.php:324
+#: floatbox-plus-popup.php:326
+#@ floatbox_plus
 msgid "Insert video URL:"
 msgstr "Füge Video URL ein:"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:377
+#: floatbox-plus.php:600
+#@ floatboxplus
 msgid "[There is a video that cannot be displayed in this feed. "
 msgstr "[Dieses Video kann nicht im Feed dargestellt werden."
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:377
+#: floatbox-plus.php:600
+#@ floatboxplus
 msgid "Visit the blog entry to see the video.]"
 msgstr "Besuche den Blog um das Video zu sehen.]"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:542
+#: floatbox-plus.php:831
+#@ floatboxplus
 msgid "Options saved."
 msgstr "Optionen gesichert"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:553
-msgid "Lightview Javascript and/or CSS isn't copied to the plugin directory. See installation instructions for further details."
-msgstr "Lightview Javascript und/prder CSS wurden nicht in das Plugin Verzeichnis kopiert. Siehe Installations Dokumente für weitere Details."
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:558
-msgid "Donation"
-msgstr "Spenden"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:563
-msgid "Lightview Plus has required a great deal of time and effort to develop. If it's been useful to you then you can support this development by making a small donation of $8. This will act as an incentive for me to carry on developing it, providing countless hours of support, and including any enhancements that are suggested."
-msgstr "Lightview Plus zu entwickeln hat sehr viel Zeit und Anstrengungen gekostet. Wenn es für dich nützlich ist, dann kannst du die Entwicklungsarbeit unterstützen, wenn du einen kleinen Beitrag von €8 spendest. Dies wäre Ansporn für mich weiterhin zu entwickeln, weiter unzählige Stunden an Support zu leisten und vorgeschlagene Erweiterungen zu implemntieren."
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:564
-msgid "Donate via PayPal!"
-msgstr "Spende via PayPal!"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:571
+#: floatbox-plus.php:852
+#@ floatboxplus
 msgid "General Settings"
 msgstr "Generelle Einstellungen"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:579
-msgid "Load Prototype/Scriptacolous Javascript Library?"
-msgstr "Lade Prototype/Scriptacolous Javascript Bibliothek?"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:583
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:599
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:616
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:633
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:649
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:673
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:689
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:719
+#: floatbox-download.php:146
+#: floatbox-plus.php:866
+#: floatbox-plus.php:883
+#: floatbox-plus.php:899
+#: floatbox-plus.php:915
+#: floatbox-plus.php:939
+#: floatbox-plus.php:973
+#: floatbox-plus.php:1038
+#: floatbox-plus.php:1053
+#: floatbox-plus.php:1068
+#: floatbox-plus.php:1092
+#: floatbox-plus.php:1108
+#: floatbox-plus.php:1138
+#@ floatboxplus
 msgid "yes"
 msgstr "Ja"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:584
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:600
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:617
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:634
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:650
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:674
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:690
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:720
+#: floatbox-download.php:145
+#: floatbox-plus.php:867
+#: floatbox-plus.php:884
+#: floatbox-plus.php:900
+#: floatbox-plus.php:916
+#: floatbox-plus.php:940
+#: floatbox-plus.php:974
+#: floatbox-plus.php:1021
+#: floatbox-plus.php:1039
+#: floatbox-plus.php:1054
+#: floatbox-plus.php:1069
+#: floatbox-plus.php:1093
+#: floatbox-plus.php:1109
+#: floatbox-plus.php:1139
+#@ floatboxplus
 msgid "no"
 msgstr "Nein"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:588
-msgid "Please, deactivate this, if you know what you are doing. It loads a compressed version of Prototype and Scriptaculous"
-msgstr "Deaktiviere diese Einstellung nur, wenn du weißt, was du tust. Dies lädt eine komprimierte Version von Prototype und Scriptaculous"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:595
-msgid "Load Prototype & Scriptacolous Libraries from Google?"
-msgstr "Lade Prototype & Scriptacolous Javascript Bibliothek von Google?"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:604
-msgid "Choose if you want to load prototype and scriptaculous from Google and get it always in the newest version. Otherwise the local versions of prototype 1.6.0.3 and scriptaculous 1.8.2 will load."
-msgstr "Wähle dies aus, wenn du Prototype und Scriptaculous von Google laden möchtest um es immer in der aktuellsten Version zu erhalten. Andernfalls wird eine lokale Version von Prototype 1.6.0.3 und Scriptaculous 1.8.2 geladen."
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:612
-msgid "Activate Lightview for [gallery]?"
-msgstr "Aktiviere Lightview für [gallery]?"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:621
-msgid "If activated, it shows the wordpress gallery with lightview"
-msgstr "Falls aktiviert, zeigt es die Wordpress Gallerie mit Lightview"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:629
-msgid "Activate Lightview for Videos?"
-msgstr "Aktiviere Lightview für Videos?"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:638
+#: floatbox-plus.php:904
+#@ floatboxplus
 msgid "Implements the video function. ATTENTION: It only works, if you do not have the embedded video plugin activated"
 msgstr "Implementiert die Video Funktion. ACHTUNG: Dies funktioniert nur, wenn Sie nicht das Embedded Video Plugin aktiviert haben"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:645
-msgid "Backup Lightview Javascript during Update?"
-msgstr "Backup von Lightview Javascript während des Updates erstellen?"
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:654
-msgid "Backups the lightview javascript files for upgrade-reasons. After uprading to a new lightview-plus version, it is needless to copy the javascript files back in the plugin directory. "
-msgstr "Erstellt ein Backup der Lightview Javascript Dateien. Nach einem Upgrade der Lightview-Plus Version ist es nicht mehr nötig, die Javascript Dateien zurück in das Plugin-Verzeichnis zu kopieren."
-
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:662
+#: floatbox-plus.php:1081
+#@ floatboxplus
 msgid "Video Options"
 msgstr "Video Optionen"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:669
+#: floatbox-plus.php:1088
+#@ floatboxplus
 msgid "Show Links under videos?"
 msgstr "Zeige Links unter den Videos?"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:678
+#: floatbox-plus.php:1097
+#@ floatboxplus
 msgid "Show a link to the original site of the video"
 msgstr "Zeigt einen Link zur originalen Seite des Videos"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:685
+#: floatbox-plus.php:1104
+#@ floatboxplus
 msgid "Show a small Link under the Video?"
 msgstr "Zeige einen kleinen Link unter dem Video?"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:694
+#: floatbox-plus.php:1113
+#@ floatboxplus
 msgid "If no, it will show a bigger text"
 msgstr "Falls nein, wird ein grösserer Text angezeigt"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:703
+#: floatbox-plus.php:1122
+#@ floatboxplus
 msgid "Separator"
 msgstr "Trennzeichen"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:708
+#: floatbox-plus.php:1127
+#@ floatboxplus
 msgid "Defines the separator between the service (eg. YouTube) and your comment"
 msgstr "Legt den Trenner zwischen dem Service (z. B. YouTube) und deinem Kommentar fest"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:715
+#: floatbox-plus.php:1134
+#@ floatboxplus
 msgid "Show in Feed?"
 msgstr "Im Feed anzeigen?"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:724
+#: floatbox-plus.php:1143
+#@ floatboxplus
 msgid "You can choose, if you want to show the video in the feed. Currently, it is only possible to show a link to the video"
 msgstr "Du kannst auswählen, ob du das Video im Feed anzeigen möchtest. Im ist es nur möglich einen Link im Feed anzuzeigen."
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:731
+#: floatbox-plus.php:1162
+#@ floatboxplus
 msgid "Video Width"
 msgstr "Video Breite"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:736
+#: floatbox-plus.php:1167
+#@ floatboxplus
 msgid "You can choose, what width the video and image have"
 msgstr "Du kannst auswählen, welche Breite das Video und das Vorschaubild haben sollen"
 
-#: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus/lightview-plus.php:743
+#: floatbox-plus.php:1174
+#@ floatboxplus
 msgid "Update Options »"
 msgstr "Speichern »"
+
+#: floatbox-download.php:19
+#@ floatboxplus
+msgid "Could not access filesystem."
+msgstr "Zugriff aufs Dateisystem wurde verweigert."
+
+#: floatbox-download.php:22
+#@ floatboxplus
+msgid "Filesystem error"
+msgstr "Dateisystemfehler"
+
+#: floatbox-download.php:27
+#@ floatboxplus
+msgid "Unable to locate WordPress Plugin directory."
+msgstr "Zugriff auf das WordPress Plugin Verzeichnis nicht möglich."
+
+#: floatbox-download.php:32
+#@ floatboxplus
+msgid "Unable to locate WordPress Content directory (wp - content)."
+msgstr "WordPress Content-Verzeichnis (wp - content) konnte nicht gefunden werden."
+
+#: floatbox-download.php:52
+#@ floatboxplus
+msgid "Unpacking the update"
+msgstr "Update wird ausgepackt"
+
+#: floatbox-download.php:82
+#@ floatboxplus
+msgid "Installing the latest version"
+msgstr "Neuste Version wird installiert"
+
+#: floatbox-download.php:112
+#@ floatboxplus
+msgid "floatbox(.js) already installed..."
+msgstr "floatbox(.js) ist bereits installiert..."
+
+#: floatbox-download.php:121
+msgid "Download successfull."
+msgstr "Download erfolgreich abgeschlossen."
+
+#: floatbox-download.php:150
+#@ floatboxplus
+msgid "submit »"
+msgstr "absenden »"
+
+#: floatbox-plus-popup.php:117
+#@ floatbox_plus
+msgid "Floatbox Plus"
+msgstr "Floatbox Plus"
+
+#: floatbox-plus.php:129
+#@ floatboxplus
+msgid "Download floatbox(.js)"
+msgstr "floatbox(.js) herunterladen"
+
+#: floatbox-plus.php:162
+#@ floatboxplus
+msgid "Updatenotice for:"
+msgstr "Anmerkungen zum Update auf Version:"
+
+#: floatbox-plus.php:186
+#@ floatboxplus
+msgid "Ticketsystem/Wiki"
+msgstr "Ticketsystem/Wiki"
+
+#: floatbox-plus.php:187
+#@ floatboxplus
+msgid "Plugin-Homepage"
+msgstr "Plugin-Seite"
+
+#: floatbox-plus.php:846
+#@ floatboxplus
+msgid "Download floatbox(.js) from randomous.com"
+msgstr "floatbox(.js) von randomous.com herunterladen"
+
+#: floatbox-plus.php:862
+#@ floatboxplus
+msgid "Activate Floatbox for [gallery]?"
+msgstr "Aktiviere Floatbox für den Galerie-Shortcode ([gallery])?"
+
+#: floatbox-plus.php:871
+#@ floatboxplus
+msgid "If activated, it shows the wordpress gallery with floatbox"
+msgstr "Aktiviere diese Option, damit die mittels Shortcode generierten Galerien Floatbox nutzen können"
+
+#: floatbox-plus.php:879
+#@ floatboxplus
+msgid "Do you use Floatbox 3.50 or above?"
+msgstr "Wird Floatbox 3.50 oder neuer eingesetzt?"
+
+#: floatbox-plus.php:888
+#@ floatboxplus
+msgid "Cause there are some major changes in Floatbox 3.50 (and above), the plugin needs to know which version you have"
+msgstr "Mit der Version 3.50 wurde Floatbox massiv überarbeitet und ist nicht mehr 100% abwärtskompatibel. Damit die Anzeige problemlos funktioniert muss das Plugin wissen, welche Variante im Einsatz ist."
+
+#: floatbox-plus.php:895
+#@ floatboxplus
+msgid "Activate Floatbox for Videos?"
+msgstr "Aktiviere Floatbox bei Videos?"
+
+#: floatbox-plus.php:911
+#@ floatboxplus
+msgid "Backup Floatbox Javascript during Update?"
+msgstr "Soll Floatbox während des Updates zwischengespeichert werden?"
+
+#: floatbox-plus.php:920
+#@ floatboxplus
+msgid "Backups the Floatbox javascript files for upgrade-reasons. After uprading to a new floatbox-plus version, it is needless to copy the javascript files back in the plugin directory. "
+msgstr "Während der Updateprozedur wird Floatbox zwischengespeichert, und nach erfolgreichem Update wieder zurückgespielt (ansonsten ist nach dem Update eine erneute Installation von Floatbox notwendig)."
+
+#: floatbox-plus.php:928
+#@ floatboxplus
+msgid "Floatbox Options"
+msgstr "Optionen von Floatbox"
+
+#: floatbox-plus.php:935
+#@ floatboxplus
+msgid "Change the options of floatbox.js?"
+msgstr "Sollten die Optionen von Floatbox überschrieben werden?"
+
+#: floatbox-plus.php:944
+#@ floatboxplus
+msgid "Overwrite the settings in floatbox.js with the values set here."
+msgstr "Mit Hilfe der folgenden Einstellungen kann die Ausgabe von Floatbox angepasst werden."
+
+#: floatbox-plus.php:950
+#@ floatboxplus
+msgid "Theme"
+msgstr "Theme"
+
+#: floatbox-plus.php:954
+#: floatbox-plus.php:1022
+#@ floatboxplus
+msgid "auto"
+msgstr "auto"
+
+#: floatbox-plus.php:955
+#@ floatboxplus
+msgid "black"
+msgstr "schwarz"
+
+#: floatbox-plus.php:956
+#@ floatboxplus
+msgid "white"
+msgstr "weiß"
+
+#: floatbox-plus.php:957
+#@ floatboxplus
+msgid "blue"
+msgstr "blau"
+
+#: floatbox-plus.php:958
+#@ floatboxplus
+msgid "yellow"
+msgstr "gelb"
+
+#: floatbox-plus.php:959
+#@ floatboxplus
+msgid "red"
+msgstr "rot"
+
+#: floatbox-plus.php:963
+#@ floatboxplus
+msgid "Color theme. 'Auto' will use the black theme for images, white for iframe content, and blue for flash and quicktime."
+msgstr "Themefarbe. 'Auto' benutzt das schwarze Theme für Bilder, das weiße Theme für iframes und das blaue Theme für flash/filme."
+
+#: floatbox-plus.php:969
+#@ floatboxplus
+msgid "doAnimations"
+msgstr ""
+
+#: floatbox-plus.php:978
+#@ floatboxplus
+msgid "Shorthand for resizeDuration=0, imageFadeDuration=0 and zoomImageStart=false."
+msgstr "Damit werden die Animationen deaktiviert (die Optionen 'Dauer der Größenänderung',  'Dauer des Einblendens' und 'Zoom des Bildes' funktionieren nur bei eingeschalteten Animationen)."
+
+#: floatbox-plus.php:984
+#@ floatboxplus
+msgid "resizeDuration"
+msgstr ""
+
+#: floatbox-plus.php:989
+#@ floatboxplus
+msgid "Controls the speed at which animated resizing occurs. 0 = no resize animation, 1 is fast, 10 is slooow. These are unit-less numbers, and don't equate to a fixed time period. Larger size changes will take longer than smaller size changes."
+msgstr ""
+
+#: floatbox-plus.php:995
+#@ floatboxplus
+msgid "imageFadeDuration"
+msgstr ""
+
+#: floatbox-plus.php:1000
+#@ floatboxplus
+msgid "Controls the speed of the opacity fade-in for images as they come into the display. 0 = no image fade-in, 1 is fast, 10 is slooow. These too are unit-less numbers."
+msgstr ""
+
+#: floatbox-plus.php:1006
+#@ floatboxplus
+msgid "overlayFadeDuration"
+msgstr ""
+
+#: floatbox-plus.php:1011
+#@ floatboxplus
+msgid "Controls the speed of the opacity fade-in and fade-out for the translucent overlay which covers the host page. 0 = no overlay fading in or out, 1 is fast, 10 is slooow.  Unit-less."
+msgstr ""
+
+#: floatbox-plus.php:1017
+#@ floatboxplus
+msgid "splitResize"
+msgstr ""
+
+#: floatbox-plus.php:1023
+#@ floatboxplus
+msgid "wh"
+msgstr ""
+
+#: floatbox-plus.php:1024
+#@ floatboxplus
+msgid "hw"
+msgstr ""
+
+#: floatbox-plus.php:1028
+#@ floatboxplus
+msgid "Default animated resizing of Floatbox resizes width, height, top and left simultaneously. The settings other than 'no' give sequenced animation where the X and Y dimensions are resized seperately. The two options 'wh' and 'hw' force either width or height to always go first. The better splitResize option is probably 'auto'.  This will always do the smallest dimension first. Using a splitResize of auto prevents unaesthetic resize behaviour of initially bloating up in the larger dimension."
+msgstr ""
+
+#: floatbox-plus.php:1034
+#@ floatboxplus
+msgid "startAtClick"
+msgstr ""
+
+#: floatbox-plus.php:1043
+#@ floatboxplus
+msgid "If true (and resizeDuration is not 0) Floatbox will expand out from the clicked anchor and shrink back to that anchor when closed. If false, Floatbox will start and end from the center of the screen."
+msgstr ""
+
+#: floatbox-plus.php:1049
+#@ floatboxplus
+msgid "zoomImageStart"
+msgstr ""
+
+#: floatbox-plus.php:1058
+#@ floatboxplus
+msgid "If true (and resizeDuration is not 0) images will expand out from the clicked thumbnail on start and collapse back to the thumbnail on exit."
+msgstr ""
+
+#: floatbox-plus.php:1064
+#@ floatboxplus
+msgid "liveImageResize"
+msgstr ""
+
+#: floatbox-plus.php:1073
+#@ floatboxplus
+msgid "If true (and resizeDuration is not 0) images will remain displayed while they are being resized. If false they will be hidden during a resize and the \"loading\" gif displayed in their place."
+msgstr ""
+
+#: floatbox-plus.php:1079
+#@ floatboxplus
+msgid "For more information about the many other options Floatbox offers (and which aren't integrated yet in the plugin), take a look at the homepage:"
+msgstr "Für weitere Informationen bzgl. der Optionen von Floatbox (nur ein kleiner Teil der Optionen kann mit Hilfe von Floatbox Plus angepasst werden) schaue bitte auf die Homepage:"
+
+#: floatbox-plus.php:1150
+#@ floatboxplus
+msgid "Video Preview Width"
+msgstr "Breite des Videovorschaubildes"
+
+#: floatbox-plus.php:1155
+#@ floatboxplus
+msgid "Choose the width of the preview images for the videos"
+msgstr "Breite der Vorschaubilder der Videos"
+
+#: floatbox-download.php:44
+#@ floatboxplus
+msgid "Download failed"
+msgstr "Download fehlgeschlagen"
+
+#: floatbox-download.php:119
+#, php-format
+#@ floatboxplus
+msgid "Download failed, please follow the manual installation instructions: %s."
+msgstr "Download fehlgeschlagen. Beachte bitte die Anleitung zur manuellen Installation: %s."
+
+#: floatbox-download.php:119
+#@ floatboxplus
+msgid "Link"
+msgstr "Link"
+
+#: floatbox-download.php:40
+#, php-format
+#@ floatboxplus
+msgid "Downloading floatbox from %s"
+msgstr "Lade floatbox von %s herunter"
+
+#: floatbox-plus.php:842
+#@ floatboxplus
+msgid "Floatbox Javascript isn't copied to the plugin directory. See installation instructions for further details <br />or try the new download option: "
+msgstr "Floatbox (nicht Floatbox Plus!) konnte nicht gefunden werden. Beachte die Anleitung zur manuellen Installation oder benutze die Download-Option:"
 

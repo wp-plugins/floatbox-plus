@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 1.1.0
+Version: 1.2.0
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -16,7 +16,7 @@ define('WPV28', version_compare($wp_version, '2.8', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '1.1.0';
+    var $version = '1.2.0';
 
     // put all options in
     var $options = array();
@@ -34,7 +34,7 @@ class floatbox_plus {
     function __construct() {
         //load language
         if (function_exists('load_plugin_textdomain'))
-        load_plugin_textdomain('floatboxplus', WP_PLUGIN_DIR.'/floatbox-plus/langs');
+        load_plugin_textdomain('floatboxplus', WP_PLUGIN_DIR.'/floatbox-plus/langs/', '/floatbox-plus/langs/');
 
         // get options
         $this->options = get_option('floatbox_plus');
@@ -171,13 +171,30 @@ class floatbox_plus {
 
     function AdminMenu()
     {
-        $hook = add_options_page('FloatBox Plus', (version_compare($GLOBALS['wp_version'], '2.6.999', '>') ? '<img src="' . @plugins_url('floatbox-plus/icon.png') . '" width="10" height="10" alt="Floatbox Plus - Icon" />' : '') . 'Floatbox Plus', 8, 'floatbox_plus', array(&$this, 'OptionsMenu'));
+        // $hook = add_options_page('FloatBox Plus', (version_compare($GLOBALS['wp_version'], '2.6.999', '>') ? '<img src="' . @plugins_url('floatbox-plus/icon.png') . '" width="10" height="10" alt="Floatbox Plus - Icon" />' : '') . 'Floatbox Plus', 8, 'floatbox_plus', array(&$this, 'OptionsMenu'));
+        $hook = add_options_page('Floatbox Plus',
+            (version_compare($GLOBALS['wp_version'], '2.6.999', '>') ? '<img src="' . @plugins_url('floatbox-plus/icon.png') . '" width="10" height="10" alt="Floatbox Plus - Icon" />' : '') . 'Floatbox Plus',
+            9,
+            'floatbox-plus/'.basename(__FILE__),
+            array(&$this,
+                'OptionsMenu'
+            )
+        );
         if (function_exists('add_contextual_help') === true) {
             add_contextual_help($hook,
                 sprintf('<a href="http://trac.splash.de/floatboxplus">%s</a><br /><a href="http://blog.splash.de/plugin/floatbox-plus/">%s</a>',
                     __('Ticketsystem/Wiki', 'floatboxplus'),
                     __('Plugin-Homepage', 'floatboxplus')
                 )
+            );
+        }
+        //add link to downloadpage, only if floatbox isn't installed
+        if (!$this->check_javascript()) {
+            add_options_page('Floatbox Download',
+                (version_compare($GLOBALS['wp_version'], '2.6.999', '>') ? '<img src="' . @plugins_url('floatbox-plus/icon.png') . '" width="10" height="10" alt="Floatbox Plus - Icon" />' : '') . 'Floatbox Download',
+                9,
+                'floatbox-plus/floatbox-download.php',
+                ''
             );
         }
     }
@@ -399,11 +416,8 @@ class floatbox_plus {
     {
         global $post;
 
-        // RegEx
+        // images
         $pattern['image'] = "/<a(.*?)href=('|\")([A-Za-z0-9\/_\.\~\:-]*?)(\.bmp|\.gif|\.jpg|\.jpeg|\.png)('|\")([^\>]*?)>/i";
-        $pattern['video'][1] = "/\[(youtube|youtubehq|vimeo) ([[:graph:]]+) (nolink)\]/";
-        $pattern['video'][2] = "/\[(youtube|youtubehq|vimeo) ([[:graph:]]+) ([[:print:]]+)\]/";
-        $pattern['video'][3] = "/\[(youtube|youtubehq|vimeo) ([[:graph:]]+)\]/";
 
         if (!$this->options['floatbox_350']) {
             $replacement = '<a$1href=$2$3$4$5 class="floatbox" rel="floatbox.%LIGHTID%"$6>';
@@ -418,7 +432,11 @@ class floatbox_plus {
         }
         $content = preg_replace($pattern['title'], $replacement, $content);
 
+        // videos
         if($this->options['show_video']) {
+            $pattern['video'][1] = "/\[(youtube|youtubehq|vimeo) ([[:graph:]]+) (nolink)\]/";
+            $pattern['video'][2] = "/\[(youtube|youtubehq|vimeo) ([[:graph:]]+) ([[:print:]]+)\]/";
+            $pattern['video'][3] = "/\[(youtube|youtubehq|vimeo) ([[:graph:]]+)\]/";
             $content = preg_replace_callback($pattern['video'][1], array(&$this, 'video_callback'), $content);
             $content = preg_replace_callback($pattern['video'][2], array(&$this, 'video_callback'), $content);
             $content = preg_replace_callback($pattern['video'][3], array(&$this, 'video_callback'), $content);
@@ -531,7 +549,7 @@ class floatbox_plus {
                         case "youtube": $output .= $this->video['youtube']['link'];
                             break;
                         // TODO: unsure?
-						case "youtubehq": $output .= $this->video['youtubehq']['link'];
+			case "youtubehq": $output .= $this->video['youtubehq']['link'];
                             break;
                         case "vimeo": $output .= $this->video['vimeo']['link'];
                             break;
@@ -609,34 +627,33 @@ class floatbox_plus {
         return $output;
     }
 
-	function get_videopreviewimage($service, $id) {
-		switch($service) {
-			case "youtube":
+    function get_videopreviewimage($service, $id) {
+	switch($service) {
+            case "youtube":
             case "youtubehq":
-				//$output = "http://img.youtube.com/vi/" . $id . "/0.jpg";
-				$output = "http://img.youtube.com/vi/" . $id . "/hqdefault.jpg";
-				break;
-			case "vimeo":
-				// check if $id is numeric
-				if(!is_numeric($id)) {
+		//$output = "http://img.youtube.com/vi/" . $id . "/0.jpg";
+		$output = "http://img.youtube.com/vi/" . $id . "/hqdefault.jpg";
+		break;
+            case "vimeo":
+		// check if $id is numeric
+		if(!is_numeric($id)) {
                     return false;
                 }
-
-				$api_link = 'http://vimeo.com/api/clip/' . $id . '.xml';
+		$api_link = 'http://vimeo.com/api/clip/' . $id . '.xml';
 
                 // Get preview image from vimeo
-				$clip = simplexml_load_file($api_link);
-				$output = $clip->clip->thumbnail_large;
+		$clip = simplexml_load_file($api_link);
+		$output = $clip->clip->thumbnail_large;
 
-				// check response, if nothing in output -> standard image
-				if(empty($output))
-					return false;
-				break;
+		// check response, if nothing in output -> standard image
+		if(empty($output))
+                    return false;
+		break;
 
-			default:
-					return false;
+		default:
+                    return false;
                 break;
-		}
+        }
 
         return $output;
     }
@@ -822,7 +839,7 @@ class floatbox_plus {
             // echo error if floatbox js / css isn't copied to plugin dir
             $plugin = plugin_basename(__FILE__);
             if(!$this->check_javascript()) {
-                echo '<div id="message" class="error"><p><strong>' . __('FloatBox Javascript isn\'t copied to the plugin directory. See installation instructions for further details <br />or try the new download option: ', 'floatboxplus') . '</strong>';
+                echo '<div id="message" class="error"><p><strong>' . __('Floatbox Javascript isn\'t copied to the plugin directory. See installation instructions for further details <br />or try the new download option: ', 'floatboxplus') . '</strong>';
                 printf(
                         '<a href="options-general.php?page=%s">%s</a>',
                         dirname($plugin).'/floatbox-download.php',
@@ -842,7 +859,7 @@ class floatbox_plus {
                         <?php if( WPV27 == false ) : ?>
                 <tr valign="top">
                     <th scope="row">
-                        <label><?php echo __('Activate FloatBox for [gallery]?', 'floatboxplus')?></label>
+                        <label><?php echo __('Activate Floatbox for [gallery]?', 'floatboxplus')?></label>
                     </th>
                     <td>
                         <select name="load_gallery" size="1">
@@ -859,7 +876,7 @@ class floatbox_plus {
                 <?php // floatbox_350 ?>
                 <tr valign="top">
                     <th scope="row">
-                        <label><?php echo __('Do you use floatbox 3.50 or above?', 'floatboxplus')?></label>
+                        <label><?php echo __('Do you use Floatbox 3.50 or above?', 'floatboxplus')?></label>
                     </th>
                     <td>
                         <select name="floatbox_350" size="1">
@@ -868,14 +885,14 @@ class floatbox_plus {
                         </select>
 
                         <br />
-                        <?php echo __('Cause there are some major changes in floatbox 3.50 (and above), the plugin needs to know which version you have', 'floatboxplus'); ?>
+                        <?php echo __('Cause there are some major changes in Floatbox 3.50 (and above), the plugin needs to know which version you have', 'floatboxplus'); ?>
                     </td>
                 </tr>
 
                 <?php // Activate Movies? ?>
                 <tr valign="top">
                     <th scope="row">
-                        <label><?php echo __('Activate FloatBox for Videos?', 'floatboxplus')?></label>
+                        <label><?php echo __('Activate Floatbox for Videos?', 'floatboxplus')?></label>
                     </th>
                     <td>
                         <select name="show_video" size="1">
@@ -891,7 +908,7 @@ class floatbox_plus {
                         <?php // Create Backup of FloatBox Javascript if plug-in deactivates? ?>
                 <tr valign="top">
                     <th scope="row">
-                        <label><?php echo __('Backup FloatBox Javascript during Update?', 'floatboxplus')?></label>
+                        <label><?php echo __('Backup Floatbox Javascript during Update?', 'floatboxplus')?></label>
                     </th>
                     <td>
                         <select name="backup_floatbox" size="1">
@@ -900,7 +917,7 @@ class floatbox_plus {
                         </select>
 
                         <br />
-                        <?php echo __('Backups the floatbox javascript files for upgrade-reasons. After uprading to a new floatbox-plus version, it is needless to copy the javascript files back in the plugin directory. ', 'floatboxplus'); ?>
+                        <?php echo __('Backups the Floatbox javascript files for upgrade-reasons. After uprading to a new floatbox-plus version, it is needless to copy the javascript files back in the plugin directory. ', 'floatboxplus'); ?>
                     </td>
                 </tr>
 
@@ -1008,7 +1025,7 @@ class floatbox_plus {
                         </select>
 
                         <br />
-                        <?php _e('Default animated resizing of floatbox resizes width, height, top and left simultaneously. The settings other than \'no\' give sequenced animation where the X and Y dimensions are resized seperately. The two options \'wh\' and \'hw\' force either width or height to always go first. The better splitResize option is probably \'auto\'.  This will always do the smallest dimension first. Using a splitResize of auto prevents unaesthetic resize behaviour of initially bloating up in the larger dimension.', 'floatboxplus'); ?>
+                        <?php _e('Default animated resizing of Floatbox resizes width, height, top and left simultaneously. The settings other than \'no\' give sequenced animation where the X and Y dimensions are resized seperately. The two options \'wh\' and \'hw\' force either width or height to always go first. The better splitResize option is probably \'auto\'.  This will always do the smallest dimension first. Using a splitResize of auto prevents unaesthetic resize behaviour of initially bloating up in the larger dimension.', 'floatboxplus'); ?>
                     </td>
                 </tr>
                 <?php // startAtClick ?>
@@ -1023,7 +1040,7 @@ class floatbox_plus {
                         </select>
 
                         <br />
-                        <?php _e('If true (and resizeDuration is not 0) floatbox will expand out from the clicked anchor and shrink back to that anchor when closed. If false, floatbox will start and end from the center of the screen.', 'floatboxplus'); ?>
+                        <?php _e('If true (and resizeDuration is not 0) Floatbox will expand out from the clicked anchor and shrink back to that anchor when closed. If false, Floatbox will start and end from the center of the screen.', 'floatboxplus'); ?>
                     </td>
                 </tr>
                 <?php // zoomImageStart ?>
@@ -1059,7 +1076,7 @@ class floatbox_plus {
             </tbody>
          </table>
 
-        <p><?php _e('For more information about the many other options floatbox offers (and which aren\'t integrated yet in the plugin), take a look at the homepage:', 'floatboxplus'); ?> <a href="http://randomous.com/tools/floatbox/">Link</a></p>
+        <p><?php _e('For more information about the many other options Floatbox offers (and which aren\'t integrated yet in the plugin), take a look at the homepage:', 'floatboxplus'); ?> <a href="http://randomous.com/tools/floatbox/">Link</a></p>
 
         <h3><?php _e('Video Options', 'floatboxplus'); ?></h3>
 
@@ -1158,7 +1175,7 @@ class floatbox_plus {
         </p>
     </form>
 
-    <p><small>Video Icon from <a href="http://www.famfamfam.com">famfamfam </a>. Special thanks to Thorsten Puzich and his plugin <a href="http://www.puzich.com/wordpress-plugins/lightview">Lightview Plus</a>, whose code i adapted to be used with floatbox instead of lightview.</small></p>
+    <p><small>Video Icon from <a href="http://www.famfamfam.com">famfamfam </a>. Special thanks to Thorsten Puzich and his plugin <a href="http://www.puzich.com/wordpress-plugins/lightview">Lightview Plus</a>, whose code i adapted to be used with Floatbox instead of lightview.</small></p>
 
 </div>
         <?php

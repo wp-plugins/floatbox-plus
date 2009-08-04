@@ -1,9 +1,9 @@
 <?php
 
-// Do not change anything here ;)
+// do not change anything here ;)
 $_floatbox['dirname'] = 'floatbox';
 $_floatbox['destinationdir'] = 'floatbox-plus/floatbox/';
-$_floatbox['download_url'] = 'http://randomous.com/tools/floatbox/floatbox_324.zip';
+$_floatbox['download_url'] = 'http://randomous.com/floatbox/floatbox_3.53.0.zip';
 
 function fbp_download($feedback = '') {
 	global $wp_filesystem, $_floatbox;
@@ -16,20 +16,20 @@ function fbp_download($feedback = '') {
 		WP_Filesystem();
 
 	if ( ! is_object($wp_filesystem) )
-		return new WP_Error('fs_unavailable', __('Could not access filesystem.'));
+		return new WP_Error('fs_unavailable', __('Could not access filesystem.', 'floatboxplus'));
 
 	if ( $wp_filesystem->errors->get_error_code() )
-		return new WP_Error('fs_error', __('Filesystem error'), $wp_filesystem->errors);
+		return new WP_Error('fs_error', __('Filesystem error', 'floatboxplus'), $wp_filesystem->errors);
 
 	//Get the base plugin folder
 	$plugins_dir = $wp_filesystem->wp_plugins_dir();
 	if ( empty($plugins_dir) )
-		return new WP_Error('fs_no_plugins_dir', __('Unable to locate WordPress Plugin directory.'));
+		return new WP_Error('fs_no_plugins_dir', __('Unable to locate WordPress Plugin directory.', 'floatboxplus'));
 
 	//And the same for the Content directory.
 	$content_dir = $wp_filesystem->wp_content_dir();
 	if( empty($content_dir) )
-		return new WP_Error('fs_no_content_dir', __('Unable to locate WordPress Content directory (wp - content).'));
+		return new WP_Error('fs_no_content_dir', __('Unable to locate WordPress Content directory (wp - content).', 'floatboxplus'));
 
 	$plugins_dir = trailingslashit( $plugins_dir );
 	$content_dir = trailingslashit( $content_dir );
@@ -37,11 +37,11 @@ function fbp_download($feedback = '') {
 	// Download the package
     $download_url = $_floatbox['download_url'];
 
-    apply_filters('update_feedback', sprintf(__('Downloading update from %s'), $download_url));
+    apply_filters('update_feedback', sprintf(__('Downloading floatbox from %s', 'floatboxplus'), $download_url));
 	$download_file = download_url($download_url);
 
 	if ( is_wp_error($download_file) )
-		return new WP_Error('download_failed', __('Download failed.'), $download_file->get_error_message());
+		return new WP_Error('download_failed', __('Download failed', 'floatboxplus'), $download_file->get_error_message());
 
 	$working_dir = $content_dir . 'upgrade/'. $_floatbox['dirname'];
 
@@ -49,7 +49,7 @@ function fbp_download($feedback = '') {
 	if ( $wp_filesystem->is_dir($working_dir) )
 		$wp_filesystem->delete($working_dir, true);
 
-	apply_filters('update_feedback', __('Unpacking the update'));
+	apply_filters('update_feedback', __('Unpacking the update', 'floatboxplus'));
 	// Unzip package to working directory
 	$result = unzip_file($download_file, $working_dir);
 
@@ -79,7 +79,7 @@ function fbp_download($feedback = '') {
 	}
     */
 
-	apply_filters('update_feedback', __('Installing the latest version'));
+	apply_filters('update_feedback', __('Installing the latest version', 'floatboxplus'));
 	// Copy new version of plugin into place.
 	$result = copy_dir($working_dir, dirname($this_plugin_dir));
 
@@ -109,16 +109,14 @@ function fbp_download($feedback = '') {
     <h2>FloatBox Plus</h2>
     <?php
 if ($floatbox_plus->check_javascript()) {
-    echo __("floatbox(.js) already installed...", "floatboxplus");
+    echo __('floatbox(.js) already installed...', 'floatboxplus')."<br>\n";
 } else {
-    echo __("Let's try to download floatbox...<br />", "floatboxplus");
-
     if ($_POST['go'] == 'true') {
 
         $result = fbp_download('show_message');
         if ( is_wp_error($result) ) {
             show_message($result);
-            show_message( __('Download failed, please follow the manual installation instructions on my <a href="http://blog.splash.de/2009/01/29/floatbox-plus/">website</a>.') );
+            show_message(sprintf(__('Download failed, please follow the manual installation instructions: %s.', 'floatboxplus'),'<a href="http://blog.splash.de/2009/01/29/floatbox-plus/">'.__('Link','floatboxplus').'</a>') );
         } else {
             show_message(__('Download successfull.'));
             // show_message($result);
@@ -126,23 +124,23 @@ if ($floatbox_plus->check_javascript()) {
     } else {
         // show form...
         ?>
-        <h3>Download disabled</h3>
-        <p>Due to changes in the licensing the download is actually disabled. Sorry</p>
-        <p>I'll try to reenable this possibility (as soon as possible).</p>
-        <p></p>
-        <p>For more information/download of floatbox check out the website of <a href="http://randomous.com/floatbox/home">floatbox</a>.</p>
-<!--
         <form action="options-general.php?page=<?php echo dirname(plugin_basename(__FILE__)).'/floatbox-download.php'; ?>" method="post">
-            <h3>License Terms</h3>
+            <h3>License Terms of Floatbox</h3>
             <p class="submit">
-            <a href="http://randomous.com/tools/floatbox/" target="_blank">Floatbox</a> is protected by copyright and is publicly released as free software under the <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0 License</a>.<br />
-You are free to use and modify floatbox but you must retain the attribution and license information in the comment block at the top of the floatbox javascript files.
-You are encouraged to attribute and link back to this source (http://randomous.com/tools/floatbox/) from sites that use floatbox.
-If you are using floatbox commercially, either by getting paid to develop sites or by using it on a promotional or revenue generating site,
-please consider making a fair <a href="http://randomous.com/tools/floatbox/donate.html" target="_blank">donation</a> towards the considerable development effort and ongoing support time that keeps floatbox alive.
+            Floatbox: Copyright © 2008-2009, Byron McGregor<br />
+<br />
+<a href="http://randomous.com/floatbox/">Floatbox</a> is protected by copyright and is released under the <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 Unported License</a>.<br />
+<br />
+All use of floatbox on production commercial web sites requires a license purchase and registration on a per domain basis. A commercial site is any web site that facilitates the selling of a product or service, that generates revenue, that advertises, markets, promotes or provides information for a commercial or professional organization or undertaking, or that is used as an Intranet service for a commercial organization. Use of floatbox by government agencies, higher educational institutions, and political, religious, labor or fraternal organizations requires commercial registration. If a fee has been or will be paid for a site's content creation or authoring, a commercial license is required for that site.<br />
+<br />
+Floatbox is free for use on non-commercial sites such as personal hobby sites and sites associated with public service non-profit organizations. It is also free for all development and test instances of web sites. Candidates for free use may request a license key through the randomous.com web site. Eligibility for a free license key will be determined at the sole discretion of the floatbox copyright holder.<br />
+<br />
+Unrestricted permission is granted, and a license key is not needed, for development, test and evaluation use.<br />
+<br />
+To purchase/register or to request a free non-commercial license please follow the instructions on this <a href="http://randomous.com/floatbox/register">page</a>.
             </p>
             <p class="submit">
-            <label><?php echo __('I agree to the <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">license</a> of <a href="http://randomous.com/tools/floatbox/" target="_blank">floatbox</a> by Byron McGregor and want to download/install floatbox now?', 'floatboxplus'); ?></label>
+            <label>I agree to the <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">license</a> of <a href="http://randomous.com/tools/floatbox/" target="_blank">floatbox</a> by Byron McGregor and want to download/install floatbox now?</label>
             <select name="go">
                 <option value="false"><?php _e('no', 'floatboxplus'); ?></option>
                 <option value="true"><?php _e('yes', 'floatboxplus'); ?></option>
@@ -153,7 +151,6 @@ please consider making a fair <a href="http://randomous.com/tools/floatbox/donat
             </p>
 
         </form>
--->
         <?php
     }
 }
