@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 1.2.0
+Version: 1.2.1
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -16,7 +16,7 @@ define('WPV28', version_compare($wp_version, '2.8', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '1.2.0';
+    var $version = '1.2.1';
 
     // put all options in
     var $options = array();
@@ -851,7 +851,7 @@ class floatbox_plus {
 
     <h3><?php _e('General Settings', 'floatboxplus');  ?></h3>
 
-    <form action="options-general.php?page=floatbox_plus" method="post">
+    <form action="options-general.php?page=<?php echo dirname($plugin).'/'.basename(__FILE__); ?>" method="post">
         <table class="form-table">
             <tbody>
 
