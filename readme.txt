@@ -86,6 +86,7 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 = 1.2.2 =
 * [FIX] YouTube HQ-Video
 * [NEW] set floatbox-licensekey via options page
+* [more information](http://blog.splash.de/2009/08/06/floatbox-plus-1-2-0-1-2-2-download-option/)
 
 = 1.2.1 =
 * [FIX] updating the options didn't work
