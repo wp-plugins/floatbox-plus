@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 1.2.1
+Version: 1.2.2
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -16,7 +16,7 @@ define('WPV28', version_compare($wp_version, '2.8', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '1.2.1';
+    var $version = '1.2.2';
 
     // put all options in
     var $options = array();
@@ -95,14 +95,14 @@ class floatbox_plus {
 		$this->video['youtube']['height'] = floor($this->options['video_width']*14/17);
 		$this->video['youtube']['preview_height'] = floor($this->options['video_preview_width']*14/17);
 		$this->video['youtube']['iphone'] = '<object width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] . '"><param name="movie" value="http://www.youtube.com/v/###VID###"></param><embed src="http://www.youtube.com/v/###VID###" type="application/x-shockwave-flash" width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] .'"></embed></object><br />';
-        $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+                $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
 		$this->video['youtube']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###\">YouTube ###TXT######THING###</a>";
 
 		$this->video['youtubehq']['height'] = floor($this->options['video_width']*9/15.2);
 		$this->video['youtubehq']['preview_height'] = floor($this->options['video_preview_width']*9/15.2);
-        $this->video['youtubehq']['iphone'] = '<object width="' . $this->options['video_width'] . '" height="' . $this->video['youtubehq']['height'] . '"><param name="movie" value="http://www.youtube.com/v/###VID###"></param><embed src="http://www.youtube.com/v/###VID###" type="application/x-shockwave-flash" width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] .'"></embed></object><br />';
-		$this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
-		$this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###&amp;ap=%2526&amp;fmt%3D22\">YouTube ###TXT######THING###</a>";
+                $this->video['youtubehq']['iphone'] = '<object width="' . $this->options['video_width'] . '" height="' . $this->video['youtubehq']['height'] . '"><param name="movie" value="http://www.youtube.com/v/###VID###"></param><embed src="http://www.youtube.com/v/###VID###" type="application/x-shockwave-flash" width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] .'"></embed></object><br />';
+		$this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&hd=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+		$this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###&amp;ap=%2526&amp;fmt%3D22&hd=1\">YouTube ###TXT######THING###</a>";
 
 		$this->video['vimeo']['height'] = floor($this->options['video_width'] * 3 / 4);
 		$this->video['vimeo']['preview_height'] = floor($this->options['video_preview_width'] * 3 / 4);
@@ -461,13 +461,13 @@ class floatbox_plus {
                         $output .= $this->video['youtube']['target'];
                     }
                     break;
-				case "youtubehq":
-					if ($this->is_iPhone() == true) {
-						$output .= $this->video['youtubehq']['iphone'];
-					} else {
-						$output .= $this->video['youtubehq']['target'];
-					}
-					break;
+                case "youtubehq":
+                        if ($this->is_iPhone() == true) {
+                                $output .= $this->video['youtubehq']['iphone'];
+                        } else {
+                                $output .= $this->video['youtubehq']['target'];
+                        }
+                        break;
                 case "vimeo": $output .= $this->video['vimeo']['target'];
                     break;
                 case "google": $output .= $this->video['google']['target'];
@@ -800,10 +800,10 @@ class floatbox_plus {
                 $this->options['video_separator'] = $_POST['video_separator'];
             }
 
-			//option 'video_preview_width'
-			if(!empty($_POST['video_preview_width'])) {
-				$this->options['video_preview_width'] = $_POST['video_preview_width'];
-			}
+            //option 'video_preview_width'
+            if(!empty($_POST['video_preview_width'])) {
+                    $this->options['video_preview_width'] = $_POST['video_preview_width'];
+            }
 
             //option 'video_width'
             if(!empty($_POST['video_width'])) {
@@ -822,6 +822,34 @@ class floatbox_plus {
                 $this->options['floatbox_350'] = true;
             } else {
                 $this->options['floatbox_350'] = false;
+            }
+            
+            // option 'fb_licenseKey'
+            if(!empty($_POST['fb_licenseKey'])) {
+                $this->options['fb_licenseKey'] = $_POST['fb_licenseKey'];
+                if (file_exists(dirname(__FILE__).'/floatbox/licenseKey.js')) {
+                    $licenseFile = dirname(__FILE__).'/floatbox/licenseKey.js';
+
+                    // open file
+                    $fileHandler = fopen($licenseFile, 'r+');
+
+                    // read file
+                    $fileContents = fread($fileHandler, filesize($licenseFile));
+
+                    // manipulate file
+                    $newFileContents = preg_replace('/fb.licenseKey = "(.*)";/i','fb.licenseKey = "'.$this->options['fb_licenseKey'].'";', $fileContents);
+
+                    // write file
+                    rewind($fileHandler);
+                    fwrite($fileHandler, $newFileContents);
+
+                    // close file
+                    fclose($fileHandler);
+
+                    echo '<div id="message" class="updated fade"><p><strong>' . sprintf(__('licensekey-file successfully written (%s)', 'floatboxplus'), $licenseFile) . '</strong></p></div>';
+                } else {
+                    echo '<div id="message" class="updated fade"><p><strong>' . sprintf(__('licensekey-file not found (%s)', 'floatboxplus'), $licenseFile) . '</strong></p></div>';
+                }
             }
 
             // update options
@@ -924,6 +952,30 @@ class floatbox_plus {
 
             </tbody>
         </table>
+
+        <?php if ($this->options['floatbox_350']): ?>
+
+        <h3><?php _e('Floatbox LicenseKey', 'floatboxplus'); ?></h3>
+
+        <table class="form-table">
+            <tbody>
+
+                <?php // LicenseKey ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php echo _e('LicenseKey', 'floatboxplus'); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" value="<?php echo $this->options['fb_licenseKey'] ?>" name="fb_licenseKey" id="fb_licenseKey" size="5" maxlength="35" />
+                        <br />
+                        <?php _e('LicenseKey for floatbox 3.52 and higher.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <?php endif; ?>
 
         <h3><?php _e('Floatbox Options', 'floatboxplus'); ?></h3>
 
