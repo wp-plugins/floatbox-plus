@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 1.2.2
+Version: 1.2.3
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -16,7 +16,7 @@ define('WPV28', version_compare($wp_version, '2.8', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '1.2.2';
+    var $version = '1.2.3';
 
     // put all options in
     var $options = array();
@@ -89,34 +89,42 @@ class floatbox_plus {
                 ),
             10,
             2
-            );
+        );
 
-		// define object targets and links
-		$this->video['youtube']['height'] = floor($this->options['video_width']*14/17);
-		$this->video['youtube']['preview_height'] = floor($this->options['video_preview_width']*14/17);
-		$this->video['youtube']['iphone'] = '<object width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] . '"><param name="movie" value="http://www.youtube.com/v/###VID###"></param><embed src="http://www.youtube.com/v/###VID###" type="application/x-shockwave-flash" width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] .'"></embed></object><br />';
-                $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
-		$this->video['youtube']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###\">YouTube ###TXT######THING###</a>";
+        // define object targets and links
+        $this->video['youtube']['height'] = floor($this->options['video_width']*14/17);
+        $this->video['youtube']['preview_height'] = floor($this->options['video_preview_width']*14/17);
+        $this->video['youtube']['iphone'] = '<object width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] . '"><param name="movie" value="http://www.youtube.com/v/###VID###"></param><embed src="http://www.youtube.com/v/###VID###" type="application/x-shockwave-flash" width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] .'"></embed></object><br />';
+        if ($this->options['youtube_fullscreen'] == true) {
+            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;fs=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+        } else {
+            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+        }
+        $this->video['youtube']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###\">YouTube ###TXT######THING###</a>";
 
-		$this->video['youtubehq']['height'] = floor($this->options['video_width']*9/15.2);
-		$this->video['youtubehq']['preview_height'] = floor($this->options['video_preview_width']*9/15.2);
-                $this->video['youtubehq']['iphone'] = '<object width="' . $this->options['video_width'] . '" height="' . $this->video['youtubehq']['height'] . '"><param name="movie" value="http://www.youtube.com/v/###VID###"></param><embed src="http://www.youtube.com/v/###VID###" type="application/x-shockwave-flash" width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] .'"></embed></object><br />';
-		$this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&hd=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
-		$this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###&amp;ap=%2526&amp;fmt%3D22&hd=1\">YouTube ###TXT######THING###</a>";
+        $this->video['youtubehq']['height'] = floor($this->options['video_width']*9/15.2);
+        $this->video['youtubehq']['preview_height'] = floor($this->options['video_preview_width']*9/15.2);
+        $this->video['youtubehq']['iphone'] = '<object width="' . $this->options['video_width'] . '" height="' . $this->video['youtubehq']['height'] . '"><param name="movie" value="http://www.youtube.com/v/###VID###"></param><embed src="http://www.youtube.com/v/###VID###" type="application/x-shockwave-flash" width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] .'"></embed></object><br />';
+        if ($this->options['youtube_fullscreen'] == true) {
+            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;fs=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+        } else {
+            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&hd=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+        }
+        $this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###&amp;ap=%2526&amp;fmt%3D22&hd=1\">YouTube ###TXT######THING###</a>";
 
-		$this->video['vimeo']['height'] = floor($this->options['video_width'] * 3 / 4);
-		$this->video['vimeo']['preview_height'] = floor($this->options['video_preview_width'] * 3 / 4);
-		$this->video['vimeo']['target'] = '<a href="http://www.vimeo.com/moogaloop.swf?clip_id=###VID###" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
-		$this->video['vimeo']['link'] = "<a title=\"vimeo\" href=\"http://www.vimeo.com/clip:###VID###\">vimeo ###TXT######THING###</a>";
+        $this->video['vimeo']['height'] = floor($this->options['video_width'] * 3 / 4);
+        $this->video['vimeo']['preview_height'] = floor($this->options['video_preview_width'] * 3 / 4);
+        $this->video['vimeo']['target'] = '<a href="http://www.vimeo.com/moogaloop.swf?clip_id=###VID###" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+        $this->video['vimeo']['link'] = "<a title=\"vimeo\" href=\"http://www.vimeo.com/clip:###VID###\">vimeo ###TXT######THING###</a>";
 
-		$this->video['local']['quicktime']['height'] = floor($this->options['video_width'] * 3 / 4);
-		$this->video['local']['quicktime']['preview_height'] = floor($this->options['video_preview_width'] * 3 / 4);
-		$this->video['local']['quicktime']['target'] = "<object classid=\"clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B\" codebase=\"http://www.apple.com/qtactivex/qtplugin.cab\" width=\"" .  $this->options['video_width'] . "\" height=\"" . 	$this->video['local']['quicktime']['height'] . "\"><param name=\"src\" value=\"".get_option('siteurl')."###VID###\" /><param name=\"autoplay\" value=\"false\" /><param name=\"pluginspage\" value=\"http://www.apple.com/quicktime/download/\" /><param name=\"controller\" value=\"true\" /><!--[if !IE]> <--><object data=\"".get_option('siteurl')."###VID###\" width=\"" . $this->options['video_width'] . "\" height=\"" . 	$this->video['local']['quicktime']['height'] . "\" type=\"video/quicktime\"><param name=\"pluginurl\" value=\"http://www.apple.com/quicktime/download/\" /><param name=\"controller\" value=\"true\" /><param name=\"autoplay\" value=\"false\" /></object><!--> <![endif]--></object><br />";
-		$this->video['local']['flashplayer']['height'] = floor($this->options['video_width'] * 93 / 112);
-		$this->video['local']['flashplayer']['target'] =  "<object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0\" width=\"" . $this->options['video_width'] . "\" height=\"" . $this->video['local']['flashplayer']['height'] . "\"><param value=\"#FFFFFF\" name=\"bgcolor\" /><param name=\"movie\" value=\"".WP_PLUGIN_URL."/floatbox-plus/mediaplayer/player.swf\" /><param value=\"file=".get_option('siteurl')."###VID###&amp;showdigits=true&amp;autostart=false&amp;overstretch=false&amp;showfsbutton=false\" name=\"flashvars\" /><param name=\"wmode\" value=\"transparent\" /><!--[if !IE]> <--><object data=\"".WP_PLUGIN_URL."/floatbox-plus/mediaplayer/player.swf\" type=\"application/x-shockwave-flash\" height=\"" . $this->video['local']['flashplayer']['height'] . "\" width=\"" . $this->options['video_width'] . "\"><param value=\"#FFFFFF\" name=\"bgcolor\"><param value=\"file=".get_option('siteurl')."###VID###&amp;showdigits=true&amp;autostart=false&amp;overstretch=false&amp;showfsbutton=false\" name=\"flashvars\" /><param name=\"wmode\" value=\"transparent\" /></object><!--> <![endif]--></object><br />";
-		$this->video['local']['target'] = "<object classid=\"clsid:22D6f312-B0F6-11D0-94AB-0080C74C7E95\" codebase=\"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-oleobject\"><param name=\"filename\" value=\"".get_option('siteurl')."###VID###\" /><param name=\"autostart\" value=\"false\" /><param name=\"showcontrols\" value=\"true\" /><!--[if !IE]> <--><object data=\"".get_option('siteurl')."###VID###\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-mplayer2\"><param name=\"pluginurl\" value=\"http://www.microsoft.com/Windows/MediaPlayer/\" /><param name=\"ShowControls\" value=\"true\" /><param name=\"ShowStatusBar\" value=\"true\" /><param name=\"ShowDisplay\" value=\"true\" /><param name=\"Autostart\" value=\"0\" /></object><!--> <![endif]--></object><br />";
-		$this->video['local']['link'] = "<a title=\"Video File\" href=\"".get_option('siteurl')."###VID###\">Download Video</a>";
-	}
+        $this->video['local']['quicktime']['height'] = floor($this->options['video_width'] * 3 / 4);
+        $this->video['local']['quicktime']['preview_height'] = floor($this->options['video_preview_width'] * 3 / 4);
+        $this->video['local']['quicktime']['target'] = "<object classid=\"clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B\" codebase=\"http://www.apple.com/qtactivex/qtplugin.cab\" width=\"" .  $this->options['video_width'] . "\" height=\"" . 	$this->video['local']['quicktime']['height'] . "\"><param name=\"src\" value=\"".get_option('siteurl')."###VID###\" /><param name=\"autoplay\" value=\"false\" /><param name=\"pluginspage\" value=\"http://www.apple.com/quicktime/download/\" /><param name=\"controller\" value=\"true\" /><!--[if !IE]> <--><object data=\"".get_option('siteurl')."###VID###\" width=\"" . $this->options['video_width'] . "\" height=\"" . 	$this->video['local']['quicktime']['height'] . "\" type=\"video/quicktime\"><param name=\"pluginurl\" value=\"http://www.apple.com/quicktime/download/\" /><param name=\"controller\" value=\"true\" /><param name=\"autoplay\" value=\"false\" /></object><!--> <![endif]--></object><br />";
+        $this->video['local']['flashplayer']['height'] = floor($this->options['video_width'] * 93 / 112);
+        $this->video['local']['flashplayer']['target'] =  "<object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0\" width=\"" . $this->options['video_width'] . "\" height=\"" . $this->video['local']['flashplayer']['height'] . "\"><param value=\"#FFFFFF\" name=\"bgcolor\" /><param name=\"movie\" value=\"".WP_PLUGIN_URL."/floatbox-plus/mediaplayer/player.swf\" /><param value=\"file=".get_option('siteurl')."###VID###&amp;showdigits=true&amp;autostart=false&amp;overstretch=false&amp;showfsbutton=false\" name=\"flashvars\" /><param name=\"wmode\" value=\"transparent\" /><!--[if !IE]> <--><object data=\"".WP_PLUGIN_URL."/floatbox-plus/mediaplayer/player.swf\" type=\"application/x-shockwave-flash\" height=\"" . $this->video['local']['flashplayer']['height'] . "\" width=\"" . $this->options['video_width'] . "\"><param value=\"#FFFFFF\" name=\"bgcolor\"><param value=\"file=".get_option('siteurl')."###VID###&amp;showdigits=true&amp;autostart=false&amp;overstretch=false&amp;showfsbutton=false\" name=\"flashvars\" /><param name=\"wmode\" value=\"transparent\" /></object><!--> <![endif]--></object><br />";
+        $this->video['local']['target'] = "<object classid=\"clsid:22D6f312-B0F6-11D0-94AB-0080C74C7E95\" codebase=\"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-oleobject\"><param name=\"filename\" value=\"".get_option('siteurl')."###VID###\" /><param name=\"autostart\" value=\"false\" /><param name=\"showcontrols\" value=\"true\" /><!--[if !IE]> <--><object data=\"".get_option('siteurl')."###VID###\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-mplayer2\"><param name=\"pluginurl\" value=\"http://www.microsoft.com/Windows/MediaPlayer/\" /><param name=\"ShowControls\" value=\"true\" /><param name=\"ShowStatusBar\" value=\"true\" /><param name=\"ShowDisplay\" value=\"true\" /><param name=\"Autostart\" value=\"0\" /></object><!--> <![endif]--></object><br />";
+        $this->video['local']['link'] = "<a title=\"Video File\" href=\"".get_option('siteurl')."###VID###\">Download Video</a>";
+    }
 
     function set_plugin_actions($links, $file) {
         $plugin = plugin_basename(__FILE__);
@@ -252,40 +260,42 @@ class floatbox_plus {
         return true;
     }
 
-	function update()
-	{
-		// add option, if they does not exist
-		if(empty($this->options['video_preview_width']))
-			$this->options['video_preview_width'] = $this->options['video_width'];
+    function update()
+    {
+        // add option, if they does not exist
+        if(empty($this->options['video_preview_width']))
+		$this->options['video_preview_width'] = $this->options['video_width'];
+        if(empty($this->options['youtube_fullscreen']))
+		$this->options['youtube_fullscreen'] = false;
 
         // floatbox: general options
-		if(empty($this->options['fb_options']))
-			$this->options['fb_options'] = false;
-		if(empty($this->options['fb_theme']))
-			$this->options['fb_theme'] = 'auto';
+        if(empty($this->options['fb_options']))
+                $this->options['fb_options'] = false;
+        if(empty($this->options['fb_theme']))
+                $this->options['fb_theme'] = 'auto';
         // floatbox: animation options
-		if(empty($this->options['fb_doAnimations']))
-			$this->options['fb_doAnimations'] = true;
-		if(empty($this->options['fb_resizeDuration']))
-			$this->options['fb_resizeDuration'] = 3.5;
-		if(empty($this->options['fb_imageFadeDuration']))
-			$this->options['fb_imageFadeDuration'] = 3.5;
-		if(empty($this->options['fb_overlayFadeDuration']))
-			$this->options['fb_overlayFadeDuration'] = 4;
-		if(empty($this->options['fb_splitResize']))
-			$this->options['fb_splitResize'] = 'no';
-		if(empty($this->options['fb_startAtClick']))
-			$this->options['fb_startAtClick'] = true;
-		if(empty($this->options['fb_zoomImageStart']))
-			$this->options['fb_zoomImageStart'] = true;
-		if(empty($this->options['fb_liveImageResize']))
-			$this->options['fb_liveImageResize'] = false;
-		if(empty($this->options['floatbox_350']))
-			$this->options['floatbox_350'] = false;
+        if(empty($this->options['fb_doAnimations']))
+                $this->options['fb_doAnimations'] = true;
+        if(empty($this->options['fb_resizeDuration']))
+                $this->options['fb_resizeDuration'] = 3.5;
+        if(empty($this->options['fb_imageFadeDuration']))
+                $this->options['fb_imageFadeDuration'] = 3.5;
+        if(empty($this->options['fb_overlayFadeDuration']))
+                $this->options['fb_overlayFadeDuration'] = 4;
+        if(empty($this->options['fb_splitResize']))
+                $this->options['fb_splitResize'] = 'no';
+        if(empty($this->options['fb_startAtClick']))
+                $this->options['fb_startAtClick'] = true;
+        if(empty($this->options['fb_zoomImageStart']))
+                $this->options['fb_zoomImageStart'] = true;
+        if(empty($this->options['fb_liveImageResize']))
+                $this->options['fb_liveImageResize'] = false;
+        if(empty($this->options['floatbox_350']))
+                $this->options['floatbox_350'] = false;
 
-		// update options
-		update_option('floatbox_plus', serialize($this->options));
-	}
+        // update options
+        update_option('floatbox_plus', serialize($this->options));
+    }
 
     //backups floatbox javascript
     function backup_floatbox()
@@ -726,6 +736,12 @@ class floatbox_plus {
             if(!empty($_POST['fb_theme'])) {
                 $this->options['fb_theme'] = $_POST['fb_theme'];
             }
+            // youtube -> fullscreen
+            if($_POST['youtube_fullscreen'] == 'true') {
+                $this->options['youtube_fullscreen'] = true;
+            } else {
+                $this->options['youtube_fullscreen'] = false;
+            }
             // floatbox: animation options
             if($_POST['fb_doAnimations'] == 'true') {
                 $this->options['fb_doAnimations'] = true;
@@ -1150,7 +1166,7 @@ class floatbox_plus {
                     </td>
                 </tr>
 
-                        <?php // Show link under videos in small? ?>
+                <?php // Show link under videos in small? ?>
                 <tr valign="top">
                     <th scope="row">
                         <label><?php _e('Show a small Link under the Video?', 'floatboxplus'); ?></label>
@@ -1168,7 +1184,7 @@ class floatbox_plus {
                     </td>
                 </tr>
 
-                        <?php // Linktext ?>
+                <?php // Linktext ?>
                 <tr valign="top">
                     <th scope="row">
                         <label><?php echo _e('Separator', 'floatboxplus'); ?></label>
@@ -1180,7 +1196,7 @@ class floatbox_plus {
                     </td>
                 </tr>
 
-                        <?php // Show in Feed? ?>
+                <?php // Show in Feed? ?>
                 <tr valign="top">
                     <th scope="row">
                         <label><?php echo _e('Show in Feed?', 'floatboxplus'); ?></label>
@@ -1196,19 +1212,19 @@ class floatbox_plus {
                     </td>
                 </tr>
 
-					<?php // Video Preview Image Width ?>
-					<tr valign="top">
-						<th scope="row">
-							<label><?php _e('Video Preview Width', 'floatboxplus'); ?>  (250px - 800px)</label>
-						</th>
-						<td>
-							<input type="text" value="<?php echo $this->options['video_preview_width'] ?>" name="video_preview_width" id="video_preview_width" size="5" maxlength="3" />
-							<br />
-							<?php _e('Choose the width of the preview images for the videos', 'floatboxplus'); ?>
-						</td>
-					</tr>
+                <?php // Video Preview Image Width ?>
+                <tr valign="top">
+                        <th scope="row">
+                                <label><?php _e('Video Preview Width', 'floatboxplus'); ?>  (250px - 800px)</label>
+                        </th>
+                        <td>
+                                <input type="text" value="<?php echo $this->options['video_preview_width'] ?>" name="video_preview_width" id="video_preview_width" size="5" maxlength="3" />
+                                <br />
+                                <?php _e('Choose the width of the preview images for the videos', 'floatboxplus'); ?>
+                        </td>
+                </tr>
 
-                        <?php // Video Width ?>
+                <?php // Video Width ?>
                 <tr valign="top">
                     <th scope="row">
                         <label><?php _e('Video Width', 'floatboxplus'); ?>  (250px - 800px)</label>
@@ -1219,6 +1235,23 @@ class floatbox_plus {
                         <?php _e('You can choose, what width the video and image have', 'floatboxplus'); ?>
                     </td>
                 </tr>
+
+                <?php // Show link under Videos? ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('YouTube: Allow fullscreen?', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="youtube_fullscreen" size="1">
+                            <option value="true" <?php if ($this->options['youtube_fullscreen'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
+                            <option value="false" <?php if ($this->options['youtube_fullscreen'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('Allow youtube videos to be shown in fullscreen mode (works only in floatbox 3.50 and higher)', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+
             </tbody>
         </table>
         <input type="hidden" name="fb_submit" id="fb_submit" value="1" />
