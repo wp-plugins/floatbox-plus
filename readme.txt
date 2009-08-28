@@ -1,5 +1,5 @@
 === Floatbox Plus ===
-Contributors: Oliver Schaal
+Contributors: cybio
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus/
