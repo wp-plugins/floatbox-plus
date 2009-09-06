@@ -1,4 +1,9 @@
 <?php
+if (!function_exists('is_admin')) {
+    header('Status: 403 Forbidden');
+    header('HTTP/1.1 403 Forbidden');
+    exit();
+}
 
 // do not change anything here ;)
 $_floatbox['dirname'] = 'floatbox';
@@ -6,102 +11,102 @@ $_floatbox['destinationdir'] = 'floatbox-plus/floatbox/';
 $_floatbox['download_url'] = 'http://randomous.com/floatbox/floatbox_3.53.0.zip';
 
 function fbp_download($feedback = '') {
-	global $wp_filesystem, $_floatbox;
+    global $wp_filesystem, $_floatbox;
 
     if ( !empty($feedback) )
-		add_filter('update_feedback', $feedback);
+	add_filter('update_feedback', $feedback);
 
-	// Is a filesystem accessor setup?
-	if ( ! $wp_filesystem || ! is_object($wp_filesystem) )
-		WP_Filesystem();
+    // Is a filesystem accessor setup?
+    if ( ! $wp_filesystem || ! is_object($wp_filesystem) )
+        WP_Filesystem();
 
-	if ( ! is_object($wp_filesystem) )
-		return new WP_Error('fs_unavailable', __('Could not access filesystem.', 'floatboxplus'));
+    if ( ! is_object($wp_filesystem) )
+        return new WP_Error('fs_unavailable', __('Could not access filesystem.', 'floatboxplus'));
 
-	if ( $wp_filesystem->errors->get_error_code() )
-		return new WP_Error('fs_error', __('Filesystem error', 'floatboxplus'), $wp_filesystem->errors);
+    if ( $wp_filesystem->errors->get_error_code() )
+        return new WP_Error('fs_error', __('Filesystem error', 'floatboxplus'), $wp_filesystem->errors);
 
-	//Get the base plugin folder
-	$plugins_dir = $wp_filesystem->wp_plugins_dir();
-	if ( empty($plugins_dir) )
-		return new WP_Error('fs_no_plugins_dir', __('Unable to locate WordPress Plugin directory.', 'floatboxplus'));
+    //Get the base plugin folder
+    $plugins_dir = $wp_filesystem->wp_plugins_dir();
+    if ( empty($plugins_dir) )
+        return new WP_Error('fs_no_plugins_dir', __('Unable to locate WordPress Plugin directory.', 'floatboxplus'));
 
-	//And the same for the Content directory.
-	$content_dir = $wp_filesystem->wp_content_dir();
-	if( empty($content_dir) )
-		return new WP_Error('fs_no_content_dir', __('Unable to locate WordPress Content directory (wp - content).', 'floatboxplus'));
+    //And the same for the Content directory.
+    $content_dir = $wp_filesystem->wp_content_dir();
+    if( empty($content_dir) )
+        return new WP_Error('fs_no_content_dir', __('Unable to locate WordPress Content directory (wp - content).', 'floatboxplus'));
 
-	$plugins_dir = trailingslashit( $plugins_dir );
-	$content_dir = trailingslashit( $content_dir );
+    $plugins_dir = trailingslashit( $plugins_dir );
+    $content_dir = trailingslashit( $content_dir );
 
-	// Download the package
+    // Download the package
     $download_url = $_floatbox['download_url'];
 
     apply_filters('update_feedback', sprintf(__('Downloading floatbox from %s', 'floatboxplus'), $download_url));
-	$download_file = download_url($download_url);
+    $download_file = download_url($download_url);
 
-	if ( is_wp_error($download_file) )
-		return new WP_Error('download_failed', __('Download failed', 'floatboxplus'), $download_file->get_error_message());
+    if ( is_wp_error($download_file) )
+        return new WP_Error('download_failed', __('Download failed', 'floatboxplus'), $download_file->get_error_message());
 
-	$working_dir = $content_dir . 'upgrade/'. $_floatbox['dirname'];
+    $working_dir = $content_dir . 'upgrade/'. $_floatbox['dirname'];
 
-	// Clean up working directory
-	if ( $wp_filesystem->is_dir($working_dir) )
-		$wp_filesystem->delete($working_dir, true);
+    // Clean up working directory
+    if ( $wp_filesystem->is_dir($working_dir) )
+        $wp_filesystem->delete($working_dir, true);
 
-	apply_filters('update_feedback', __('Unpacking the update', 'floatboxplus'));
-	// Unzip package to working directory
-	$result = unzip_file($download_file, $working_dir);
+    apply_filters('update_feedback', __('Unpacking the update', 'floatboxplus'));
+    // Unzip package to working directory
+    $result = unzip_file($download_file, $working_dir);
 
     // Once extracted, delete the package
-	unlink($download_file);
+    unlink($download_file);
 
-	if ( is_wp_error($result) ) {
-		$wp_filesystem->delete($working_dir, true);
-		return $result;
-	}
+    if ( is_wp_error($result) ) {
+            $wp_filesystem->delete($working_dir, true);
+            return $result;
+    }
 
     $plugin = $_floatbox['destinationdir'];
-	// Remove the existing plugin.
-	// apply_filters('update_feedback', __('Removing the old version of the floatbox'));
-	$this_plugin_dir = trailingslashit( $plugins_dir . $plugin );
+    // Remove the existing plugin.
+    // apply_filters('update_feedback', __('Removing the old version of the floatbox'));
+    $this_plugin_dir = trailingslashit( $plugins_dir . $plugin );
 
-	// If plugin is in its own directory, recursively delete the directory.
-	if ( strpos($plugin, '/') && $this_plugin_dir != $plugins_dir ) //base check on if plugin includes directory seperator AND that its not the root plugin folder
-		$deleted = $wp_filesystem->delete($this_plugin_dir, true);
-	else
-		$deleted = $wp_filesystem->delete($plugins_dir . $plugin);
+    // If plugin is in its own directory, recursively delete the directory.
+    if ( strpos($plugin, '/') && $this_plugin_dir != $plugins_dir ) //base check on if plugin includes directory seperator AND that its not the root plugin folder
+            $deleted = $wp_filesystem->delete($this_plugin_dir, true);
+    else
+            $deleted = $wp_filesystem->delete($plugins_dir . $plugin);
 
-    /* aktuell uninteressant, nur bei updates sollte es vll. wieder aktiviert werden ?
+    /* TODO: aktuell uninteressant, nur bei updates sollte es vll. wieder aktiviert werden ?
 	if ( ! $deleted ) {
 		$wp_filesystem->delete($working_dir, true);
 		return new WP_Error('delete_failed', __('Could not remove the old plugin'));
 	}
     */
 
-	apply_filters('update_feedback', __('Installing the latest version', 'floatboxplus'));
-	// Copy new version of plugin into place.
-	$result = copy_dir($working_dir, dirname($this_plugin_dir));
+    apply_filters('update_feedback', __('Installing the latest version', 'floatboxplus'));
+    // Copy new version of plugin into place.
+    $result = copy_dir($working_dir, dirname($this_plugin_dir));
 
-	if ( is_wp_error($result) ) {
-		$wp_filesystem->delete($working_dir, true);
-		return $result;
-	}
+    if ( is_wp_error($result) ) {
+            $wp_filesystem->delete($working_dir, true);
+            return $result;
+    }
 
     //Get a list of the directories in the working directory before we delete it, We need to know the new folder for the plugin
-	$filelist = array_keys( $wp_filesystem->dirlist($working_dir) );
+    $filelist = array_keys( $wp_filesystem->dirlist($working_dir) );
 
-	// Remove working directory
-	$wp_filesystem->delete($working_dir, true);
+    // Remove working directory
+    $wp_filesystem->delete($working_dir, true);
 
-	if( empty($filelist) )
-		return false; //We couldnt find any files in the working dir, therefor no plugin installed? Failsafe backup.
+    if( empty($filelist) )
+            return false; //We couldnt find any files in the working dir, therefor no plugin installed? Failsafe backup.
 
-	$folder = $filelist[0];
-	$plugin = get_plugins('/' . $folder); //Ensure to pass with leading slash
-	$pluginfiles = array_keys($plugin); //Assume the requested plugin is the first in the list
+    $folder = $filelist[0];
+    $plugin = get_plugins('/' . $folder); //Ensure to pass with leading slash
+    $pluginfiles = array_keys($plugin); //Assume the requested plugin is the first in the list
 
-	return  $folder . '/' . $pluginfiles[0];
+    return  $folder . '/' . $pluginfiles[0];
 }
 
 ?>
