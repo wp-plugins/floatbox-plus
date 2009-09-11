@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 1.2.4
+Version: 1.2.5
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -22,7 +22,7 @@ define('WPV28', version_compare($wp_version, '2.8', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '1.2.4';
+    var $version = '1.2.5';
 
     // put all options in
     var $options = array();
@@ -114,9 +114,9 @@ class floatbox_plus {
         if ($this->options['youtube_fullscreen'] == true) {
             $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;fs=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
         } else {
-            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&hd=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
         }
-        $this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###&amp;ap=%2526&amp;fmt%3D22&hd=1\">YouTube ###TXT######THING###</a>";
+        $this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###&amp;ap=%2526&amp;fmt%3D22&amp;hd=1\">YouTube ###TXT######THING###</a>";
 
         $this->video['vimeo']['height'] = floor($this->options['video_width'] * 3 / 4);
         $this->video['vimeo']['preview_height'] = floor($this->options['video_preview_width'] * 3 / 4);
@@ -690,27 +690,34 @@ class floatbox_plus {
         $path = plugins_url()."/floatbox-plus";
 
         $script = "\n<!-- FloatBox Plus Plugin -->\n";
-        $script .= "<script type=\"text/javascript\">\nfbPageOptions =  {\n";
-        // floatbox options
-        if ($this->options['fb_options'] == true) {
-            // general options
-            $script .= "theme: '".$this->options['fb_theme']."',\n";
-            // animation options
-            $script .= "doAnimations: ".$this->boolToString($this->options['fb_doAnimations']).",\n";
-            $script .= "resizeDuration: ".$this->options['fb_resizeDuration'].",\n";
-            $script .= "imageFadeDuration: ".$this->options['fb_imageFadeDuration'].",\n";
-            $script .= "overlayFadeDuration: ".$this->options['fb_overlayFadeDuration'].",\n";
-            $script .= "splitResize: '".$this->options['fb_splitResize']."',\n";
-            $script .= "startAtClick: ".$this->boolToString($this->options['fb_startAtClick']).",\n";
-            $script .= "zoomImageStart: ".$this->boolToString($this->options['fb_zoomImageStart']).",\n";
-            $script .= "liveImageResize: ".$this->boolToString($this->options['fb_liveImageResize']).",\n";
+        if ($this->options['fb_options'] == true || !$this->options['floatbox_350']) {
+            $script .= "<script type=\"text/javascript\">\nfbPageOptions = {\n";
+            // floatbox options
+            if ($this->options['fb_options'] == true) {
+                // general options
+                $script .= "theme: '".$this->options['fb_theme']."',\n";
+                // animation options
+                $script .= "doAnimations: ".$this->boolToString($this->options['fb_doAnimations']).",\n";
+                $script .= "resizeDuration: ".$this->options['fb_resizeDuration'].",\n";
+                $script .= "imageFadeDuration: ".$this->options['fb_imageFadeDuration'].",\n";
+                $script .= "overlayFadeDuration: ".$this->options['fb_overlayFadeDuration'].",\n";
+                $script .= "splitResize: '".$this->options['fb_splitResize']."',\n";
+                $script .= "startAtClick: ".$this->boolToString($this->options['fb_startAtClick']).",\n";
+                $script .= "zoomImageStart: ".$this->boolToString($this->options['fb_zoomImageStart']).",\n";
+                $script .= "liveImageResize: ".$this->boolToString($this->options['fb_liveImageResize']);
+                if (!$this->options['floatbox_350']) {
+                    $script .= ",\n";
+                } else {
+                    $script .= "\n";
+                }
+            }
+            // path, won't be necessary for floatbox 3.50
+            if (!$this->options['floatbox_350']) {
+                $script .= "urlGraphics: '".$path."/floatbox/graphics/',\n";
+                $script .= "urlLanguages: '".$path."/floatbox/languages/'\n";
+            }
+            $script .= "};\n</script>\n";
         }
-        // path, won't be necessary for floatbox 3.50
-        if (!$this->options['floatbox_350']) {
-            $script .= "urlGraphics: '".$path."/floatbox/graphics/',\n";
-            $script .= "urlLanguages: '".$path."/floatbox/languages/'\n";
-        }
-        $script .= "};\n</script>\n";
         if (WPV28 == false) {
             $script .= "<script type=\"text/javascript\" src=\"$path/floatbox/floatbox.js\"></script>\n";
             $script .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"$path/floatbox/floatbox.css\" media=\"screen\" />\n";
