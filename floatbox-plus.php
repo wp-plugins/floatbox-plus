@@ -5,7 +5,7 @@ Plugin Name: Floatbox Plus
 Website link: http://blog.splash.de/
 Author URI: http://blog.splash.de/
 Plugin URI: http://blog.splash.de/plugins/floatbox-plus
-Version: 1.2.5
+Version: 1.2.6
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -16,6 +16,7 @@ if (!function_exists('is_admin')) {
 }
 
 global $wp_version;
+define('FBP_URLPATH', WP_PLUGIN_URL . '/' . plugin_basename( dirname(__FILE__) ).'/' );
 define('WPV27', version_compare($wp_version, '2.7', '>='));
 define('WPV28', version_compare($wp_version, '2.8', '>='));
 
@@ -78,7 +79,12 @@ class floatbox_plus {
 
         // add MCE Editor Button
         if($this->options['show_video']) {
-            add_action('init', array(&$this, 'mceinit'));
+            //add_action('init', array(&$this, 'mceinit'));
+            /* Add the button to FloatBoxMCE */
+            include_once (dirname(__FILE__) . '/tinymce/tinymce.php');
+            if (class_exists("FloatBoxMCE")) {
+                $floatboxmce_button = new FloatBoxMCE ();
+            }
             if (WPV28) {
                 add_action('admin_enqueue_scripts', array(&$this, 'enqueueAdmin'));
             } else {
@@ -1279,38 +1285,15 @@ class floatbox_plus {
         <?php
     }
 
-    function mcebutton($buttons) {
-        array_push($buttons, "|", "floatboxplus");
-        return $buttons;
-    }
-
-    function mceplugin($ext_plu) {
-        if (is_array($ext_plu) == false) {
-            $ext_plu = array();
-        }
-
-        $url = WP_PLUGIN_URL."/floatbox-plus/editor_plugin.js";
-        $result = array_merge($ext_plu, array("floatboxplus" => $url));
-        return $result;
-    }
-
-    function mceinit() {
-        if (function_exists('load_plugin_textdomain')) load_plugin_textdomain('floatbox-plus', dirname(__FILE__).'/langs');
-        if ( 'true' == get_user_option('rich_editing') ) {
-            add_filter('mce_external_plugins', array(&$this, 'mceplugin'), 0);
-            add_filter("mce_buttons", array(&$this, 'mcebutton'), 0);
-        }
-    }
-
     function add_admin_header() {
-        echo "<script type='text/javascript' src='".WP_PLUGIN_URL."/floatbox-plus/floatbox-plus.js'></script>\n";
+        echo "<script type='text/javascript' src='".WP_PLUGIN_URL."/floatbox-plus/tinymce/floatbox-plus.js'></script>\n";
     }
 
     function enqueueAdmin($hook_suffix) {
         // print '<!-- enqueueAdmin: '.$hook_suffix.' -->';
-        $fbp_admin_pages = array('post-new.php', 'post.php');
+        $fbp_admin_pages = array('post-new.php', 'post.php', 'page-new.php', 'page.php');
         if(in_array($hook_suffix, $fbp_admin_pages)) {
-            wp_enqueue_script('wp-polls-admin', plugins_url('/floatbox-plus/floatbox-plus.js'), null , $this->version, true);
+            wp_enqueue_script('wp-polls-admin', plugins_url('/floatbox-plus/tinymce/floatbox-plus.js'), null , $this->version, true);
         }
     }
 
@@ -1348,4 +1331,4 @@ if(!function_exists("simplexml_load_file")) {
 
 //initalize class
 if (class_exists('floatbox_plus'))
-$floatbox_plus = new floatbox_plus();
+    $floatbox_plus = new floatbox_plus();

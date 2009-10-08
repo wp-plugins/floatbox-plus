@@ -8,6 +8,7 @@ else {
 	metaKey = 'Alt';
 }
 
-tinyMCE.addI18n('en.floatboxplus',{
+tinyMCE.addI18n({de:{
+FloatBoxPlus:{
 desc : 'Floatbox-Plus Plugin - Embed Video'
-});
+}}});

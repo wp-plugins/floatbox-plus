@@ -8,6 +8,7 @@ else {
 	metaKey = 'Alt';
 }
 
-tinyMCE.addI18n('de.floatboxplus',{
-desc : 'Floatbox Plus Plugin - Video einfügen'
-});
+tinyMCE.addI18n({de:{
+FloatBoxPlus:{
+desc : 'Video via FBP einfügen'
+}}});
