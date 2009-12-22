@@ -743,7 +743,6 @@ class floatbox_plus {
                 $script .= "urlGraphics: '".$path."/floatbox/graphics/',\n";
                 $script .= "urlLanguages: '".$path."/floatbox/languages/'\n";
             }
-            $script .= "};\n</script>\n";
         }
         if (WPV28 == false) {
             $script .= "<script type=\"text/javascript\" src=\"$path/floatbox/floatbox.js\"></script>\n";
