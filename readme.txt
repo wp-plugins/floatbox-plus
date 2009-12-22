@@ -35,6 +35,7 @@ Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki
 For Support, please use the [forum](http://board.splash.de/forumdisplay.php?f=103).
 
 Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
+For Support, please use the [forum](http://board.splash.de/forumdisplay.php?f=103).
 
 Floatbox Plus is based on the WP-Plugin "Lightview Plus" by [Thorsten Puzich](http://www.puzich.com/wordpress-plugins/lightview).
 
