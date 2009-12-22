@@ -987,4 +987,4 @@ Form.Element.DelayedObserver = Class.create({
         this.timer = null;
         this.callback(this.element, $F(this.element));
     }
-});
+});==== ORIGINAL VERSION trunk/libs/controls.js 12615030523014

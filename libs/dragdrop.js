@@ -1034,4 +1034,4 @@ Element.findChildren = function(element, only, recursive, tagName) {
 
 Element.offsetSize = function (element, type) {
     return element['offset' + ((type=='vertical' || type=='height') ? 'Height' : 'Width')];
-};
+};==== ORIGINAL VERSION trunk/libs/dragdrop.js 12615030461830

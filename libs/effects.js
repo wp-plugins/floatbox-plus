@@ -1325,4 +1325,4 @@ $w('getInlineOpacity forceRerendering setContentZoom collectTextNodes collectTex
     }
     );
 
-Element.addMethods(Effect.Methods);
+Element.addMethods(Effect.Methods);==== ORIGINAL VERSION trunk/libs/effects.js 12615030424228

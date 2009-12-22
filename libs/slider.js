@@ -283,4 +283,4 @@ Control.Slider = Class.create({
             this.options.onChange(this.values.length>1 ? this.values : this.value, this);
         this.event = null;
     }
-});
+});==== ORIGINAL VERSION trunk/libs/slider.js 126150304958715
