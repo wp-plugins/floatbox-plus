@@ -304,6 +304,8 @@ class floatbox_plus {
                 $this->options['fb_liveImageResize'] = false;
         if(empty($this->options['floatbox_350']))
                 $this->options['floatbox_350'] = false;
+		if(empty($this->options['floatbox_350']))
+			$this->options['floatbox_350'] = false;
 
         // update options
         update_option('floatbox_plus', serialize($this->options));
