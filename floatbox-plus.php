@@ -1328,6 +1328,7 @@ if(!function_exists("simplexml_load_file")) {
         return $sx->xml_load_file($file);
     }
 }
+}
 
 //initalize class
 if (class_exists('floatbox_plus'))

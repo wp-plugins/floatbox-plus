@@ -1,11 +1,11 @@
 // DE lang variables
-
+var metaKey;
 if (navigator.userAgent.indexOf('Mac OS') != -1) {
 // Mac OS browsers use Ctrl to hit accesskeys
-	var metaKey = 'Ctrl';
+	metaKey = 'Ctrl';
 }
 else {
-	var metaKey = 'Alt';
+	metaKey = 'Alt';
 }
 
 tinyMCE.addI18n('de.floatboxplus',{
