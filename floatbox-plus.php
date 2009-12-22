@@ -250,9 +250,6 @@ class floatbox_plus {
             $this->update();
         }
 
-		// update options for old installs
-		$this->update();
-
         // restore floatbox javascript, if backup exists and not already installed
         $bkp_folder = dirname(__FILE__) . '/../' . $this->bkp_folder;
         if (!$this->check_javascript()) {
