@@ -1318,9 +1318,9 @@ class floatbox_plus {
 
     function enqueueAdmin($hook_suffix) {
         // print '<!-- enqueueAdmin: '.$hook_suffix.' -->';
-        $fbp_admin_pages = array('post-new.php', 'post.php');
+        $fbp_admin_pages = array('post-new.php', 'post.php', 'page-new.php', 'page.php');
         if(in_array($hook_suffix, $fbp_admin_pages)) {
-            wp_enqueue_script('wp-polls-admin', plugins_url('/floatbox-plus/floatbox-plus.js'), null , $this->version, true);
+            wp_enqueue_script('wp-polls-admin', plugins_url('/floatbox-plus/tinymce/floatbox-plus.js'), null , $this->version, true);
         }
     }
 
