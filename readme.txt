@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.8.4
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -85,6 +85,9 @@ Yes and no, actually only some options (theme selection + animation options) can
 For other questions, take a look at the [support forum](http://board.splash.de/forumdisplay.php?f=103).
 
 == Changelog ==
+
+= 1.2.7 =
+* [FIX] downloadlink for floatbox 3.54.3
 
 = 1.2.6 =
 * [FIX] adding videos to a page
