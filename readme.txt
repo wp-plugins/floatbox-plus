@@ -103,4 +103,4 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 0.1.1
 - update (lightview: 2.0.3 -> 2.1.0)
 0.1.0
-- initial release`
+- initial release`==== ORIGINAL VERSION tags/1.0.0/readme.txt 126150381618878
