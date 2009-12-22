@@ -692,10 +692,10 @@ class floatbox_plus {
 					return false;
 				break;
 
-			default:
-					return false;
+		default:
+                    return false;
                 break;
-		}
+        }
 
         return $output;
     }
