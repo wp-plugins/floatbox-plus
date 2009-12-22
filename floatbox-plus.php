@@ -250,6 +250,9 @@ class floatbox_plus {
             $this->update();
         }
 
+		// update options for old installs
+		$this->update();
+
         // restore floatbox javascript, if backup exists and not already installed
         $bkp_folder = dirname(__FILE__) . '/../' . $this->bkp_folder;
         if (!$this->check_javascript()) {
@@ -677,7 +680,22 @@ class floatbox_plus {
                 break;
         }
 
-        return $output;
+				// is simplexml available? Get preview image from vimeo
+				if(function_exists(simplexml_load_file)) {
+					$clip = simplexml_load_file($api_link);
+					$output = $clip->clip->thumbnail_large;
+				} else {
+					$output = get_option('siteurl') . '/wp-content/plugins/floatbox-plus/img/preview_image.png';
+				}
+				// check response
+				if(empty($output))
+					return false;
+
+				break;
+
+			default:
+                break;
+		}
     }
 
     function is_iPhone() {

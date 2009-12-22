@@ -130,16 +130,18 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
 
         <div class="panel_wrapper">
 
-            <div id="portal_panel" class="current">
-                <form name="portal_form" action="#">
-                    <table border="0" cellpadding="4" cellspacing="0">
-                        <tr>
-                            <td nowrap="nowrap" style="text-align:right;"><?php echo _e('Select video portal:','floatbox_plus'); ?></td>
-                            <td>
-                                <table border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td><select name="portal" id="portal_portal" style="width: 200px" onChange="dailymotion(this, this.form.linktext, this.form.nolink);">
-                                                <option value="youtube">YouTube</option>
+<div id="portal_panel" class="current">
+	<form name="portal_form" action="#">
+		<table border="0" cellpadding="4" cellspacing="0">
+			<tr>
+			<td nowrap="nowrap" style="text-align:right;"><?php echo _e('Select video portal:','floatboxplus'); ?></td>
+			<td>
+				<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td><select name="portal" id="portal_portal" style="width: 200px" onChange="dailymotion(this, this.form.linktext, this.form.nolink);">
+					<option value="youtube">YouTube</option>
+					<option value="youtubehq">YouTube HQ</option>
+
                                                 <option value="vimeo">vimeo</option>
                                                 <?php /* <option value="google">Google Video</option>
                                                                     <option value="myspace">Myspace Video</option>
