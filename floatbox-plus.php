@@ -685,17 +685,20 @@ class floatbox_plus {
 					$clip = simplexml_load_file($api_link);
 					$output = $clip->clip->thumbnail_large;
 				} else {
-					$output = get_option('siteurl') . '/wp-content/plugins/floatbox-plus/img/preview_image.png';
+					// $output = get_option('siteurl') . '/wp-content/plugins/floatbox-plus/img/preview_image.png';
+                    return false;
 				}
-				// check response
+				// check response, if nothing in output -> standard image
 				if(empty($output))
 					return false;
-
 				break;
 
 			default:
+					return false;
                 break;
 		}
+
+        return $output;
     }
 
     function is_iPhone() {
