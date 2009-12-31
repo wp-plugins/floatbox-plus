@@ -1,0 +1,506 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lightview Plus 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-21 22:01+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Fat Cow <zhr@tut.by>\n"
+"Language-Team: Fat Cow <zhr@tut.by>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Belarusian\n"
+"X-Poedit-Country: BELARUS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus\n"
+
+#@ floatboxplus
+#: floatbox-plus-popup.php:137
+msgid "Select video portal:"
+msgstr "Абраць видеопортал"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:170
+msgid "Insert video ID:"
+msgstr "Уставіць ID відэа"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:184
+#: floatbox-plus-popup.php:242
+#: floatbox-plus-popup.php:340
+msgid "Show video without link"
+msgstr "Паказаць відэа без спасылкі"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:190
+#: floatbox-plus-popup.php:248
+#: floatbox-plus-popup.php:346
+msgid "Link text:"
+msgstr "Тэкст спасылкі:"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:200
+#: floatbox-plus-popup.php:258
+#: floatbox-plus-popup.php:355
+msgid "Insert"
+msgstr "Уставіць"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:202
+#: floatbox-plus-popup.php:260
+#: floatbox-plus-popup.php:311
+#: floatbox-plus-popup.php:357
+msgid "Cancel"
+msgstr "Адмена"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:221
+msgid "Select video file:"
+msgstr "Абраць відэафайл:"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:279
+msgid "Local video file:"
+msgstr "Лакальны файл відэа:"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:289
+msgid "Title:"
+msgstr "Назва:"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:299
+msgid "Description:"
+msgstr "Апісанне:"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:309
+msgid "Upload"
+msgstr "Загрузка"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:326
+msgid "Insert video URL:"
+msgstr "Уставіць УРЛ відэа:"
+
+#@ floatboxplus
+#: floatbox-plus.php:600
+msgid "[There is a video that cannot be displayed in this feed. "
+msgstr "[Гэта відэа не можа быць адлюстравана ў гэтым канале."
+
+#@ floatboxplus
+#: floatbox-plus.php:600
+msgid "Visit the blog entry to see the video.]"
+msgstr "Наведаць блог для прагляду відэа.]"
+
+#@ floatboxplus
+#: floatbox-plus.php:831
+msgid "Options saved."
+msgstr "Опцыі захаваны"
+
+#@ floatboxplus
+#: floatbox-plus.php:852
+msgid "General Settings"
+msgstr "Галоўныя налады"
+
+#@ floatboxplus
+#: floatbox-download.php:146
+#: floatbox-plus.php:866
+#: floatbox-plus.php:883
+#: floatbox-plus.php:899
+#: floatbox-plus.php:915
+#: floatbox-plus.php:939
+#: floatbox-plus.php:973
+#: floatbox-plus.php:1038
+#: floatbox-plus.php:1053
+#: floatbox-plus.php:1068
+#: floatbox-plus.php:1092
+#: floatbox-plus.php:1108
+#: floatbox-plus.php:1138
+msgid "yes"
+msgstr "так"
+
+#@ floatboxplus
+#: floatbox-download.php:145
+#: floatbox-plus.php:867
+#: floatbox-plus.php:884
+#: floatbox-plus.php:900
+#: floatbox-plus.php:916
+#: floatbox-plus.php:940
+#: floatbox-plus.php:974
+#: floatbox-plus.php:1021
+#: floatbox-plus.php:1039
+#: floatbox-plus.php:1054
+#: floatbox-plus.php:1069
+#: floatbox-plus.php:1093
+#: floatbox-plus.php:1109
+#: floatbox-plus.php:1139
+msgid "no"
+msgstr "не"
+
+#@ floatboxplus
+#: floatbox-plus.php:904
+msgid "Implements the video function. ATTENTION: It only works, if you do not have the embedded video plugin activated"
+msgstr "Рэалізуе відэа функцыі. Нататка: Гэта працуе, толькі калі ў вас не актываваны ўбудаваны відэа ўбудовы"
+
+#@ floatboxplus
+#: floatbox-plus.php:1081
+msgid "Video Options"
+msgstr "Налады відэа"
+
+#@ floatboxplus
+#: floatbox-plus.php:1088
+msgid "Show Links under videos?"
+msgstr "Паказаць спасылкі пад відэа?"
+
+#@ floatboxplus
+#: floatbox-plus.php:1097
+msgid "Show a link to the original site of the video"
+msgstr "Паказаць спасылку на арыгінальны сайт відэа"
+
+#@ floatboxplus
+#: floatbox-plus.php:1104
+msgid "Show a small Link under the Video?"
+msgstr "Паказаць маленькую спасылку пад відэа?"
+
+#@ floatboxplus
+#: floatbox-plus.php:1113
+msgid "If no, it will show a bigger text"
+msgstr "Калі няма, паказваць буйны тэкст"
+
+#@ floatboxplus
+#: floatbox-plus.php:1122
+msgid "Separator"
+msgstr "Падзельнік"
+
+#@ floatboxplus
+#: floatbox-plus.php:1127
+msgid "Defines the separator between the service (eg. YouTube) and your comment"
+msgstr "Усталёўвае падзельнік паміж сэрвісам (напрыклад, YouTube) і вашым каментаром"
+
+#@ floatboxplus
+#: floatbox-plus.php:1134
+msgid "Show in Feed?"
+msgstr "Паказваць у стужцы?"
+
+#@ floatboxplus
+#: floatbox-plus.php:1143
+msgid "You can choose, if you want to show the video in the feed. Currently, it is only possible to show a link to the video"
+msgstr "Вы можаце самі абраць упадабанага вам адлюстраванні відэа ў канале. Як гэта толькі магчыма адлюстраваць спасылку ў канале."
+
+#@ floatboxplus
+#: floatbox-plus.php:1162
+msgid "Video Width"
+msgstr "Шырыня відэа"
+
+#@ floatboxplus
+#: floatbox-plus.php:1167
+msgid "You can choose, what width the video and image have"
+msgstr "Вы можаце выбіраць шырыню відэа і эскізаў"
+
+#@ floatboxplus
+#: floatbox-plus.php:1174
+msgid "Update Options "
+msgstr "Абнавіць налады "
+
+#@ floatboxplus
+#: floatbox-download.php:19
+msgid "Could not access filesystem."
+msgstr "Няма доступу да файлавай сістэмы."
+
+#@ floatboxplus
+#: floatbox-download.php:22
+msgid "Filesystem error"
+msgstr "Памылка файлавай сістэмы"
+
+#@ floatboxplus
+#: floatbox-download.php:27
+msgid "Unable to locate WordPress Plugin directory."
+msgstr "Не знойдзена дырэкторыя ўбудовы WordPress."
+
+#@ floatboxplus
+#: floatbox-download.php:32
+msgid "Unable to locate WordPress Content directory (wp - content)."
+msgstr "Не знойдзена дырэкторыя з утрыманнем WordPress."
+
+#@ floatboxplus
+#: floatbox-download.php:52
+msgid "Unpacking the update"
+msgstr "Распакаванне абноўлена"
+
+#@ floatboxplus
+#: floatbox-download.php:82
+msgid "Installing the latest version"
+msgstr "Усталёўка апошняй версіі"
+
+#@ floatboxplus
+#: floatbox-download.php:112
+msgid "floatbox(.js) already installed..."
+msgstr "floatbox(.js) ужо ўсталяваны..."
+
+#: floatbox-download.php:121
+msgid "Download successfull."
+msgstr "Запампоўка завершана."
+
+#@ floatboxplus
+#: floatbox-download.php:150
+msgid "submit"
+msgstr "адправіць"
+
+#@ floatbox_plus
+#: floatbox-plus-popup.php:117
+msgid "Floatbox Plus"
+msgstr "Floatbox Plus"
+
+#@ floatboxplus
+#: floatbox-plus.php:129
+msgid "Download floatbox(.js)"
+msgstr "Запампаваць floatbox(.js)"
+
+#@ floatboxplus
+#: floatbox-plus.php:162
+msgid "Updatenotice for:"
+msgstr "Апавяшчэнне пра абнаўленне для:"
+
+#@ floatboxplus
+#: floatbox-plus.php:186
+msgid "Ticketsystem/Wiki"
+msgstr "Ticketsystem/Wiki"
+
+#@ floatboxplus
+#: floatbox-plus.php:187
+msgid "Plugin-Homepage"
+msgstr "Хатняя старонка ўбудовы"
+
+#@ floatboxplus
+#: floatbox-plus.php:846
+msgid "Download floatbox(.js) from randomous.com"
+msgstr "Запампаваць floatbox(.js) з randomous.com"
+
+#@ floatboxplus
+#: floatbox-plus.php:862
+msgid "Activate Floatbox for [gallery]?"
+msgstr "Актываваць Floatbox для [gallery]?"
+
+#@ floatboxplus
+#: floatbox-plus.php:871
+msgid "If activated, it shows the wordpress gallery with floatbox"
+msgstr "Калі актывавана, паказваць галерэю з floatbox"
+
+#@ floatboxplus
+#: floatbox-plus.php:879
+msgid "Do you use Floatbox 3.50 or above?"
+msgstr "Вы выкарыстоўваеце Floatbox 3.50 ці вышэй?"
+
+#@ floatboxplus
+#: floatbox-plus.php:888
+msgid "Cause there are some major changes in Floatbox 3.50 (and above), the plugin needs to know which version you have"
+msgstr "З версіяй 3.50 была масава Floatbox ?berarbeitete і больш 100% abwartskompatibel. Так што дысплей павінен быць ці лёгка ўбудова ведаць, якія варыянты знаходзяцца ў выкарыстанні."
+
+#@ floatboxplus
+#: floatbox-plus.php:895
+msgid "Activate Floatbox for Videos?"
+msgstr "Актываваць Floatbox для відэа?"
+
+#@ floatboxplus
+#: floatbox-plus.php:911
+msgid "Backup Floatbox Javascript during Update?"
+msgstr "Выкарыстоўваеце Floatbox 3.50 ці вышэй?"
+
+#@ floatboxplus
+#: floatbox-plus.php:920
+msgid "Backups the Floatbox javascript files for upgrade-reasons. After uprading to a new floatbox-plus version, it is needless to copy the javascript files back in the plugin directory. "
+msgstr "Падчас абнаўлення працэдура кэшуецца Floatbox, а пасля паспяховага абнаўлення зноў zuruckgespielt (пасля абнаўлення адваротным выпадку паўторнай усталёўкі Floatbox па неабходнасці)."
+
+#@ floatboxplus
+#: floatbox-plus.php:928
+msgid "Floatbox Options"
+msgstr "Налады Floatbox"
+
+#@ floatboxplus
+#: floatbox-plus.php:935
+msgid "Change the options of floatbox.js?"
+msgstr "Выкарыстоўваць floatbox.js?"
+
+#@ floatboxplus
+#: floatbox-plus.php:944
+msgid "Overwrite the settings in floatbox.js with the values set here."
+msgstr "Перапісаць налады ў floatbox.js значэннямі, усталяванымі тут."
+
+#@ floatboxplus
+#: floatbox-plus.php:950
+msgid "Theme"
+msgstr "Тэма"
+
+#@ floatboxplus
+#: floatbox-plus.php:954
+#: floatbox-plus.php:1022
+msgid "auto"
+msgstr "аўта"
+
+#@ floatboxplus
+#: floatbox-plus.php:955
+msgid "black"
+msgstr "чорны"
+
+#@ floatboxplus
+#: floatbox-plus.php:956
+msgid "white"
+msgstr "белы"
+
+#@ floatboxplus
+#: floatbox-plus.php:957
+msgid "blue"
+msgstr "сіні"
+
+#@ floatboxplus
+#: floatbox-plus.php:958
+msgid "yellow"
+msgstr "жоўты"
+
+#@ floatboxplus
+#: floatbox-plus.php:959
+msgid "red"
+msgstr "чырвоны"
+
+#@ floatboxplus
+#: floatbox-plus.php:963
+msgid "Color theme. 'Auto' will use the black theme for images, white for iframe content, and blue for flash and quicktime."
+msgstr "Тэма кветак. 'Аўта' выкарыстоўвае чорныя тэмы для карцін, белыя? E тэмай для фрэймаў і сінім Тэмай Flash / фільмы."
+
+#@ floatboxplus
+#: floatbox-plus.php:969
+msgid "doAnimations"
+msgstr "doAnimations"
+
+#@ floatboxplus
+#: floatbox-plus.php:978
+msgid "Shorthand for resizeDuration=0, imageFadeDuration=0 and zoomImageStart=false."
+msgstr "Кароткая форма для resizeDuration = 0, imageFadeDuration = 0 і zoomImageStart = False."
+
+#@ floatboxplus
+#: floatbox-plus.php:984
+msgid "resizeDuration"
+msgstr "resizeDuration"
+
+#@ floatboxplus
+#: floatbox-plus.php:989
+msgid "Controls the speed at which animated resizing occurs. 0 = no resize animation, 1 is fast, 10 is slooow. These are unit-less numbers, and don't equate to a fixed time period. Larger size changes will take longer than smaller size changes."
+msgstr "Кантроль хуткасці, пры якой адбываецца змена памераў. 0 = няма анімацыі ресайза, 1 хуткі, 10 з'яўляецца вельмі павольным. Гэтыя адзінкі меней лікі, а не прыраўноўваць да фіксаваны перыяд часу. Вялікія змены памеру зойме больш часу, чым дробныя змены памеру."
+
+#@ floatboxplus
+#: floatbox-plus.php:995
+msgid "imageFadeDuration"
+msgstr "imageFadeDuration"
+
+#@ floatboxplus
+#: floatbox-plus.php:1000
+msgid "Controls the speed of the opacity fade-in for images as they come into the display. 0 = no image fade-in, 1 is fast, 10 is slooow. These too are unit-less numbers."
+msgstr "Кантроль хуткасці непразрыстасць паступовае з'яўленне малюнкаў як яны прыходзяць на экране. 0 = няма малюнка Fade-In, 1 хуткі, 10 з'яўляецца slooow. Яны таксама з'яўляюцца адзінку меншай лічбы."
+
+#@ floatboxplus
+#: floatbox-plus.php:1006
+msgid "overlayFadeDuration"
+msgstr "overlayFadeDuration"
+
+#@ floatboxplus
+#: floatbox-plus.php:1011
+msgid "Controls the speed of the opacity fade-in and fade-out for the translucent overlay which covers the host page. 0 = no overlay fading in or out, 1 is fast, 10 is slooow.  Unit-less."
+msgstr "Кантроль хуткасці непразрыстасць паступовае з'яўленне і знікаць з-за напаўпразрыстага аверлэя якая ахоплівае галоўнай старонцы. 0 = Няма Накладанне выцвітання ці паменшыць маштаб, 1 хуткі, 10 з'яўляецца slooow. Група-меней."
+
+#@ floatboxplus
+#: floatbox-plus.php:1017
+msgid "splitResize"
+msgstr "splitResize"
+
+#@ floatboxplus
+#: floatbox-plus.php:1023
+msgid "wh"
+msgstr "шырыня"
+
+#@ floatboxplus
+#: floatbox-plus.php:1024
+msgid "hw"
+msgstr "вышыня"
+
+#@ floatboxplus
+#: floatbox-plus.php:1028
+msgid "Default animated resizing of Floatbox resizes width, height, top and left simultaneously. The settings other than 'no' give sequenced animation where the X and Y dimensions are resized seperately. The two options 'wh' and 'hw' force either width or height to always go first. The better splitResize option is probably 'auto'.  This will always do the smallest dimension first. Using a splitResize of auto prevents unaesthetic resize behaviour of initially bloating up in the larger dimension."
+msgstr "Па змаўчанні анімаваны змены памеру Floatbox змяняе памер шырыні, вышыні, зверху і злева адначасова. Налады іншае, чым \"не\" даць паслядоўны анімацыю, дзе X і Y памераў змяніць асобна. Два варыянту 'WH' і 'сіла HW \"ці шырыні ці вышыні, каб заўсёды ісці ў першую чаргу. SplitResize лепшым варыянтам, верагодна, 'Аўта'. Гэта заўсёды будзе рабіць маленькія першага аспекту. Выкарыстанне splitResize аўтамабільнай прадухіляе эстэтычна памеры паводзін першапачаткова ўздуцце ў шырэйшым аспекце."
+
+#@ floatboxplus
+#: floatbox-plus.php:1034
+msgid "startAtClick"
+msgstr "startAtClick"
+
+#@ floatboxplus
+#: floatbox-plus.php:1043
+msgid "If true (and resizeDuration is not 0) Floatbox will expand out from the clicked anchor and shrink back to that anchor when closed. If false, Floatbox will start and end from the center of the screen."
+msgstr "Калі гэта праўда (і resizeDuration не 0) Floatbox будзе пашырацца з пстрыкнулі якары і адхіснуцца на гэты якар, калі зачынены. Калі хлусня, Floatbox будзе пачатак і канец ад цэнтра экрана."
+
+#@ floatboxplus
+#: floatbox-plus.php:1049
+msgid "zoomImageStart"
+msgstr "zoomImageStart"
+
+#@ floatboxplus
+#: floatbox-plus.php:1058
+msgid "If true (and resizeDuration is not 0) images will expand out from the clicked thumbnail on start and collapse back to the thumbnail on exit."
+msgstr "Калі гэта праўда (і resizeDuration не 0) малюнак будзе пашырацца з націскам піктаграмы на пачатак і распаду Вярнуцца на старонку з эскізам на выйсці."
+
+#@ floatboxplus
+#: floatbox-plus.php:1064
+msgid "liveImageResize"
+msgstr "liveImageResize"
+
+#@ floatboxplus
+#: floatbox-plus.php:1073
+msgid "If true (and resizeDuration is not 0) images will remain displayed while they are being resized. If false they will be hidden during a resize and the \"loading\" gif displayed in their place."
+msgstr "Калі гэта праўда (і resizeDuration не 0) малюнкі будзе заставацца ўключаным, пакуль яны ў наш час змяняецца. Калі лжывыя яны будуць утоены падчас змены памераў і \"нагрузку\" малюнак адлюстроўваецца на іх месцы."
+
+#@ floatboxplus
+#: floatbox-plus.php:1079
+msgid "For more information about the many other options Floatbox offers (and which aren't integrated yet in the plugin), take a look at the homepage:"
+msgstr "Для атрымання дадатковай інфармацыі пра шматлікіх іншых варыянтаў Floatbox прапановы (і якія яшчэ не інтэграваны ва ўбудове), пагледзіце на сайт:"
+
+#@ floatboxplus
+#: floatbox-plus.php:1150
+msgid "Video Preview Width"
+msgstr "Шырыня прэв'ю відэа"
+
+#@ floatboxplus
+#: floatbox-plus.php:1155
+msgid "Choose the width of the preview images for the videos"
+msgstr "Абраць шырыню прадагляду для відэа"
+
+#@ floatboxplus
+#: floatbox-download.php:44
+msgid "Download failed"
+msgstr "Скаканне спынена"
+
+#@ floatboxplus
+#: floatbox-download.php:119
+#, php-format
+msgid "Download failed, please follow the manual installation instructions: %s."
+msgstr "Скаканне спынена, калі ласка, вынікайце інструкцыі: %s."
+
+#@ floatboxplus
+#: floatbox-download.php:119
+msgid "Link"
+msgstr "Спасылка"
+
+#@ floatboxplus
+#: floatbox-download.php:40
+#, php-format
+msgid "Downloading floatbox from %s"
+msgstr "Запампаваць floatbox %s"
+
+#@ floatboxplus
+#: floatbox-plus.php:842
+msgid "Floatbox Javascript isn't copied to the plugin directory. See installation instructions for further details <br />or try the new download option: "
+msgstr "Floatbox (не Floatbox Plus!) Не можа быць знойдзена. Звернеце ўвагу на ўказанне ўсталяваць уручную ці выкарыстоўвайце опцыю загрузкі:"
+
