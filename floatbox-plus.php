@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.2.7
+Version: 1.2.8
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -41,7 +41,7 @@ define('WPV28', version_compare($wp_version, '2.8', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '1.2.7';
+    var $version = '1.2.8';
 
     // put all options in
     var $options = array();
@@ -261,7 +261,7 @@ class floatbox_plus {
                         'video_width' => '300',
                         'video_separator' => '- ',
                         'video_showinfeed' => true,
-                        'floatbox_350' => false
+                        'floatbox_350' => true
                     )));
         } else {
             // update options for old installs
@@ -734,8 +734,17 @@ class floatbox_plus {
         $path = plugins_url()."/floatbox-plus";
 
         $script = "\n<!-- FloatBox Plus Plugin -->\n";
-        if ($this->options['fb_options'] == true || !$this->options['floatbox_350']) {
+        if ($this->options['fb_licenseKey'] != 0 || $this->options['fb_options'] == true || !$this->options['floatbox_350']) {
             $script .= "<script type=\"text/javascript\">\nfbPageOptions = {\n";
+            // license key
+            if (!empty($this->options['fb_licenseKey'])) {
+                $script .= "licenseKey: '".$this->options['fb_licenseKey']."'";
+                if (!$this->options['floatbox_350'] || $this->options['fb_options'] == true) {
+                    $script .= ",\n";
+                } else {
+                    $script .= "\n";
+                }
+            }
             // floatbox options
             if ($this->options['fb_options'] == true) {
                 // general options
@@ -897,32 +906,8 @@ class floatbox_plus {
             }
             
             // option 'fb_licenseKey'
-            if(!empty($_POST['fb_licenseKey'])) {
-                $this->options['fb_licenseKey'] = $_POST['fb_licenseKey'];
-                if (file_exists(dirname(__FILE__).'/floatbox/licenseKey.js')) {
-                    $licenseFile = dirname(__FILE__).'/floatbox/licenseKey.js';
-
-                    // open file
-                    $fileHandler = fopen($licenseFile, 'r+');
-
-                    // read file
-                    $fileContents = fread($fileHandler, filesize($licenseFile));
-
-                    // manipulate file
-                    $newFileContents = preg_replace('/fb.licenseKey = "(.*)";/i','fb.licenseKey = "'.$this->options['fb_licenseKey'].'";', $fileContents);
-
-                    // write file
-                    rewind($fileHandler);
-                    fwrite($fileHandler, $newFileContents);
-
-                    // close file
-                    fclose($fileHandler);
-
-                    echo '<div id="message" class="updated fade"><p><strong>' . sprintf(__('licensekey-file successfully written (%s)', 'floatboxplus'), $licenseFile) . '</strong></p></div>';
-                } else {
-                    echo '<div id="message" class="updated fade"><p><strong>' . sprintf(__('licensekey-file not found (%s)', 'floatboxplus'), $licenseFile) . '</strong></p></div>';
-                }
-            }
+            // if(!empty($_POST['fb_licenseKey']))
+                    $this->options['fb_licenseKey'] = $_POST['fb_licenseKey'];
 
             // update options
             update_option('floatbox_plus', serialize($this->options));
