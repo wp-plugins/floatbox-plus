@@ -121,14 +121,17 @@ class floatbox_plus {
             2
         );
 
+	// playbutton
+	$_overlayimage = '<img src="'.plugins_url('/floatbox-plus/img/playbutton.png').'" alt="" style="position: absolute; left: '.(($this->options['video_preview_width']/2)-50).'px; top: '.((floor($this->options['video_preview_width']*14/17)/2)-50).'px; margin:0px 0px;" height="100" width="100" border="0">';
+
         // define object targets and links
         $this->video['youtube']['height'] = floor($this->options['video_width']*14/17);
         $this->video['youtube']['preview_height'] = floor($this->options['video_preview_width']*14/17);
         $this->video['youtube']['iphone'] = '<object width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] . '"><param name="movie" value="http://www.youtube.com/v/###VID###"></param><embed src="http://www.youtube.com/v/###VID###" type="application/x-shockwave-flash" width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] .'"></embed></object><br />';
         if ($this->options['youtube_fullscreen'] == true) {
-            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;fs=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;fs=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`" style="display: block; position: relative; width: '.$this->options['video_preview_width'].'px;"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" />'.$_overlayimage.'</a>';
         } else {
-            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`" style="display: block; position: relative; width: '.$this->options['video_preview_width'].'px;"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" />'.$_overlayimage.'</a>';
         }
         $this->video['youtube']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###\">YouTube ###TXT######THING###</a>";
 
@@ -136,15 +139,15 @@ class floatbox_plus {
         $this->video['youtubehq']['preview_height'] = floor($this->options['video_preview_width']*9/15.2);
         $this->video['youtubehq']['iphone'] = '<object width="' . $this->options['video_width'] . '" height="' . $this->video['youtubehq']['height'] . '"><param name="movie" value="http://www.youtube.com/v/###VID###"></param><embed src="http://www.youtube.com/v/###VID###" type="application/x-shockwave-flash" width="' . $this->options['video_width'] . '" height="' . $this->video['youtube']['height'] .'"></embed></object><br />';
         if ($this->options['youtube_fullscreen'] == true) {
-            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;fs=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;fs=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`" style="display: block; position: relative; width: '.$this->options['video_preview_width'].'px;"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" />'.$_overlayimage.'</a>';
         } else {
-            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtubehq']['height'] . ' scrolling:no caption:`###THING###`" style="display: block; position: relative; width: '.$this->options['video_preview_width'].'px;"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" />'.$_overlayimage.'</a>';
         }
         $this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VID###&amp;ap=%2526&amp;fmt%3D22&amp;hd=1\">YouTube ###TXT######THING###</a>";
 
         $this->video['vimeo']['height'] = floor($this->options['video_width'] * 3 / 4);
         $this->video['vimeo']['preview_height'] = floor($this->options['video_preview_width'] * 3 / 4);
-        $this->video['vimeo']['target'] = '<a href="http://www.vimeo.com/moogaloop.swf?clip_id=###VID###" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" /></a><br />';
+        $this->video['vimeo']['target'] = '<a href="http://www.vimeo.com/moogaloop.swf?clip_id=###VID###" title="###THING###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:' . $this->options['video_width'] . ' height:' . $this->video['youtube']['height'] . ' scrolling:no caption:`###THING###`" style="display: block; position: relative; width: '.$this->options['video_preview_width'].'px;"><img src="###IMAGE###" class="videoplay" width="' . $this->options['video_preview_width'] . '" height="' . $this->video['youtube']['preview_height'] . '" alt="###THING###" />'.$_overlayimage.'</a>';
         $this->video['vimeo']['link'] = "<a title=\"vimeo\" href=\"http://www.vimeo.com/clip:###VID###\">vimeo ###TXT######THING###</a>";
 
         $this->video['local']['quicktime']['height'] = floor($this->options['video_width'] * 3 / 4);
@@ -211,7 +214,7 @@ class floatbox_plus {
     {
         // $hook = add_options_page('FloatBox Plus', (version_compare($GLOBALS['wp_version'], '2.6.999', '>') ? '<img src="' . @plugins_url('floatbox-plus/icon.png') . '" width="10" height="10" alt="Floatbox Plus - Icon" />' : '') . 'Floatbox Plus', 8, 'floatbox_plus', array(&$this, 'OptionsMenu'));
         $hook = add_options_page('Floatbox Plus',
-            (version_compare($GLOBALS['wp_version'], '2.6.999', '>') ? '<img src="' . @plugins_url('floatbox-plus/icon.png') . '" width="10" height="10" alt="Floatbox Plus - Icon" />' : '') . 'Floatbox Plus',
+            (version_compare($GLOBALS['wp_version'], '2.6.999', '>') ? '<img src="' . @plugins_url('floatbox-plus/icon.png') . '" width="10" height="10" alt="Floatbox Plus - Icon" /> ' : '') . 'Floatbox Plus',
             9,
             'floatbox-plus/'.basename(__FILE__),
             array(&$this,

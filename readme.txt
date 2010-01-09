@@ -87,6 +87,7 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 == Changelog ==
 
 = 1.2.9 =
+* [NEW] playbutton overlay on videopreviewimages
 * [FIX] cleanup (javascript libs)
 
 = 1.2.8 =
