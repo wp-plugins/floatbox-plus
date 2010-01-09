@@ -86,9 +86,14 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
+= 1.2.10 =
+* [FIX] playbutton with transparency
+* [more information](http://blog.splash.de/2010/01/09/floatbox-plus-1-2-9-play-button/)
+
 = 1.2.9 =
 * [NEW] playbutton overlay on videopreviewimages
 * [FIX] cleanup (javascript libs)
+* [more information](http://blog.splash.de/2010/01/09/floatbox-plus-1-2-9-play-button/)
 
 = 1.2.8 =
 * [FIX] floatbox-licensekey/code cleanup
