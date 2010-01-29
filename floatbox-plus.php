@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.2.10
+Version: 1.2.11
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -41,7 +41,7 @@ define('WPV28', version_compare($wp_version, '2.8', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '1.2.10';
+    var $version = '1.2.11';
 
     // put all options in
     var $options = array();
@@ -306,6 +306,8 @@ class floatbox_plus {
                 $this->options['fb_options'] = false;
         if(empty($this->options['fb_theme']))
                 $this->options['fb_theme'] = 'auto';
+        if(empty($this->options['fb_preloadAll']))
+                $this->options['fb_preloadAll'] = true;
         // floatbox: animation options
         if(empty($this->options['fb_doAnimations']))
                 $this->options['fb_doAnimations'] = true;
@@ -754,6 +756,7 @@ class floatbox_plus {
                 $script .= "theme: '".$this->options['fb_theme']."',\n";
                 // animation options
                 $script .= "doAnimations: ".$this->boolToString($this->options['fb_doAnimations']).",\n";
+                $script .= "preloadAll: ".$this->boolToString($this->options['fb_preloadAll']).",\n";
                 $script .= "resizeDuration: ".$this->options['fb_resizeDuration'].",\n";
                 $script .= "imageFadeDuration: ".$this->options['fb_imageFadeDuration'].",\n";
                 $script .= "overlayFadeDuration: ".$this->options['fb_overlayFadeDuration'].",\n";
@@ -803,6 +806,12 @@ class floatbox_plus {
             }
             if(!empty($_POST['fb_theme'])) {
                 $this->options['fb_theme'] = $_POST['fb_theme'];
+            }
+
+            if($_POST['fb_preloadAll'] == 'true') {
+                $this->options['fb_preloadAll'] = true;
+            } else {
+                $this->options['fb_preloadAll'] = false;
             }
             // youtube -> fullscreen
             if($_POST['youtube_fullscreen'] == 'true') {
@@ -1075,7 +1084,22 @@ class floatbox_plus {
                         <?php _e('Color theme. \'Auto\' will use the black theme for images, white for iframe content, and blue for flash and quicktime.', 'floatboxplus'); ?>
                     </td>
                 </tr>
-                <?php // activate the floatbox options ?>
+                <?php // preloadAll ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('preloadAll', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="fb_preloadAll" size="1">
+                            <option value="true" <?php if ($this->options['fb_preloadAll'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
+                            <option value="false" <?php if ($this->options['fb_preloadAll'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('If true, floatbox will aggressively preload all images that are referenced by floatboxed anchors.', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+                <?php // doAnimations ?>
                 <tr valign="top">
                     <th scope="row">
                         <label><?php _e('doAnimations', 'floatboxplus')?></label>
@@ -1090,7 +1114,7 @@ class floatbox_plus {
                         <?php _e('Shorthand for resizeDuration=0, imageFadeDuration=0 and zoomImageStart=false.', 'floatboxplus'); ?>
                     </td>
                 </tr>
-                        <?php // resizeDuration ?>
+                <?php // resizeDuration ?>
                 <tr valign="top">
                     <th scope="row">
                         <label><?php echo _e('resizeDuration', 'floatboxplus'); ?></label>
