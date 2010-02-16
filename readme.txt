@@ -91,6 +91,7 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 * [FIX] vimeo videos and preview images are shown in the correct dimension, now
 * [UPDATE] simple api v2 (vimeo)
 * [FIX] playbutton on previewimages (no more image, just a symbol)
+* [more information](http://blog.splash.de/2010/02/16/floatbox-plus-1-2-12-crossports/)
 
 = 1.2.11 =
 * [NEW] floatbox option: preloadAll (default true)
