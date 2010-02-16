@@ -4,8 +4,8 @@ function floatboxplus_insert() {
 
         tinyMCE.activeEditor.windowManager.open( {
             url : tinyMCE.activeEditor.documentBaseURI + '../../../wp-content/plugins/floatbox-plus/tinymce/floatbox-plus-popup.php?post='+postnumber,
-            width : 440,
-            height : 220,
+            width : 550,
+            height : 330,
             resizable : 'no',
             scrollbars : 'no',
             inline : 'yes'

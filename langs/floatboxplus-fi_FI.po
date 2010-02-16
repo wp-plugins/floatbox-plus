@@ -1,0 +1,479 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Floatbox Plus 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-11 20:26+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Jaakko Kangosjärvi <jaakko@kangosjarvi.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: C:\\D\\Blogit\\plugins\\floatbox-plus\n"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:24
+msgid "Could not access filesystem."
+msgstr "Ei pääsyä tiedostojärjestelmään."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:27
+msgid "Filesystem error"
+msgstr "Tiedostojärjestelmän virhe"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:32
+msgid "Unable to locate WordPress Plugin directory."
+msgstr "WordPressin lisäosahakemistoa ei löytynyt."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:37
+msgid "Unable to locate WordPress Content directory (wp - content)."
+msgstr "WordPressin sisältöhakemistoa (wp-content) ei löytynyt."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:45
+#, php-format
+msgid "Downloading floatbox from %s"
+msgstr "Ladataan Floatboxia osoitteesta %s"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:49
+msgid "Download failed"
+msgstr "Lataus epäonnistui"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:57
+msgid "Unpacking the update"
+msgstr "Päivityspakettia puretaan"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:87
+msgid "Installing the latest version"
+msgstr "Uusinta versiota asennetaan"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:117
+msgid "floatbox(.js) already installed..."
+msgstr "Floatbox(.js) on jo asennettu..."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:124
+#, php-format
+msgid "Download failed, please follow the manual installation instructions: %s."
+msgstr "Lataus epäonnistui. Ole hyvä ja seuraa asennusohjeita: %s."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:124
+msgid "Link"
+msgstr "Linkki"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:126
+msgid "Download successfull."
+msgstr "Lataus onnistui."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:150
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:945
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:962
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:978
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:994
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1042
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1076
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1091
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1138
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1156
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1171
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1186
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1210
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1226
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1256
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1296
+msgid "no"
+msgstr "Ei"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:151
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:944
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:961
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:977
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:993
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1041
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1075
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1090
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1155
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1170
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1185
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1209
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1225
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1255
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1295
+msgid "yes"
+msgstr "Kyllä"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-download.php:155
+msgid "submit »"
+msgstr "Lataa »"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:170
+msgid "Download floatbox(.js)"
+msgstr "Lataa Floatbox(.js)"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:203
+msgid "Updatenotice for:"
+msgstr "Päivitysmuistutus: "
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:227
+msgid "Ticketsystem/Wiki"
+msgstr "Tehtävälista/Wiki"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:228
+msgid "Plugin-Homepage"
+msgstr "Lisäosan kotisivu"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:646
+msgid "[There is a video that cannot be displayed in this feed. "
+msgstr "[Joitakin videoita ei voida näyttää syötteessä."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:646
+msgid "Visit the blog entry to see the video.]"
+msgstr "Siirry blogimerkintään, jos haluat nähdä video.]"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:909
+msgid "Options saved."
+msgstr "Asetukset tallennettu"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:920
+msgid "Floatbox Javascript isn't copied to the plugin directory. See installation instructions for further details <br />or try the new download option: "
+msgstr "Floatboxin Javascript-tiedostoa ei ole kopioitu lisäosan kansioon. Katso lisätiedot asennusohjeista <br/>tai yritä uutta latausvaihtoehtoa:"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:924
+msgid "Download floatbox(.js) from randomous.com"
+msgstr "Lataa Floatbox(.js) osoitteesta randomous.com"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:930
+msgid "General Settings"
+msgstr "Yleiset asetukset"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:940
+msgid "Activate Floatbox for [gallery]?"
+msgstr "Näytä galleriat Floatbox-näkymässä? "
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:949
+msgid "If activated, it shows the wordpress gallery with floatbox"
+msgstr "Jos 'Kyllä', Wordpress-galleriat (lyhytkoodi [gallery]) näytetään Floatbox-näkymässä."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:957
+msgid "Do you use Floatbox 3.50 or above?"
+msgstr "Onko Floatbox-versiosi 3.50 tai uudempi?"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:966
+msgid "Cause there are some major changes in Floatbox 3.50 (and above), the plugin needs to know which version you have"
+msgstr "Floatbox muuttui olennaisesti versiosta 3.50 lähtien, joten lisäosa tarvitsee tiedon käytössä olevasta versiosta."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:973
+msgid "Activate Floatbox for Videos?"
+msgstr "Näytä videot Floatbox-näkymässä? "
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:982
+msgid "Implements the video function. ATTENTION: It only works, if you do not have the embedded video plugin activated"
+msgstr "Poistaa videotoiminnon käytöstä. HUOMAA: Toimii vain, jos et ole aktivoinut Embedded Video -lisäosaa."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:989
+msgid "Backup Floatbox Javascript during Update?"
+msgstr "Varmuuskopioi Floatbox Javascript päivityksen aikana? "
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:998
+msgid "Backups the Floatbox javascript files for upgrade-reasons. After uprading to a new floatbox-plus version, it is needless to copy the javascript files back in the plugin directory. "
+msgstr "Varmuuskopioi Floatboxin Javascript-tiedostot päivityksiä varten. Päivitettäessä Floatbox-Plus-lisäosaa tiedostoja ei tarvitse enää kopioida lisäosakansioon."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1008
+msgid "Floatbox LicenseKey"
+msgstr "Floatboxin lisenssiavain"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1016
+msgid "LicenseKey"
+msgstr "Lisenssiavain"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1021
+msgid "LicenseKey for floatbox 3.52 and higher."
+msgstr "Lisenssiavain Floatboxin versioon 3.52 ja sitä uudempiin."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1030
+msgid "Floatbox Options"
+msgstr "Floatbox Asetukset"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1037
+msgid "Change the options of floatbox.js?"
+msgstr "Muuta Floatbox.js:n määritykset?"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1046
+msgid "Overwrite the settings in floatbox.js with the values set here."
+msgstr "Korvaa Floatbox.js:n asetukset tässä annettavilla arvoilla."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1052
+msgid "Theme"
+msgstr "Ulkoasu"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1056
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1139
+msgid "auto"
+msgstr "auto"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1057
+msgid "black"
+msgstr "musta"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1058
+msgid "white"
+msgstr "valkoinen"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1059
+msgid "blue"
+msgstr "sininen"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1060
+msgid "yellow"
+msgstr "keltainen"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1061
+msgid "red"
+msgstr "punainen"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1065
+msgid "Color theme. 'Auto' will use the black theme for images, white for iframe content, and blue for flash and quicktime."
+msgstr "Väriteema. 'Auto' käyttää mustaa ulkoasua kuviin, valkoista iframe-sisältöihin ja sinistä videotiedostoihin."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1071
+msgid "preloadAll"
+msgstr "preloadAll"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1080
+msgid "If true, floatbox will aggressively preload all images that are referenced by floatboxed anchors."
+msgstr "Jos 'Kyllä', Floatbox esilataa väkisin kaikki ankkureiden vaikutuspiirissä olevat kuvat."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1086
+msgid "doAnimations"
+msgstr "doAnimations"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1095
+msgid "Shorthand for resizeDuration=0, imageFadeDuration=0 and zoomImageStart=false."
+msgstr "Pikakomento arvoille:  resizeDuration=0, imageFadeDuration=0 ja zoomImageStart=false."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1101
+msgid "resizeDuration"
+msgstr "resizeDuration"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1106
+msgid "Controls the speed at which animated resizing occurs. 0 = no resize animation, 1 is fast, 10 is slooow. These are unit-less numbers, and don't equate to a fixed time period. Larger size changes will take longer than smaller size changes."
+msgstr "Säätää animoidun koonmuutoksen nopeutta. 0 = ei koonmuutoksen animointi, 1 = nopea, 10 = hidas. Numerot eivät perustu aikayksiköihin. Suuremmat koonmuutokset vievät pitemmän aikaa kuin pienet muutokset."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1112
+msgid "imageFadeDuration"
+msgstr "imageFadeDuration"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1117
+msgid "Controls the speed of the opacity fade-in for images as they come into the display. 0 = no image fade-in, 1 is fast, 10 is slooow. These too are unit-less numbers."
+msgstr "Säätää häivytyksen läpinäkyvyyden nopeutta, kun kuvat ilmestyvät näyttöön. 0 = ei häivytystä, 1 = nopea, 10 = hidas. Numerot eivät perustu yksiköihin."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1123
+msgid "overlayFadeDuration"
+msgstr "overlayFadeDuration"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1128
+msgid "Controls the speed of the opacity fade-in and fade-out for the translucent overlay which covers the host page. 0 = no overlay fading in or out, 1 is fast, 10 is slooow.  Unit-less."
+msgstr "Säätää sivun päälle latautuvan läpinäkyvän tehostepohjan läpinäkyvyyden nopeutta. 0 = ei tehosteen häivytystä, 1 = nopea, 10 = hidas. Yksikötön."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1134
+msgid "splitResize"
+msgstr "splitResize"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1140
+msgid "wh"
+msgstr "wh"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1141
+msgid "hw"
+msgstr "hw"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1145
+msgid "Default animated resizing of Floatbox resizes width, height, top and left simultaneously. The settings other than 'no' give sequenced animation where the X and Y dimensions are resized seperately. The two options 'wh' and 'hw' force either width or height to always go first. The better splitResize option is probably 'auto'.  This will always do the smallest dimension first. Using a splitResize of auto prevents unaesthetic resize behaviour of initially bloating up in the larger dimension."
+msgstr "Oletusarvoisesti Floatboxin koonmuutosanimaatio vaikuttaa yhtäaikaisesti leveyteen ja korkeuteen. Muut arvot kuin 'Ei' tuottavat animaation, jossa X- ja Y-ulottuvuudet käsitellään erikseen. Arvo 'wh' muuttaa ensin leveyden ja 'hw' korkeuden. Paras splitResize-tulos saavutettaneen arvolla 'auto', jolloin pienin ulottuvuus käsitellään ensin ja estetään epäesteettiset animoinnit etenkin suurten ulottuvuuksien käsittelyssä."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1151
+msgid "startAtClick"
+msgstr "startAtClick"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1160
+msgid "If true (and resizeDuration is not 0) Floatbox will expand out from the clicked anchor and shrink back to that anchor when closed. If false, Floatbox will start and end from the center of the screen."
+msgstr "Jos 'Kyllä' (eikä resizeDuration ole 0), Floatbox-tehoste laajenee klikatusta ankkurista ja kutistuu suljettaessa takaisin ankkuriin. Arvolla 'Ei' tehosteen alku- ja loppupiste on näytön keskipisteessä."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1166
+msgid "zoomImageStart"
+msgstr "zoomImageStart"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1175
+msgid "If true (and resizeDuration is not 0) images will expand out from the clicked thumbnail on start and collapse back to the thumbnail on exit."
+msgstr "Jos 'Kyllä' (eikä resizeDuration ole 0), kuvat laajenevat klikattaessa pikkukuvasta ja kutistuvat suljettaessa taas pikkukuvaan."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1181
+msgid "liveImageResize"
+msgstr "liveImageResize"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1190
+msgid "If true (and resizeDuration is not 0) images will remain displayed while they are being resized. If false they will be hidden during a resize and the \"loading\" gif displayed in their place."
+msgstr "Jos 'Kyllä' (eikä resizeDuration ole 0) kuvat ovat näkyvissä koonmuutosanimaation ajan. Arvolla 'Ei' kuvien tilalla näkyy koonmuutoksen ajan \"lataa\"-gif-animaatio."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1196
+msgid "For more information about the many other options Floatbox offers (and which aren't integrated yet in the plugin), take a look at the homepage:"
+msgstr "Jos haluat lisätietoja Floatboxin lukuisista muista ominaisuuksista (joita ei vielä ole sovitettu lisäosaan), vieraile kotisivulla: "
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1198
+msgid "Video Options"
+msgstr "Videoasetukset"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1205
+msgid "Show Links under videos?"
+msgstr "Näytä linkit videoiden alla?"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1214
+msgid "Show a link to the original site of the video"
+msgstr "Jos 'Kyllä', videon alla näytetään linkki alkuperäiselle esityssivulle."
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1221
+msgid "Show a small Link under the Video?"
+msgstr "Näytä pieni linkki videon alla?"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1230
+msgid "If no, it will show a bigger text"
+msgstr "Jos 'Ei', näytetään suurempi teksti"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1239
+msgid "Separator"
+msgstr "Erotin"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1244
+msgid "Defines the separator between the service (eg. YouTube) and your comment"
+msgstr "Määrittää erottimen, joka näytetään palvelun nimen (esim. YouTube) ja antamasi linkin tekstin välissä"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1251
+msgid "Show in Feed?"
+msgstr "Näytä syötteessä?"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1260
+msgid "You can choose, if you want to show the video in the feed. Currently, it is only possible to show a link to the video"
+msgstr "Voit valita, näytetäänkö video syötteessä. Toistaiseksi on mahdollista näyttää vain linkki videoon"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1267
+msgid "Video Preview Width"
+msgstr "Videon esikatseluleveys"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1272
+msgid "Choose the width of the preview images for the videos"
+msgstr "Valitse videoiden esikatselukuvan leveys"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1279
+msgid "Video Width"
+msgstr "Videon leveys"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1284
+msgid "You can choose, what width the video and image have"
+msgstr "Voit valita videon ja kuvan leveyden"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1291
+msgid "YouTube: Allow fullscreen?"
+msgstr "YouTube: Salli kokoruutu?"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1300
+msgid "Allow youtube videos to be shown in fullscreen mode (works only in floatbox 3.50 and higher)"
+msgstr "Sallii YouTube-videoiden näytön kokoruututilassa (vain Floatboxin versiosta 3.50 alkaen)"
+
+#: C:\D\Blogit\plugins\floatbox-plus/floatbox-plus.php:1308
+msgid "Update Options »"
+msgstr "Päivitä asetukset »"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:117
+msgid "Floatbox Plus"
+msgstr "Floatbox Plus"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:137
+msgid "Select video portal:"
+msgstr "Valitse videon lähde:"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:170
+msgid "Insert video ID:"
+msgstr "Kopioi videon ID-tunnus:"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:184
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:242
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:340
+msgid "Show video without link"
+msgstr "Näytä video ilman linkkiä"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:190
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:248
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:346
+msgid "Link text:"
+msgstr "Linkin teksti:"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:200
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:258
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:355
+msgid "Insert"
+msgstr "Liitä"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:202
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:260
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:311
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:357
+msgid "Cancel"
+msgstr "Peru"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:221
+msgid "Select video file:"
+msgstr "Valitse videotiedosto:"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:279
+msgid "Local video file:"
+msgstr "Videotiedosto tietokoneelta:"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:289
+msgid "Title:"
+msgstr "Otsikko:"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:299
+msgid "Description:"
+msgstr "Kuvaus:"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:309
+msgid "Upload"
+msgstr "Lataa"
+
+#: C:\D\Blogit\plugins\floatbox-plus/tinymce/floatbox-plus-popup.php:326
+msgid "Insert video URL:"
+msgstr "Videon URL:"
+
+#~ msgid "Lightview Plus"
+#~ msgstr "FloatBox Plus"
+#~ msgid ""
+#~ "Lightview Plus has required a great deal of time and effort to develop. "
+#~ "If it's been useful to you then you can support this development by "
+#~ "making a small donation of $8. This will act as an incentive for me to "
+#~ "carry on developing it, providing countless hours of support, and "
+#~ "including any enhancements that are suggested."
+#~ msgstr ""
+#~ "Floatbox Plus on vaatinut melkoiset aikaa ja panostusta. Olisi siksi "
+#~ "hyödyllistä, jos tuet kehitystyötä pienellä 8 euron summalla. "
+#~ msgid "Donate via PayPal!"
+#~ msgstr "Lahjoita PayPalin kautta!"
+#~ msgid "Load Prototype/Scriptacolous Javascript Library?"
+#~ msgstr "Lataa Prototype/Scriptacolous Javascript-kirjasto?"
+#~ msgid ""
+#~ "Please, deactivate this, if you know what you are doing. It loads a "
+#~ "compressed version of Prototype and Scriptaculous"
+#~ msgstr ""
+#~ "Ota käyttöön vain, jos tiedät mitä teet. Toiminto lataa Prototypen ja "
+#~ "Scriptaculousin pakatut versiot"
+#~ msgid "Load Prototype & Scriptacolous Libraries from Google?"
+#~ msgstr "Lataa Prototype & Scriptacolous Javascript-kirjastot Googlelta?"
+#~ msgid ""
+#~ "Choose if you want to load prototype and scriptaculous from Google and "
+#~ "get it always in the newest version. Otherwise the local versions of "
+#~ "prototype 1.6.0.3 and scriptaculous 1.8.2 will load."
+#~ msgstr ""
+#~ "Valitse, jos valuta ladata aina tuoreimman Prototypen ja Scriptaculousin "
+#~ "version Googlelta. Muuten ladataan paikalliset versiot Prototype 1.6.0.3 "
+#~ "ja Scriptaculous 1.8.2."
+

@@ -1,19 +1,35 @@
 <?php
-if (!defined('ABSPATH')) include_once('./../../../../wp-blog-header.php');
+if (!defined('ABSPATH')) include_once(dirname(__FILE__).'/../../../../wp-blog-header.php');
 require_once(ABSPATH . '/wp-admin/admin.php');
 
 if (isset($_POST['action'])) {
 
-    $mimes = is_array($mimes) ? $mimes : apply_filters('upload_mimes', array (
-        'avi' => 'video/avi',
-        'mov|qt' => 'video/quicktime',
-        'mpeg|mpg|mpe' => 'video/mpeg',
-        'asf|asx|wax|wmv|wmx' => 'video/asf',
-        'swf' => 'application/x-shockwave-flash',
-        'flv' => 'video/x-flv'
-        ));
+	// load php video toolkit
+	//if(version_compare('4', PHP_VERSION, '<') === -1) ? $php_version = 'php4' : $php_version = 'php5';
+	//require_once('phpvideotoolkit.' . $php_version . '.php');
 
-    $overrides = array('action' => 'save', 'mimes' => $mimes);
+	// get lightview plus options
+	$options = get_option('lightview_plus');
+	(!is_array($options) && !empty($options)) ? $options = unserialize($options) : $options = false;
+
+	// set phpvideotoolkit settings
+	define('PHPVIDEOTOOLKIT_FFMPEG_BINARY', $options['ffmpeg']);
+	define('PHPVIDEOTOOLKIT_FLVTOOLS_BINARY', $options['flvtools']);
+
+	// expand wp mime types
+	$mimes = is_array($mimes) ? $mimes : apply_filters('upload_mimes', array (
+		'avi' => 'video/x-msvideo',
+		'mov|qt' => 'video/quicktime',
+		'mpeg|mpg|mpe' => 'video/mpeg',
+		'asf|asx' => 'video/x-ms-asf',
+		'wmv|wax|wmx' => 'application/x-msmetafile',
+		'swf' => 'application/x-shockwave-flash',
+		'flv' => 'video/x-flv'
+	));
+
+	$overrides = array('action' => 'save', 'mimes' => $mimes);
+
+	// handle upload
 
     $file = wp_handle_upload($_FILES['video'], $overrides);
 
@@ -71,13 +87,17 @@ if (isset($_POST['action'])) {
 
 }
 
-if (! current_user_can('edit_others_posts') )
-$and_user = "AND post_author = " . $user_ID;
-$and_type = "AND (post_mime_type = 'video/avi' OR post_mime_type = 'video/quicktime' OR post_mime_type = 'video/mpeg' OR post_mime_type = 'video/asf' OR post_mime_type = 'video/x-flv' OR post_mime_type = 'application/x-shockwave-flash')";
-if ( 3664 <= $wp_db_version )
-$attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHERE post_type = 'attachment' $and_type $and_user ORDER BY post_date_gmt DESC LIMIT 0, 10", ARRAY_A);
-else
-$attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHERE post_status = 'attachment' $and_type $and_user ORDER BY post_date_gmt DESC LIMIT 0, 10", ARRAY_A);
+// get videos to post
+if (! current_user_can('edit_others_posts') ) {
+	$and_user = "AND post_author = " . $user_ID;
+}
+$and_type = "AND (post_mime_type = 'video/x-msvideo' OR post_mime_type = 'video/quicktime' OR post_mime_type = 'video/mpeg' OR post_mime_type = 'video/x-ms-asf' OR post_mime_type = 'application/x-msmetafile' OR post_mime_type = 'video/x-flv' OR post_mime_type = 'application/x-shockwave-flash')";
+
+if ( 3664 <= $wp_db_version ) {
+  $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHERE post_type = 'attachment' $and_type $and_user ORDER BY post_date_gmt DESC LIMIT 0, 10", ARRAY_A);
+} else {
+  $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHERE post_status = 'attachment' $and_type $and_user ORDER BY post_date_gmt DESC LIMIT 0, 10", ARRAY_A);
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -90,11 +110,11 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
         <base target="_self" />
         <style type="text/css">
             #floatboxplus .panel_wrapper, #floatboxplus div.current {
-                height: 165px;
+                height: 265px;
                 padding-top: 5px;
             }
             #portal_insert, #portal_cancel, #select_insert, #select_cancel, #upload_insert, #upload_cancel, #remote_insert, #remote_cancel {
-                font: 13px Verdana, Arial, Helvetica, sans-serif;
+                font: 14px Verdana, Arial, Helvetica, sans-serif;
                 height: auto;
                 width: auto;
                 background-color: transparent;
@@ -106,7 +126,7 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
                 border-left-color: rgb(204, 204, 204);
                 border-top-color: rgb(204, 204, 204);
                 color: rgb(51, 51, 51);
-                padding: 0.25em 0.75em;
+                padding: 0.75em 1.00em;
             }
             #portal_insert:active, #portal_cancel:active, #select_insert:active, #select_cancel:active, #upload_insert:active, #upload_cancel:active, #remote_insert:active, #remote_cancel:active {
                 background: #f4f4f4;
@@ -120,12 +140,12 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
     <body id="floatboxplus" onload="<?php $tab = (isset($_GET['tab'])) ? $_GET['tab'] : $_POST['tab']; echo "mcTabs.displayTab('".$tab."_tab','".$tab."_panel');"; if ($_GET['tab']=='portal') echo "document.forms.portal_form.vid.style.backgroundColor = '#f30';" ?>tinyMCEPopup.executeOnLoad('init();');document.body.style.display='';" style="display: none">
 
         <div class="tabs">
-            <?php /* <ul>
+            <!-- <ul>
                   <li id="portal_tab" class="current"><span><a href="javascript:mcTabs.displayTab('portal_tab','portal_panel');" onmousedown="return false;"><?php echo _e('Portal video','floatbox_plus'); ?></a></span></li>
                   <?php if ($attachments) { ?><li id="select_tab"><span><a href="javascript:mcTabs.displayTab('select_tab','select_panel');" onmousedown="return false;"><?php echo _e('Local video','floatbox_plus'); ?></a></span></li><?php } ?>
                   <li id="upload_tab"><span><a href="javascript:mcTabs.displayTab('upload_tab','upload_panel');" onmousedown="return false;"><?php echo _e('Upload video','floatbox_plus'); ?></a></span></li>
                   <li id="remote_tab"><span><a href="javascript:mcTabs.displayTab('remote_tab','remote_panel');" onmousedown="return false;"><?php echo _e('Video URL','floatbox_plus'); ?></a></span></li>
-                </ul> */?>
+                </ul> -->
         </div>
 
         <div class="panel_wrapper">
@@ -171,7 +191,7 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
                             <td>
                                 <table border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td><input name="vid" type="text" id="portal_vid" value="" style="width: 200px" /></td>
+                                        <td><input name="vid" type="text" id="portal_vid" value="" style="width: 350px" /></td>
                                     </tr>
                             </table></td>
                         </tr>
@@ -191,7 +211,7 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
                             <td>
                                 <table border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td><input name="linktext" type="text" id="portal_linktext" value="<?php echo $_GET['linktext']; ?>" style="width: 200px" /></td>
+                                        <td><input name="linktext" type="text" id="portal_linktext" value="<?php echo $_GET['linktext']; ?>" style="width: 350px" /></td>
                                     </tr>
                             </table></td>
                         </tr>
@@ -249,7 +269,7 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
                             <td>
                                 <table border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td><input name="linktext" type="text" id="select_linktext" value="" style="width: 200px" /></td>
+                                        <td><input name="linktext" type="text" id="select_linktext" value="" style="width: 350px" /></td>
                                     </tr>
                                 </table>
                             </td>
@@ -280,7 +300,7 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
                             <td>
                                 <table border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td><input name="video" type="file" id="upload" value="" style="width: 200px" /></td>
+                                        <td><input name="video" type="file" id="upload" value="" style="width: 350px" /></td>
                                     </tr>
                                 </table>
                             </td>
@@ -290,7 +310,7 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
                             <td>
                                 <table border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td><input name="videotitle" type="text" id="videotitle" value="" style="width: 200px" /></td>
+                                        <td><input name="videotitle" type="text" id="videotitle" value="" style="width: 350px" /></td>
                                     </tr>
                                 </table>
                             </td>
@@ -300,7 +320,7 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
                             <td>
                                 <table border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td><input name="descr" type="text" id="descr" value="" style="width: 200px" /></td>
+                                        <td><input name="descr" type="text" id="descr" value="" style="width: 350px" /></td>
                                     </tr>
                                 </table>
                             </td>
@@ -315,50 +335,6 @@ $attachments = $wpdb->get_results("SELECT post_title, guid FROM $wpdb->posts WHE
                     <input type="hidden" name="tab" value="upload" />
                 </form>
 
-            </div>
-
-
-            <div id="remote_panel" class="panel">
-                <form name="remote_form" action="#">
-                    <input name="portal" type="hidden" id="remote_portal" value="video" />
-                    <table border="0" cellpadding="4" cellspacing="0">
-                        <tr>
-                            <td nowrap="nowrap" style="text-align:right;"><?php echo _e('Insert video URL:','floatbox_plus'); ?></td>
-                            <td>
-                                <table border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td><input name="vid" type="text" id="remote_vid" value="" style="width: 200px" /></td>
-                                    </tr>
-                            </table></td>
-                        </tr>
-                        <tr>
-                            <td nowrap="nowrap" style="text-align:right;"></td>
-                            <td>
-                                <table border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td><input name="nolink" type="checkbox" id="remote_nolink" onClick="disable_enable(this, this.form.linktext);" /></td>
-                                        <td><?php echo _e('Show video without link','floatbox_plus'); ?></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td nowrap="nowrap" style="text-align:right;"><?php echo _e('Link text:','floatbox_plus'); ?></td>
-                            <td>
-                                <table border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td><input name="linktext" type="text" id="remote_linktext" value="<?php echo $_GET['linktext']; ?>" style="width: 200px" /></td>
-                                    </tr>
-                            </table></td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" id="remote_insert" name="insert" value="<?php echo _e('Insert','floatbox_plus'); ?>" onclick="lp_checkData(this.form);" />
-                            </td>
-                            <td align="right"><input type="button" id="remote_cancel" name="cancel" value="<?php echo _e('Cancel','floatbox_plus'); ?>" onclick="tinyMCEPopup.close();" /></td>
-                        </tr>
-                    </table>
-                    <input type="hidden" name="tab" value="remote" />
-                </form>
             </div>
 
         </div>
