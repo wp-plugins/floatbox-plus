@@ -37,12 +37,12 @@ global $wp_version;
 define('FBP_URLPATH', WP_PLUGIN_URL . '/' . plugin_basename( dirname(__FILE__) ).'/' );
 define('WPV27', version_compare($wp_version, '2.7', '>='));
 define('WPV28', version_compare($wp_version, '2.8', '>='));
-define('WPV29', version_compare($wp_version, '2.9', '>='));
+// define('WPV29', version_compare($wp_version, '2.9', '>='));
 
 class floatbox_plus {
 
     // version
-    var $version = '1.2.12';
+    var $version = '1.2.13';
 
     // put all options in
     var $options = array();

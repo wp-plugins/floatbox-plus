@@ -4,14 +4,7 @@
 
 .lvp_playbutton {
 	position: absolute;
-        /* top: 50%; */
-	/*background: rgba(0, 0, 0, 0.746094); */
 	color: white;
-	/*display: table-cell; */
 	font: normal normal normal 75px/75px Helvetica;
 	text-align: center;
-	/* height: 60px; */
-        /* left: 50%; */
-	/* width: 98px; */
-	/* margin: -30px 0px 0px -49px; */
 }
