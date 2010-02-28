@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.2.12
+Version: 1.2.13
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -37,7 +37,7 @@ global $wp_version;
 define('FBP_URLPATH', WP_PLUGIN_URL . '/' . plugin_basename( dirname(__FILE__) ).'/' );
 define('WPV27', version_compare($wp_version, '2.7', '>='));
 define('WPV28', version_compare($wp_version, '2.8', '>='));
-// define('WPV29', version_compare($wp_version, '2.9', '>='));
+define('WPV29', version_compare($wp_version, '2.9', '>='));
 
 class floatbox_plus {
 
@@ -60,7 +60,7 @@ class floatbox_plus {
     function __construct() {
         //load language
         if (function_exists('load_plugin_textdomain'))
-        load_plugin_textdomain('floatboxplus', WP_PLUGIN_DIR.'/floatbox-plus/langs/', '/floatbox-plus/langs/');
+            load_plugin_textdomain('floatboxplus', false, dirname(plugin_basename(__FILE__)) . '/languages');
 
         // get options
         $this->options = get_option('floatbox_plus');
@@ -127,19 +127,21 @@ class floatbox_plus {
 
         $this->video['youtube']['iphone'] = '<object width="###WIDTH###" height="###HEIGHT###"><param name="movie" value="http://www.youtube.com/v/###VIDEOID###"></param><embed src="http://www.youtube.com/v/###VIDEOID###" type="application/x-shockwave-flash" width="###WIDTH###" height="###HEIGHT###"></embed></object><br />';
         if ($this->options['youtube_fullscreen'] == true) {
-            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><div class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###"><span id="lvp_playbutton"> ▶ </span></div></a><br />';
+            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
         } else {
-            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><div class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###"><span id="lvp_playbutton"> ▶ </span></div></a><br />';
+            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
         }
         $this->video['youtube']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VIDEOID###\">YouTube ###SEPERATOR######TITLE###</a>";
+
         $this->video['youtubehq']['iphone'] = '<object width="###WIDTH###" height="###HEIGHT###"><param name="movie" value="http://www.youtube.com/v/###VIDEOID###"></param><embed src="http://www.youtube.com/v/###VIDEOID###" type="application/x-shockwave-flash" width="###WIDTH###" height="###HEIGHT###"></embed></object><br />';
         if ($this->options['youtube_fullscreen'] == true) {
-            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><div class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###"><span id="lvp_playbutton"> ▶ </span></div></a><br />';
+            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
         } else {
-            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><div class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###"><span id="lvp_playbutton"> ▶ </span></div></a><br />';
+            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
         }
         $this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VIDEOID###&amp;ap=%2526&amp;fmt%3D22 \">YouTube ###SEPERATOR######TITLE###</a>";
-        $this->video['vimeo']['target'] = '<a href="http://www.vimeo.com/moogaloop.swf?clip_id=###VIDEOID###" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><div class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###"><span id="lvp_playbutton"> ▶ </span></div></a><br />';
+        
+        $this->video['vimeo']['target'] = '<a href="http://www.vimeo.com/moogaloop.swf?clip_id=###VIDEOID###" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" src="###IMAGE###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
         $this->video['vimeo']['link'] = "<a title=\"vimeo\" href=\"http://www.vimeo.com/###VIDEOID###\">vimeo ###SEPERATOR######TITLE###</a>";
 
         $this->video['video']['flash']['target'] = "<object id=\"flowplayer\" width=\"###WIDTH###\" height=\"###HEIGHT###\" data=\"" . get_option('siteurl') . "/wp-content/plugins/lightview-plus/flowplayer/flowplayer-3.1.1.swf\" type=\"application/x-shockwave-flash\"> <param name=\"movie\" value=\"" . get_option('siteurl') . "/wp-content/plugins/lightview-plus/flowplayer/flowplayer-3.1.1.swf\" /> <param name=\"allowfullscreen\" value=\"true\" /> <param name=\"flashvars\" value='config={\"clip\":\"###VIDEOID###\"}' /></object>";
@@ -454,7 +456,7 @@ class floatbox_plus {
         global $post;
 
         // images
-        $pattern['image'] = "/<a(.*?)href=('|\")([A-Za-z0-9\/_\.\~\:-]*?)(\.bmp|\.gif|\.jpg|\.jpeg|\.png)('|\")([^\>]*?)>/i";
+        $pattern['image'] = "/<a(.*?)href=('|\")([A-Za-z0-9\?=,%\/_\.\~\:-]*?)(\.bmp|\.gif|\.jpg|\.jpeg|\.png)('|\")([^\>]*?)>/i";
 
         if (!$this->options['floatbox_350']) {
             $replacement = '<a$1href=$2$3$4$5 class="floatbox" rel="floatbox.%LIGHTID%"$6>';
@@ -649,6 +651,8 @@ class floatbox_plus {
                 $output = str_replace("###HEIGHT###", floor($this->options['video_width'] / $videodata['width'] * $videodata['height']), $output); // Height
                 $output = str_replace("###PREVIEWWIDTH###", $this->options['video_preview_width'], $output); // Preview Width
                 $output = str_replace("###PREVIEWHEIGHT###", floor($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']), $output); // Preview Height
+                // $output = str_replace("###MARGINH###", floor($this->options['video_preview_width'] / 2) - 50, $output); // Preview Width
+                $output = str_replace("###MARGIN###", floor(($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']) / 2)+16, $output); // Preview Height
         }
 
         // add HTML comment
@@ -663,13 +667,12 @@ class floatbox_plus {
     function get_videodata($service, $id) {
     switch($service) {
         case "youtube":
-        //$output = "http://img.youtube.com/vi/" . $id . "/0.jpg";
-            $output['thumbnail'] = "http://img.youtube.com/vi/" . $id . "/hqdefault.jpg";
+            $output['thumbnail'] = sprintf('http://img.youtube.com/vi/%s/hqdefault.jpg', $id);
             $output['width'] = 17;
             $output['height'] = 14;
             break;
         case "youtubehq":
-            $output['thumbnail'] = "http://img.youtube.com/vi/" . $id . "/hqdefault.jpg";
+            $output['thumbnail'] = sprintf('http://img.youtube.com/vi/%s/hqdefault.jpg', $id);
             $output['width'] = 15.2;
             $output['height'] = 9;
             break;
@@ -679,7 +682,7 @@ class floatbox_plus {
                 return false;
 
             // Get preview image from vimeo
-            $api_link = 'http://vimeo.com/api/v2/video/' . $id . '.xml';
+            $api_link = sprintf('http://vimeo.com/api/v2/video/%s.xml', $id);
             $video = simplexml_load_file($api_link);
             $outout = array();
             $output['thumbnail'] = $video->video->thumbnail_large;
@@ -1011,7 +1014,7 @@ class floatbox_plus {
                         </select>
 
                         <br />
-                        <?php echo __('Backups the Floatbox javascript files for upgrade-reasons. After uprading to a new floatbox-plus version, it is needless to copy the javascript files back in the plugin directory. ', 'floatboxplus'); ?>
+                        <?php echo __('Backups the Floatbox javascript files for upgrade-reasons. After upgrading to a new floatbox-plus version, it is needless to copy the javascript files back in the plugin directory. ', 'floatboxplus'); ?>
                     </td>
                 </tr>
 

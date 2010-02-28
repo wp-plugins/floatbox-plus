@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.9.2
-Stable tag: 1.2.12
+Stable tag: 1.2.13
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -85,6 +85,11 @@ Yes and no, actually only some options (theme selection + animation options) can
 For other questions, take a look at the [support forum](http://board.splash.de/forumdisplay.php?f=103).
 
 == Changelog ==
+
+= 1.2.13 =
+* [NEW] dutch translation by [WP webshop](http://wpwebshop.com/)
+* [FIX] play button overlay
+* [FIX] regex (more characters in urls allowed)
 
 = 1.2.12 =
 * [NEW] finish translation by jaska
