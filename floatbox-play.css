@@ -1,0 +1,10 @@
+.lvp_previewimage {
+   position: relative;
+}
+
+.lvp_playbutton {
+	position: absolute;
+	color: white;
+	font: normal normal normal 75px/75px Helvetica;
+	text-align: center;
+}
