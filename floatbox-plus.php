@@ -651,8 +651,7 @@ class floatbox_plus {
                 $output = str_replace("###HEIGHT###", floor($this->options['video_width'] / $videodata['width'] * $videodata['height']), $output); // Height
                 $output = str_replace("###PREVIEWWIDTH###", $this->options['video_preview_width'], $output); // Preview Width
                 $output = str_replace("###PREVIEWHEIGHT###", floor($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']), $output); // Preview Height
-                // $output = str_replace("###MARGINH###", floor($this->options['video_preview_width'] / 2) - 50, $output); // Preview Width
-                $output = str_replace("###MARGIN###", floor(($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']) / 2)+16, $output); // Preview Height
+                $output = str_replace("###MARGIN###", floor(($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']) / 2)+16, $output); // playbutton topmargin
         }
 
         // add HTML comment
