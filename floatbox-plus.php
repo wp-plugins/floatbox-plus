@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.2.13
+Version: 1.2.14
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -42,7 +42,7 @@ define('WPV28', version_compare($wp_version, '2.8', '>='));
 class floatbox_plus {
 
     // version
-    var $version = '1.2.13';
+    var $version = '1.2.14';
 
     // put all options in
     var $options = array();
@@ -127,21 +127,21 @@ class floatbox_plus {
 
         $this->video['youtube']['iphone'] = '<object width="###WIDTH###" height="###HEIGHT###"><param name="movie" value="http://www.youtube.com/v/###VIDEOID###"></param><embed src="http://www.youtube.com/v/###VIDEOID###" type="application/x-shockwave-flash" width="###WIDTH###" height="###HEIGHT###"></embed></object><br />';
         if ($this->options['youtube_fullscreen'] == true) {
-            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
+            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />###PLAYBUTTON###</span></a><br />';
         } else {
-            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
+            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />###PLAYBUTTON###</span></a><br />';
         }
         $this->video['youtube']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VIDEOID###\">YouTube ###SEPERATOR######TITLE###</a>";
 
         $this->video['youtubehq']['iphone'] = '<object width="###WIDTH###" height="###HEIGHT###"><param name="movie" value="http://www.youtube.com/v/###VIDEOID###"></param><embed src="http://www.youtube.com/v/###VIDEOID###" type="application/x-shockwave-flash" width="###WIDTH###" height="###HEIGHT###"></embed></object><br />';
         if ($this->options['youtube_fullscreen'] == true) {
-            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
+            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />###PLAYBUTTON###</span></a><br />';
         } else {
-            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
+            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />###PLAYBUTTON###</span></a><br />';
         }
         $this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VIDEOID###&amp;ap=%2526&amp;fmt%3D22 \">YouTube ###SEPERATOR######TITLE###</a>";
-        
-        $this->video['vimeo']['target'] = '<a href="http://www.vimeo.com/moogaloop.swf?clip_id=###VIDEOID###" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="lvp_previewimage" style="width:###PREVIEWWIDTH###px;"><img width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" src="###IMAGE###" alt="###TITLE###" /><span class="lvp_playbutton" style="width: ###PREVIEWWIDTH###px; margin-top:-###MARGIN###px;"> ▶ </span></span></a><br />';
+
+        $this->video['vimeo']['target'] = '<a href="http://www.vimeo.com/moogaloop.swf?clip_id=###VIDEOID###" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" src="###IMAGE###" alt="###TITLE###" />###PLAYBUTTON###</span></a><br />';
         $this->video['vimeo']['link'] = "<a title=\"vimeo\" href=\"http://www.vimeo.com/###VIDEOID###\">vimeo ###SEPERATOR######TITLE###</a>";
 
         $this->video['video']['flash']['target'] = "<object id=\"flowplayer\" width=\"###WIDTH###\" height=\"###HEIGHT###\" data=\"" . get_option('siteurl') . "/wp-content/plugins/lightview-plus/flowplayer/flowplayer-3.1.1.swf\" type=\"application/x-shockwave-flash\"> <param name=\"movie\" value=\"" . get_option('siteurl') . "/wp-content/plugins/lightview-plus/flowplayer/flowplayer-3.1.1.swf\" /> <param name=\"allowfullscreen\" value=\"true\" /> <param name=\"flashvars\" value='config={\"clip\":\"###VIDEOID###\"}' /></object>";
@@ -253,6 +253,7 @@ class floatbox_plus {
                         'video_showlink' => true,
                         'video_smallink' => true,
 			'video_preview_width'=> '300',
+                        'video_preview_playimage' => true,
                         'video_width' => '500',
                         'video_separator' => '- ',
                         'video_showinfeed' => true,
@@ -292,6 +293,8 @@ class floatbox_plus {
 		$this->options['video_preview_width'] = $this->options['video_width'];
         if(empty($this->options['youtube_fullscreen']))
 		$this->options['youtube_fullscreen'] = false;
+        if(empty($this->options['video_preview_playimage']))
+		$this->options['video_preview_playimage'] = true;
 
         // floatbox: general options
         if(empty($this->options['fb_options']))
@@ -501,12 +504,12 @@ class floatbox_plus {
                     }
                     break;
                 case "youtubehq":
-                        if ($this->is_iPhone() == true) {
-                                $output .= $this->video['youtubehq']['iphone'];
-                        } else {
-                                $output .= $this->video['youtubehq']['target'];
-                        }
-                        break;
+                    if ($this->is_iPhone() == true) {
+                            $output .= $this->video['youtubehq']['iphone'];
+                    } else {
+                            $output .= $this->video['youtubehq']['target'];
+                    }
+                    break;
                 case "vimeo": $output .= $this->video['vimeo']['target'];
                     break;
                 case "google": $output .= $this->video['google']['target'];
@@ -546,18 +549,18 @@ class floatbox_plus {
                 case "gametrailers": $output .= $this->video['gametrailers']['target'];
                     break;
                 case "video":
-                        if (preg_match("%([[:print:]]+).(mov|qt|MOV|QT)$%", $match[2])) {
-                                $output .= $this->video['local']['quicktime']['target'];
-                                break;
+                    if (preg_match("%([[:print:]]+).(mov|qt|MOV|QT)$%", $match[2])) {
+                            $output .= $this->video['local']['quicktime']['target'];
+                            break;
 
-                        } elseif (preg_match("%([[:print:]]+).(wmv|mpg|mpeg|mpe|asf|asx|wax|wmv|wmx|avi|WMV|MPG|MPEG|MPE|ASF|ASX|WAX|WMV|WMX|AVI)$%", $match[2])) {
-                                $output .= $this->video['local']['target'];
-                                break;
+                    } elseif (preg_match("%([[:print:]]+).(wmv|mpg|mpeg|mpe|asf|asx|wax|wmv|wmx|avi|WMV|MPG|MPEG|MPE|ASF|ASX|WAX|WMV|WMX|AVI)$%", $match[2])) {
+                            $output .= $this->video['local']['target'];
+                            break;
 
-                        } elseif (preg_match("%([[:print:]]+).(swf|flv|SWF|FLV)$%", $match[2])) {
-                                $output .= $this->video['local']['flashplayer']['target'];
-                                break;
-                        }
+                    } elseif (preg_match("%([[:print:]]+).(swf|flv|SWF|FLV)$%", $match[2])) {
+                            $output .= $this->video['local']['flashplayer']['target'];
+                            break;
+                    }
 
                 default:
                     break;
@@ -571,7 +574,6 @@ class floatbox_plus {
                     switch ($match[1]) {
                         case "youtube": $output .= $this->video['youtube']['link'];
                             break;
-                        // TODO: unsure?
 			case "youtubehq": $output .= $this->video['youtubehq']['link'];
                             break;
                         case "vimeo": $output .= $this->video['vimeo']['link'];
@@ -647,12 +649,20 @@ class floatbox_plus {
         $output = str_replace("###IMAGE###", $videodata['thumbnail'], $output); // Thumbnail
 
         if(!empty($videodata['width']) && !empty($videodata['height'])) {
+        	$_height=floor($this->options['video_width'] / $videodata['width'] * $videodata['height']);
+        	$_previewheight=floor($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']);
+        	$_previewtop=($_previewheight - 100)/2;
+                $_previewleft=($this->options['video_preview_width']-100)/2;
                 $output = str_replace("###WIDTH###", $this->options['video_width'], $output); // Width
-                $output = str_replace("###HEIGHT###", floor($this->options['video_width'] / $videodata['width'] * $videodata['height']), $output); // Height
+                $output = str_replace("###HEIGHT###", $_height, $output); // Height
                 $output = str_replace("###PREVIEWWIDTH###", $this->options['video_preview_width'], $output); // Preview Width
-                $output = str_replace("###PREVIEWHEIGHT###", floor($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']), $output); // Preview Height
-                $output = str_replace("###MARGIN###", floor(($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']) / 2)+16, $output); // playbutton topmargin
-        }
+                $output = str_replace("###PREVIEWHEIGHT###", $_previewheight, $output); // Preview Height
+                if ($this->options['video_preview_playimage']) {
+                    $output = str_replace("###PLAYBUTTON###", '<img class="fbp_videopreviewbutton" src="'.plugins_url('/floatbox-plus/img/playbutton.png').'" alt="play" style="left: '.$_previewleft.'px; top:'.$_previewtop.'px" />', $output); // play-button
+                } else {
+                    $output = str_replace("###PLAYBUTTON###", '<span class="fbp_videopreviewplay" style="left: '.$_previewleft.'px; top:'.($_previewtop+23).'px"> ▶ </span>', $output); // play-button
+                }
+	}
 
         // add HTML comment
         if (!is_feed())
@@ -818,6 +828,7 @@ class floatbox_plus {
             } else {
                 $this->options['youtube_fullscreen'] = false;
             }
+
             // floatbox: animation options
             if($_POST['fb_doAnimations'] == 'true') {
                 $this->options['fb_doAnimations'] = true;
@@ -909,13 +920,20 @@ class floatbox_plus {
                 $this->options['video_showinfeed'] = false;
             }
 
+            // play-button
+            if($_POST['video_preview_playimage'] == 'true') {
+                $this->options['video_preview_playimage'] = true;
+            } else {
+                $this->options['video_preview_playimage'] = false;
+            }
+
             // option 'floatbox_350'
             if($_POST['floatbox_350'] == 'true') {
                 $this->options['floatbox_350'] = true;
             } else {
                 $this->options['floatbox_350'] = false;
             }
-            
+
             // option 'fb_licenseKey'
             // if(!empty($_POST['fb_licenseKey']))
                     $this->options['fb_licenseKey'] = $_POST['fb_licenseKey'];
@@ -1319,6 +1337,22 @@ class floatbox_plus {
                     </td>
                 </tr>
 
+                <?php // play-button image vs text ?>
+                <tr valign="top">
+                    <th scope="row">
+                        <label><?php _e('Show play-button as image?', 'floatboxplus')?></label>
+                    </th>
+                    <td>
+                        <select name="video_preview_playimage" size="1">
+                            <option value="true" <?php if ($this->options['video_preview_playimage'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
+                            <option value="false" <?php if ($this->options['video_preview_playimage'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                        </select>
+
+                        <br />
+                        <?php _e('Show the play-button as overlayimage, otherwise the textversion will be used', 'floatboxplus'); ?>
+                    </td>
+                </tr>
+
             </tbody>
         </table>
         <input type="hidden" name="fb_submit" id="fb_submit" value="1" />
@@ -1356,15 +1390,15 @@ class floatbox_plus {
 	function direct_image_urls_for_galleries( $link, $id ) {
 		if ( is_admin() ) return $link;
 
-		$mimetypes = array( 'image/jpeg', 'image/png', 'image/gif' );
+        $mimetypes = array( 'image/jpeg', 'image/png', 'image/gif' );
 
-		$post = get_post( $id );
+        $post = get_post( $id );
 
-		if ( in_array( $post->post_mime_type, $mimetypes ) )
-			return wp_get_attachment_url( $id );
-		else
-			return $link;
-	}
+        if ( in_array( $post->post_mime_type, $mimetypes ) )
+                return wp_get_attachment_url( $id );
+        else
+                return $link;
+    }
 
     function boolToString($bool) {
         if ($bool == 0)

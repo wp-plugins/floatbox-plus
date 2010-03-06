@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.9.2
-Stable tag: 1.2.13
+Stable tag: 1.2.14
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -84,27 +84,32 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
+= 1.2.14 =
+* [FIX] play-button
+* [NEW] play-button option: overlay image vs. textmode
+
 = 1.2.13 =
 * [NEW] dutch translation by [WP webshop](http://wpwebshop.com/)
-* [FIX] play button overlay
+* [FIX] play-button overlay
 * [FIX] regex (more characters in urls allowed)
+[more information](http://blog.splash.de/2010/02/28/floatbox-plus-1-2-13-probleme-beim-update/)
 
 = 1.2.12 =
 * [NEW] finish translation by jaska
 * [FIX] vimeo videos and preview images are shown in the correct dimension, now
 * [UPDATE] simple api v2 (vimeo)
-* [FIX] playbutton on previewimages (no more image, just a symbol)
+* [FIX] play-button on previewimages (no more image, just a symbol)
 * [more information](http://blog.splash.de/2010/02/16/floatbox-plus-1-2-12-crossports/)
 
 = 1.2.11 =
 * [NEW] floatbox option: preloadAll (default true)
 
 = 1.2.10 =
-* [FIX] playbutton with transparency
+* [FIX] play-button with transparency
 * [more information](http://blog.splash.de/2010/01/09/floatbox-plus-1-2-9-play-button/)
 
 = 1.2.9 =
-* [NEW] playbutton overlay on videopreviewimages
+* [NEW] play-button overlay on videopreviewimages
 * [FIX] cleanup (javascript libs)
 * [more information](http://blog.splash.de/2010/01/09/floatbox-plus-1-2-9-play-button/)
 
