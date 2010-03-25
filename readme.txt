@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.9.2
-Stable tag: 1.2.14
+Stable tag: 1.2.15
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -84,9 +84,14 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
+= 1.2.15 =
+* [NEW] previewthumbs from youtube-videos are now fetched via api
+* [NEW] xml-results from api-calls (vimeo/youtube) are cached if possible (php5, write-access to cachedirectory)
+
 = 1.2.14 =
 * [FIX] play-button
 * [NEW] play-button option: overlay image vs. textmode
+[more information](http://blog.splash.de/2010/03/06/floatbox-plus-1-2-14-play-button/)
 
 = 1.2.13 =
 * [NEW] dutch translation by [WP webshop](http://wpwebshop.com/)
