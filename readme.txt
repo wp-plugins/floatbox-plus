@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 2.9.2
-Stable tag: 1.2.15
+Stable tag: 1.2.16
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -80,9 +80,16 @@ add rel="nofloatbox" to the link
 
 Yes and no, actually only some options (theme selection + animation options) can be adjusted at the plugin options page.
 
+= Seems that the XML-data isn't cached? =
+
+If you're using PHP4 or PHP5 without SimpleXML-extension the cache won't work.
+
 For other questions, take a look at the [support forum](http://board.splash.de/forumdisplay.php?f=103).
 
 == Changelog ==
+
+= 1.2.16 =
+* [FIX] php4/simplexml.class.php fix (cache doesn't work with php4)
 
 = 1.2.15 =
 * [NEW] previewthumbs from youtube-videos are now fetched via api

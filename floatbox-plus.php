@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.2.15
+Version: 1.2.16
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -40,11 +40,28 @@ define('FBP_WPV28', version_compare($wp_version, '2.8', '>='));
 // define('WPV29', version_compare($wp_version, '2.9', '>='));
 define('FBP_PHP5', version_compare(PHP_VERSION, '5.0.0', '>='));
 define('FBP_CACHEPATH', WP_PLUGIN_DIR.'/'.dirname(plugin_basename( __FILE__ )).'/cache/');
+if (class_exists(SimpleXMLElement)) {
+    define('FBP_SXML', true);
+} else {
+    define('FBP_SXML', false);
+}
+
+// i hate php4 and php5 without SimpleXML ;)
+if (FBP_SXML) {
+    function fbp_serializeSimpleXML(SimpleXMLElement $xmlObj) {
+        return serialize($xmlObj->asXML());
+    }
+
+    function fbp_unserializeSimpleXML($str) {
+        return simplexml_load_string(unserialize($str));
+
+    }
+}
 
 class floatbox_plus {
 
     // version
-    var $version = '1.2.15';
+    var $version = '1.2.16';
 
     // put all options in
     var $options = array();
@@ -154,7 +171,7 @@ class floatbox_plus {
         $this->video['video']['target'] = "<object classid=\"clsid:22D6f312-B0F6-11D0-94AB-0080C74C7E95\" codebase=\"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-oleobject\"><param name=\"filename\" value=\"".get_option('siteurl')."###VIDEOID###\" /><param name=\"autostart\" value=\"false\" /><param name=\"showcontrols\" value=\"true\" /><!--[if !IE]> <--><object data=\"".get_option('siteurl')."###VIDEOID###\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-mplayer2\"><param name=\"pluginurl\" value=\"http://www.microsoft.com/Windows/MediaPlayer/\" /><param name=\"ShowControls\" value=\"true\" /><param name=\"ShowStatusBar\" value=\"true\" /><param name=\"ShowDisplay\" value=\"true\" /><param name=\"Autostart\" value=\"0\" /></object><!--> <![endif]--></object><br />";
         $this->video['video']['link'] = "<a title=\"Local Video\" href=\"".get_option('siteurl')."###VIDEOID###\">Download Video</a>";
 
-        if ( ( is_dir(FBP_CACHEPATH) || ( umask(0022) && @mkdir( FBP_CACHEPATH , 0755, true ) ) ) && FBP_PHP5 ) {
+        if ( ( is_dir(FBP_CACHEPATH) || ( umask(0022) && @mkdir( FBP_CACHEPATH , 0755, true ) ) ) && FBP_PHP5 && FBP_SXML ) {
             $this->xmlCache = true;
         }
 
@@ -702,27 +719,17 @@ class floatbox_plus {
         return $obj;
     }
 
-
-    function serializeSimpleXML(SimpleXMLElement $xmlObj) {
-        return serialize($xmlObj->asXML());
-    }
-
-    function unserializeSimpleXML($str) {
-        return simplexml_load_string(unserialize($str));
-
-    }
-
     function getXMLData($url){
         if ($this->xmlCache) {
             $_cFile = FBP_CACHEPATH.md5($url).'.cache';
             if (file_exists($_cFile) && ((time() - filemtime($_cFile))/60/60) < 72) {
                 // return cached data
-                return $this->unserializeSimpleXML(base64_decode(file_get_contents($_cFile)));
+                return fbp_unserializeSimpleXML(base64_decode(file_get_contents($_cFile)));
             } else {
                 // fetch and cache data, return data
                 $_xmlObject = @simplexml_load_file($url);
                 if (is_object($_xmlObject)) {
-                    file_put_contents($_cFile, base64_encode($this->serializeSimpleXML($_xmlObject)));
+                    file_put_contents($_cFile, base64_encode(fbp_serializeSimpleXML($_xmlObject)));
                 } else {
                     file_put_contents($_cFile, '');
                 }
