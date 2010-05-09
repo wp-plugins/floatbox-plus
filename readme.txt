@@ -88,7 +88,7 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
-== 1.2.17 ==
+= 1.2.17 =
 * [FIX] fix for the php4
 * [UPDATE] downloadurl for floatbox 4.01
 
