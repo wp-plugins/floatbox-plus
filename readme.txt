@@ -7,8 +7,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=C2RBC
 Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overlay, fancybox, thickbox
 License: GPL v3, see LICENSE
 Requires at least: 2.5
-Tested up to: 2.9.2
-Stable tag: 1.2.17
+Tested up to: 3.0.0
+Stable tag: 1.2.18
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -28,9 +28,6 @@ Cause Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor<
 under the terms of Creative Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/)
 it is not included (not GPL compatible). You have two options, let the plugin download/install floatbox for you or
 do a manual installation of floatbox on your own (see installations instructions).
-
-Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
-For Support, please use the [forum](http://board.splash.de/forumdisplay.php?f=103).
 
 Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
 For Support, please use the [forum](http://board.splash.de/forumdisplay.php?f=103).
@@ -88,6 +85,10 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
+= 1.2.18 =
+* [NEW] options.js + notice about the many more options and the configurator
+* [UPDATE] downloadurl for floatbox 4.04
+
 = 1.2.17 =
 * [FIX] fix for the php4
 * [UPDATE] downloadurl for floatbox 4.01
@@ -102,13 +103,13 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 = 1.2.14 =
 * [FIX] play-button
 * [NEW] play-button option: overlay image vs. textmode
-[more information](http://blog.splash.de/2010/03/06/floatbox-plus-1-2-14-play-button/)
+* [more information](http://blog.splash.de/2010/03/06/floatbox-plus-1-2-14-play-button/)
 
 = 1.2.13 =
 * [NEW] dutch translation by [WP webshop](http://wpwebshop.com/)
 * [FIX] play-button overlay
 * [FIX] regex (more characters in urls allowed)
-[more information](http://blog.splash.de/2010/02/28/floatbox-plus-1-2-13-probleme-beim-update/)
+* [more information](http://blog.splash.de/2010/02/28/floatbox-plus-1-2-13-probleme-beim-update/)
 
 = 1.2.12 =
 * [NEW] finish translation by jaska
