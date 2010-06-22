@@ -352,8 +352,6 @@ class floatbox_plus {
                 $this->options['fb_liveImageResize'] = false;
         if(empty($this->options['floatbox_350']))
                 $this->options['floatbox_350'] = false;
-		if(empty($this->options['floatbox_350']))
-			$this->options['floatbox_350'] = false;
 
         // update options
         update_option('floatbox_plus', serialize($this->options));
@@ -787,30 +785,10 @@ class floatbox_plus {
             if(empty($output))
                 return false;
 
-		default:
-                    return false;
-                break;
-        }
-
-				// is simplexml available? Get preview image from vimeo
-				if(function_exists(simplexml_load_file)) {
-					$clip = simplexml_load_file($api_link);
-					$output = $clip->clip->thumbnail_large;
-				} else {
-					// $output = get_option('siteurl') . '/wp-content/plugins/floatbox-plus/img/preview_image.png';
-                    return false;
-				}
-				// check response, if nothing in output -> standard image
-				if(empty($output))
-					return false;
-				break;
-
-		default:
-                    return false;
-                break;
-        }
-
-        return $output;
+            break;
+        case "video":
+            break;
+        default: break;
     }
     return $output;
 }
@@ -867,6 +845,7 @@ class floatbox_plus {
                 $script .= "urlGraphics: '".$path."/floatbox/graphics/',\n";
                 $script .= "urlLanguages: '".$path."/floatbox/languages/'\n";
             }
+            $script .= "};\n</script>\n";
         }
         if (FBP_WPV28 == false) {
             $script .= "<script type=\"text/javascript\" src=\"$path/floatbox/floatbox.js\"></script>\n";
@@ -1467,16 +1446,8 @@ class floatbox_plus {
         }
     }
 
-    function enqueueAdmin($hook_suffix) {
-        // print '<!-- enqueueAdmin: '.$hook_suffix.' -->';
-        $fbp_admin_pages = array('post-new.php', 'post.php', 'page-new.php', 'page.php');
-        if(in_array($hook_suffix, $fbp_admin_pages)) {
-            wp_enqueue_script('wp-polls-admin', plugins_url('/floatbox-plus/tinymce/floatbox-plus.js'), null , $this->version, true);
-        }
-    }
-
-	function direct_image_urls_for_galleries( $link, $id ) {
-		if ( is_admin() ) return $link;
+    function direct_image_urls_for_galleries( $link, $id ) {
+        if ( is_admin() ) return $link;
 
         $mimetypes = array( 'image/jpeg', 'image/png', 'image/gif' );
 
@@ -1505,7 +1476,6 @@ if(!function_exists("simplexml_load_file")) {
         $sx = new simplexml;
         return $sx->xml_load_file($file);
     }
-}
 }
 
 //initalize class
