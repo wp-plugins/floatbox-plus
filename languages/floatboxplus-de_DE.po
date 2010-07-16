@@ -1,0 +1,557 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lightview Plus 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-21 22:01+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Thorsten\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: /Users/Thorsten/Sites/wp27/wp-content/plugins/lightview-plus\n"
+"X-Textdomain-Support: yes"
+
+#: tinymce/floatbox-plus-popup.php:157
+#@ floatboxplus
+msgid "Select video portal:"
+msgstr "Wähle Video Portal"
+
+#: tinymce/floatbox-plus-popup.php:190
+#@ floatbox_plus
+msgid "Insert video ID:"
+msgstr "Gebe Video ID ein"
+
+#: tinymce/floatbox-plus-popup.php:204
+#: tinymce/floatbox-plus-popup.php:262
+#@ floatbox_plus
+msgid "Show video without link"
+msgstr "Video ohne Link anzeigen"
+
+#: tinymce/floatbox-plus-popup.php:210
+#: tinymce/floatbox-plus-popup.php:268
+#@ floatbox_plus
+msgid "Link text:"
+msgstr "Linktext:"
+
+#: tinymce/floatbox-plus-popup.php:220
+#: tinymce/floatbox-plus-popup.php:278
+#@ floatbox_plus
+msgid "Insert"
+msgstr "Einfügen"
+
+#: tinymce/floatbox-plus-popup.php:222
+#: tinymce/floatbox-plus-popup.php:280
+#: tinymce/floatbox-plus-popup.php:331
+#@ floatbox_plus
+msgid "Cancel"
+msgstr "Abbruch"
+
+#: tinymce/floatbox-plus-popup.php:241
+#@ floatbox_plus
+msgid "Select video file:"
+msgstr "Wähle Video Datei"
+
+#: tinymce/floatbox-plus-popup.php:299
+#@ floatbox_plus
+msgid "Local video file:"
+msgstr "Lokale Video Datei"
+
+#: tinymce/floatbox-plus-popup.php:309
+#@ floatbox_plus
+msgid "Title:"
+msgstr "Titel:"
+
+#: tinymce/floatbox-plus-popup.php:319
+#@ floatbox_plus
+msgid "Description:"
+msgstr "Beschreibung:"
+
+#: tinymce/floatbox-plus-popup.php:329
+#@ floatbox_plus
+msgid "Upload"
+msgstr "Upload"
+
+#: floatbox-plus.php:619
+#@ floatboxplus
+msgid "[There is a video that cannot be displayed in this feed. "
+msgstr "[Dieses Video kann nicht im Feed dargestellt werden."
+
+#: floatbox-plus.php:619
+#@ floatboxplus
+msgid "Visit the blog entry to see the video.]"
+msgstr "Besuche den Blog um das Video zu sehen.]"
+
+#: floatbox-plus.php:905
+#@ floatboxplus
+msgid "Options saved."
+msgstr "Optionen gesichert"
+
+#: floatbox-plus.php:926
+#@ floatboxplus
+msgid "General Settings"
+msgstr "Generelle Einstellungen"
+
+#: floatbox-download.php:151
+#: floatbox-plus.php:940
+#: floatbox-plus.php:957
+#: floatbox-plus.php:973
+#: floatbox-plus.php:989
+#: floatbox-plus.php:1037
+#: floatbox-plus.php:1071
+#: floatbox-plus.php:1086
+#: floatbox-plus.php:1151
+#: floatbox-plus.php:1166
+#: floatbox-plus.php:1181
+#: floatbox-plus.php:1205
+#: floatbox-plus.php:1221
+#: floatbox-plus.php:1251
+#: floatbox-plus.php:1291
+#@ floatboxplus
+msgid "yes"
+msgstr "Ja"
+
+#: floatbox-download.php:150
+#: floatbox-plus.php:941
+#: floatbox-plus.php:958
+#: floatbox-plus.php:974
+#: floatbox-plus.php:990
+#: floatbox-plus.php:1038
+#: floatbox-plus.php:1072
+#: floatbox-plus.php:1087
+#: floatbox-plus.php:1134
+#: floatbox-plus.php:1152
+#: floatbox-plus.php:1167
+#: floatbox-plus.php:1182
+#: floatbox-plus.php:1206
+#: floatbox-plus.php:1222
+#: floatbox-plus.php:1252
+#: floatbox-plus.php:1292
+#@ floatboxplus
+msgid "no"
+msgstr "Nein"
+
+#: floatbox-plus.php:978
+#@ floatboxplus
+msgid "Implements the video function. ATTENTION: It only works, if you do not have the embedded video plugin activated"
+msgstr "Implementiert die Video Funktion. ACHTUNG: Dies funktioniert nur, wenn Sie nicht das Embedded Video Plugin aktiviert haben"
+
+#: floatbox-plus.php:1194
+#@ floatboxplus
+msgid "Video Options"
+msgstr "Video Optionen"
+
+#: floatbox-plus.php:1201
+#@ floatboxplus
+msgid "Show Links under videos?"
+msgstr "Zeige Links unter den Videos?"
+
+#: floatbox-plus.php:1210
+#@ floatboxplus
+msgid "Show a link to the original site of the video"
+msgstr "Zeigt einen Link zur originalen Seite des Videos"
+
+#: floatbox-plus.php:1217
+#@ floatboxplus
+msgid "Show a small Link under the Video?"
+msgstr "Zeige einen kleinen Link unter dem Video?"
+
+#: floatbox-plus.php:1226
+#@ floatboxplus
+msgid "If no, it will show a bigger text"
+msgstr "Falls nein, wird ein grösserer Text angezeigt"
+
+#: floatbox-plus.php:1235
+#@ floatboxplus
+msgid "Separator"
+msgstr "Trennzeichen"
+
+#: floatbox-plus.php:1240
+#@ floatboxplus
+msgid "Defines the separator between the service (eg. YouTube) and your comment"
+msgstr "Legt den Trenner zwischen dem Service (z. B. YouTube) und deinem Kommentar fest"
+
+#: floatbox-plus.php:1247
+#@ floatboxplus
+msgid "Show in Feed?"
+msgstr "Im Feed anzeigen?"
+
+#: floatbox-plus.php:1256
+#@ floatboxplus
+msgid "You can choose, if you want to show the video in the feed. Currently, it is only possible to show a link to the video"
+msgstr "Du kannst auswählen, ob du das Video im Feed anzeigen möchtest. Im ist es nur möglich einen Link im Feed anzuzeigen."
+
+#: floatbox-plus.php:1275
+#@ floatboxplus
+msgid "Video Width"
+msgstr "Video Breite"
+
+#: floatbox-plus.php:1280
+#@ floatboxplus
+msgid "You can choose, what width the video and image have"
+msgstr "Du kannst auswählen, welche Breite das Video und das Vorschaubild haben sollen"
+
+#: floatbox-plus.php:1304
+#@ floatboxplus
+msgid "Update Options »"
+msgstr "Speichern »"
+
+#: floatbox-download.php:24
+#@ floatboxplus
+msgid "Could not access filesystem."
+msgstr "Zugriff aufs Dateisystem wurde verweigert."
+
+#: floatbox-download.php:27
+#@ floatboxplus
+msgid "Filesystem error"
+msgstr "Dateisystemfehler"
+
+#: floatbox-download.php:32
+#@ floatboxplus
+msgid "Unable to locate WordPress Plugin directory."
+msgstr "Zugriff auf das WordPress Plugin Verzeichnis nicht möglich."
+
+#: floatbox-download.php:37
+#@ floatboxplus
+msgid "Unable to locate WordPress Content directory (wp - content)."
+msgstr "WordPress Content-Verzeichnis (wp - content) konnte nicht gefunden werden."
+
+#: floatbox-download.php:57
+#@ floatboxplus
+msgid "Unpacking the update"
+msgstr "Update wird ausgepackt"
+
+#: floatbox-download.php:87
+#@ floatboxplus
+msgid "Installing the latest version"
+msgstr "Neuste Version wird installiert"
+
+#: floatbox-download.php:117
+#@ floatboxplus
+msgid "floatbox(.js) already installed..."
+msgstr "floatbox(.js) ist bereits installiert..."
+
+#: floatbox-download.php:126
+msgid "Download successfull."
+msgstr "Download erfolgreich abgeschlossen."
+
+#: floatbox-download.php:155
+#@ floatboxplus
+msgid "submit »"
+msgstr "absenden »"
+
+#: tinymce/floatbox-plus-popup.php:137
+#@ floatbox_plus
+msgid "Floatbox Plus"
+msgstr "Floatbox Plus"
+
+#: floatbox-plus.php:161
+#@ floatboxplus
+msgid "Download floatbox(.js)"
+msgstr "floatbox(.js) herunterladen"
+
+#: floatbox-plus.php:194
+#@ floatboxplus
+msgid "Updatenotice for:"
+msgstr "Anmerkungen zum Update auf Version:"
+
+#: floatbox-plus.php:218
+#@ floatboxplus
+msgid "Ticketsystem/Wiki"
+msgstr "Ticketsystem/Wiki"
+
+#: floatbox-plus.php:219
+#@ floatboxplus
+msgid "Plugin-Homepage"
+msgstr "Plugin-Seite"
+
+#: floatbox-plus.php:920
+#@ floatboxplus
+msgid "Download floatbox(.js) from randomous.com"
+msgstr "floatbox(.js) von randomous.com herunterladen"
+
+#: floatbox-plus.php:936
+#@ floatboxplus
+msgid "Activate Floatbox for [gallery]?"
+msgstr "Aktiviere Floatbox für den Galerie-Shortcode ([gallery])?"
+
+#: floatbox-plus.php:945
+#@ floatboxplus
+msgid "If activated, it shows the wordpress gallery with floatbox"
+msgstr "Aktiviere diese Option, damit die mittels Shortcode generierten Galerien Floatbox nutzen können"
+
+#: floatbox-plus.php:953
+#@ floatboxplus
+msgid "Do you use Floatbox 3.50 or above?"
+msgstr "Wird Floatbox 3.50 oder neuer eingesetzt?"
+
+#: floatbox-plus.php:962
+#@ floatboxplus
+msgid "Cause there are some major changes in Floatbox 3.50 (and above), the plugin needs to know which version you have"
+msgstr "Mit der Version 3.50 wurde Floatbox massiv überarbeitet und ist nicht mehr 100% abwärtskompatibel. Damit die Anzeige problemlos funktioniert muss das Plugin wissen, welche Variante im Einsatz ist."
+
+#: floatbox-plus.php:969
+#@ floatboxplus
+msgid "Activate Floatbox for Videos?"
+msgstr "Aktiviere Floatbox bei Videos?"
+
+#: floatbox-plus.php:985
+#@ floatboxplus
+msgid "Backup Floatbox Javascript during Update?"
+msgstr "Soll Floatbox während des Updates zwischengespeichert werden?"
+
+#: floatbox-plus.php:994
+#@ floatboxplus
+msgid "Backups the Floatbox javascript files for upgrade-reasons. After upgrading to a new floatbox-plus version, it is needless to copy the javascript files back in the plugin directory. "
+msgstr "Während der Updateprozedur wird Floatbox zwischengespeichert, und nach erfolgreichem Update wieder zurückgespielt (ansonsten ist nach dem Update eine erneute Installation von Floatbox notwendig)."
+
+#: floatbox-plus.php:1026
+#@ floatboxplus
+msgid "Floatbox Options"
+msgstr "Optionen von Floatbox"
+
+#: floatbox-plus.php:1033
+#@ floatboxplus
+msgid "Change the options of floatbox.js?"
+msgstr "Sollten die Optionen von Floatbox überschrieben werden?"
+
+#: floatbox-plus.php:1042
+#@ floatboxplus
+msgid "Overwrite the settings in floatbox.js with the values set here."
+msgstr "Mit Hilfe der folgenden Einstellungen kann die Ausgabe von Floatbox angepasst werden."
+
+#: floatbox-plus.php:1048
+#@ floatboxplus
+msgid "Theme"
+msgstr "Theme"
+
+#: floatbox-plus.php:1052
+#: floatbox-plus.php:1135
+#@ floatboxplus
+msgid "auto"
+msgstr "auto"
+
+#: floatbox-plus.php:1053
+#@ floatboxplus
+msgid "black"
+msgstr "schwarz"
+
+#: floatbox-plus.php:1054
+#@ floatboxplus
+msgid "white"
+msgstr "weiß"
+
+#: floatbox-plus.php:1055
+#@ floatboxplus
+msgid "blue"
+msgstr "blau"
+
+#: floatbox-plus.php:1056
+#@ floatboxplus
+msgid "yellow"
+msgstr "gelb"
+
+#: floatbox-plus.php:1057
+#@ floatboxplus
+msgid "red"
+msgstr "rot"
+
+#: floatbox-plus.php:1061
+#@ floatboxplus
+msgid "Color theme. 'Auto' will use the black theme for images, white for iframe content, and blue for flash and quicktime."
+msgstr "Themefarbe. 'Auto' benutzt das schwarze Theme für Bilder, das weiße Theme für iframes und das blaue Theme für flash/filme."
+
+#: floatbox-plus.php:1082
+#@ floatboxplus
+msgid "doAnimations"
+msgstr ""
+
+#: floatbox-plus.php:1091
+#@ floatboxplus
+msgid "Shorthand for resizeDuration=0, imageFadeDuration=0 and zoomImageStart=false."
+msgstr "Damit werden die Animationen deaktiviert (die Optionen 'Dauer der Größenänderung',  'Dauer des Einblendens' und 'Zoom des Bildes' funktionieren nur bei eingeschalteten Animationen)."
+
+#: floatbox-plus.php:1097
+#@ floatboxplus
+msgid "resizeDuration"
+msgstr ""
+
+#: floatbox-plus.php:1102
+#@ floatboxplus
+msgid "Controls the speed at which animated resizing occurs. 0 = no resize animation, 1 is fast, 10 is slooow. These are unit-less numbers, and don't equate to a fixed time period. Larger size changes will take longer than smaller size changes."
+msgstr ""
+
+#: floatbox-plus.php:1108
+#@ floatboxplus
+msgid "imageFadeDuration"
+msgstr ""
+
+#: floatbox-plus.php:1113
+#@ floatboxplus
+msgid "Controls the speed of the opacity fade-in for images as they come into the display. 0 = no image fade-in, 1 is fast, 10 is slooow. These too are unit-less numbers."
+msgstr ""
+
+#: floatbox-plus.php:1119
+#@ floatboxplus
+msgid "overlayFadeDuration"
+msgstr ""
+
+#: floatbox-plus.php:1124
+#@ floatboxplus
+msgid "Controls the speed of the opacity fade-in and fade-out for the translucent overlay which covers the host page. 0 = no overlay fading in or out, 1 is fast, 10 is slooow.  Unit-less."
+msgstr ""
+
+#: floatbox-plus.php:1130
+#@ floatboxplus
+msgid "splitResize"
+msgstr ""
+
+#: floatbox-plus.php:1136
+#@ floatboxplus
+msgid "wh"
+msgstr ""
+
+#: floatbox-plus.php:1137
+#@ floatboxplus
+msgid "hw"
+msgstr ""
+
+#: floatbox-plus.php:1141
+#@ floatboxplus
+msgid "Default animated resizing of Floatbox resizes width, height, top and left simultaneously. The settings other than 'no' give sequenced animation where the X and Y dimensions are resized seperately. The two options 'wh' and 'hw' force either width or height to always go first. The better splitResize option is probably 'auto'.  This will always do the smallest dimension first. Using a splitResize of auto prevents unaesthetic resize behaviour of initially bloating up in the larger dimension."
+msgstr ""
+
+#: floatbox-plus.php:1147
+#@ floatboxplus
+msgid "startAtClick"
+msgstr ""
+
+#: floatbox-plus.php:1156
+#@ floatboxplus
+msgid "If true (and resizeDuration is not 0) Floatbox will expand out from the clicked anchor and shrink back to that anchor when closed. If false, Floatbox will start and end from the center of the screen."
+msgstr ""
+
+#: floatbox-plus.php:1162
+#@ floatboxplus
+msgid "zoomImageStart"
+msgstr ""
+
+#: floatbox-plus.php:1171
+#@ floatboxplus
+msgid "If true (and resizeDuration is not 0) images will expand out from the clicked thumbnail on start and collapse back to the thumbnail on exit."
+msgstr ""
+
+#: floatbox-plus.php:1177
+#@ floatboxplus
+msgid "liveImageResize"
+msgstr ""
+
+#: floatbox-plus.php:1186
+#@ floatboxplus
+msgid "If true (and resizeDuration is not 0) images will remain displayed while they are being resized. If false they will be hidden during a resize and the \"loading\" gif displayed in their place."
+msgstr ""
+
+#: floatbox-plus.php:1192
+#@ floatboxplus
+msgid "For more information about the many other options Floatbox offers (and which aren't integrated yet in the plugin), take a look at the homepage:"
+msgstr "Für weitere Informationen bzgl. der Optionen von Floatbox (nur ein kleiner Teil der Optionen kann mit Hilfe von Floatbox Plus angepasst werden) schaue bitte auf die Homepage:"
+
+#: floatbox-plus.php:1263
+#@ floatboxplus
+msgid "Video Preview Width"
+msgstr "Breite des Videovorschaubildes"
+
+#: floatbox-plus.php:1268
+#@ floatboxplus
+msgid "Choose the width of the preview images for the videos"
+msgstr "Breite der Vorschaubilder der Videos"
+
+#: floatbox-download.php:49
+#@ floatboxplus
+msgid "Download failed"
+msgstr "Download fehlgeschlagen"
+
+#: floatbox-download.php:124
+#, php-format
+#@ floatboxplus
+msgid "Download failed, please follow the manual installation instructions: %s."
+msgstr "Download fehlgeschlagen. Beachte bitte die Anleitung zur manuellen Installation: %s."
+
+#: floatbox-download.php:124
+#@ floatboxplus
+msgid "Link"
+msgstr "Link"
+
+#: floatbox-download.php:45
+#, php-format
+#@ floatboxplus
+msgid "Downloading floatbox from %s"
+msgstr "Lade floatbox von %s herunter"
+
+#: floatbox-plus.php:916
+#@ floatboxplus
+msgid "Floatbox Javascript isn't copied to the plugin directory. See installation instructions for further details <br />or try the new download option: "
+msgstr "Floatbox (nicht Floatbox Plus!) konnte nicht gefunden werden. Beachte die Anleitung zur manuellen Installation oder benutze die Download-Option:"
+
+#: floatbox-plus.php:1004
+#@ floatboxplus
+msgid "Floatbox LicenseKey"
+msgstr "Floatbox Lizenzkey"
+
+#: floatbox-plus.php:1012
+#@ floatboxplus
+msgid "LicenseKey"
+msgstr "Lizenzkey"
+
+#: floatbox-plus.php:1017
+#@ floatboxplus
+msgid "LicenseKey for floatbox 3.52 and higher."
+msgstr "Lizenzkey für floatbox 3.52 und höher."
+
+#: floatbox-plus.php:1067
+#@ floatboxplus
+msgid "preloadAll"
+msgstr ""
+
+#: floatbox-plus.php:1076
+#@ floatboxplus
+msgid "If true, floatbox will aggressively preload all images that are referenced by floatboxed anchors."
+msgstr "Falls aktiviert versucht Floatbox alle entsprechend referenzierten Bilder im Hintergrund zu laden (Standard: Ja)."
+
+#: floatbox-plus.php:1287
+#@ floatboxplus
+msgid "YouTube: Allow fullscreen?"
+msgstr "YouTube: Fullscreen?"
+
+#: floatbox-plus.php:1296
+#@ floatboxplus
+msgid "Allow youtube videos to be shown in fullscreen mode (works only in floatbox 3.50 and higher)"
+msgstr "Soll der Fullscreenmodus bei YouTube-Videos erlaubt sein (funktioniert nur mit floatbox 3.50 und neuer)"
+
+#: tinymce/floatbox-plus-popup.php:144
+#@ floatbox_plus
+msgid "Portal video"
+msgstr ""
+
+#: tinymce/floatbox-plus-popup.php:145
+#@ floatbox_plus
+msgid "Local video"
+msgstr ""
+
+#: tinymce/floatbox-plus-popup.php:146
+#@ floatbox_plus
+msgid "Upload video"
+msgstr ""
+
+#: tinymce/floatbox-plus-popup.php:147
+#@ floatbox_plus
+msgid "Video URL"
+msgstr ""
+
