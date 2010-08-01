@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.2.19
+Version: 1.2.20
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -65,7 +65,7 @@ if (FBP_SXML) {
 class floatbox_plus {
 
     // version
-    var $version = '1.2.19';
+    var $version = '1.2.20';
 
     // put all options in
     var $options = array();
@@ -1294,8 +1294,11 @@ class floatbox_plus {
             </tbody>
          </table>
 
-        <p><?php printf(__("If you need to change options not mentioned here, you can change the following file %s (the configurator (%s) delievered with floatbox may help to find the options you're interessted in)."), FBP_PATH.'floatbox/options.js', '<a target="_blank" href="'.FBP_URLPATH.'floatbox/configurator.html">link</a>'); ?></p>
-
+        <p>
+            <?php printf(__("If you need to change options not mentioned here, you can change the following file %s (the configurator (%s) delievered with floatbox may help to find the options you're interessted in)."), FBP_PATH.'floatbox/options.js', '<a target="_blank" href="'.FBP_URLPATH.'floatbox/configurator.html">link</a>'); ?>
+            <?php printf(__("To edit options.js you can try to use the Plugin-Editor of WordPress (only works with the right permissions set): %s"), '<a target="_blank" href="'.get_bloginfo( 'wpurl' ).'/wp-admin/plugin-editor.php?file='.plugin_basename( dirname(__FILE__) ).'/floatbox/options.js">link</a>'); ?>
+        </p>
+        
         <p><?php _e('For more information about the many other options Floatbox offers (and which aren\'t integrated yet in the plugin), take a look at the homepage:', 'floatboxplus'); ?> <a href="http://randomous.com/tools/floatbox/">Link</a></p>
 
         <h3><?php _e('Video Options', 'floatboxplus'); ?></h3>
