@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 3.0.0
-Stable tag: 1.2.20
+Stable tag: 1.2.22
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -85,7 +85,7 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
-= 1.2.21 =
+= 1.2.21 / 1.2.22 =
 * [UPDATE] downloadurl for floatbox 4.21
 
 = 1.2.20 =

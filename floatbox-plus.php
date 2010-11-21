@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.2.21
+Version: 1.2.22
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -65,7 +65,7 @@ if (FBP_SXML) {
 class floatbox_plus {
 
     // version
-    var $version = '1.2.21';
+    var $version = '1.2.22';
 
     // put all options in
     var $options = array();
