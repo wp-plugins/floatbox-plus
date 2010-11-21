@@ -85,6 +85,9 @@ For other questions, take a look at the [support forum](http://board.splash.de/f
 
 == Changelog ==
 
+= 1.2.21 =
+* [UPDATE] downloadurl for floatbox 4.21
+
 = 1.2.20 =
 * [NEW] link to edit "options.js" with the plugin-editor of wordpress
 * [UPDATE] downloadurl for floatbox 4.13

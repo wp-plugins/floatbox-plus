@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.2.20
+Version: 1.2.21
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -41,7 +41,7 @@ define('FBP_WPV28', version_compare($wp_version, '2.8', '>='));
 // define('WPV29', version_compare($wp_version, '2.9', '>='));
 define('FBP_PHP5', version_compare(PHP_VERSION, '5.0.0', '>='));
 define('FBP_CACHEPATH', WP_PLUGIN_DIR.'/'.dirname(plugin_basename( __FILE__ )).'/cache/');
-if (class_exists(SimpleXMLElement)) {
+if (class_exists(SimpleXMLElement) && FBP_PHP5) {
     define('FBP_SXML', true);
 } else {
     define('FBP_SXML', false);
@@ -65,7 +65,7 @@ if (FBP_SXML) {
 class floatbox_plus {
 
     // version
-    var $version = '1.2.20';
+    var $version = '1.2.21';
 
     // put all options in
     var $options = array();
@@ -175,7 +175,7 @@ class floatbox_plus {
         $this->video['video']['target'] = "<object classid=\"clsid:22D6f312-B0F6-11D0-94AB-0080C74C7E95\" codebase=\"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-oleobject\"><param name=\"filename\" value=\"".get_option('siteurl')."###VIDEOID###\" /><param name=\"autostart\" value=\"false\" /><param name=\"showcontrols\" value=\"true\" /><!--[if !IE]> <--><object data=\"".get_option('siteurl')."###VIDEOID###\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-mplayer2\"><param name=\"pluginurl\" value=\"http://www.microsoft.com/Windows/MediaPlayer/\" /><param name=\"ShowControls\" value=\"true\" /><param name=\"ShowStatusBar\" value=\"true\" /><param name=\"ShowDisplay\" value=\"true\" /><param name=\"Autostart\" value=\"0\" /></object><!--> <![endif]--></object>";
         $this->video['video']['link'] = "<a title=\"Local Video\" href=\"".get_option('siteurl')."###VIDEOID###\">Download Video</a>";
 
-        if ( ( is_dir(FBP_CACHEPATH) || ( umask(0022) && @mkdir( FBP_CACHEPATH , 0755, true ) ) ) && FBP_PHP5 && FBP_SXML ) {
+        if ( ( is_dir(FBP_CACHEPATH) || ( umask(0022) && @mkdir( FBP_CACHEPATH , 0755, true ) ) ) && FBP_SXML ) {
             $this->xmlCache = true;
         }
 
@@ -351,7 +351,7 @@ class floatbox_plus {
         if(empty($this->options['fb_liveImageResize']))
                 $this->options['fb_liveImageResize'] = false;
         if(empty($this->options['floatbox_350']))
-                $this->options['floatbox_350'] = false;
+                $this->options['floatbox_350'] = true;
 
         // update options
         update_option('floatbox_plus', serialize($this->options));
@@ -841,6 +841,7 @@ class floatbox_plus {
                 }
             }
             // path, won't be necessary for floatbox 3.50
+            // * [FIX] urlLanguages and urlGraphics aren't needed anymore
             if (!$this->options['floatbox_350']) {
                 $script .= "urlGraphics: '".$path."/floatbox/graphics/',\n";
                 $script .= "urlLanguages: '".$path."/floatbox/languages/'\n";
