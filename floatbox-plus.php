@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.2.22
+Version: 1.3.0
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -40,32 +40,11 @@ define('FBP_WPV27', version_compare($wp_version, '2.7', '>='));
 define('FBP_WPV28', version_compare($wp_version, '2.8', '>='));
 // define('WPV29', version_compare($wp_version, '2.9', '>='));
 define('FBP_PHP5', version_compare(PHP_VERSION, '5.0.0', '>='));
-define('FBP_CACHEPATH', WP_PLUGIN_DIR.'/'.dirname(plugin_basename( __FILE__ )).'/cache/');
-if (class_exists(SimpleXMLElement) && FBP_PHP5) {
-    define('FBP_SXML', true);
-} else {
-    define('FBP_SXML', false);
-    //dummy class, to stop error on php4
-    class SimpleXMLElement {
-    }
-}
-
-// i hate php4 and php5 without SimpleXML ;)
-if (FBP_SXML) {
-    function fbp_serializeSimpleXML(SimpleXMLElement $xmlObj) {
-        return serialize($xmlObj->asXML());
-    }
-
-    function fbp_unserializeSimpleXML($str) {
-        return simplexml_load_string(unserialize($str));
-
-    }
-}
 
 class floatbox_plus {
 
     // version
-    var $version = '1.2.22';
+    var $version;
 
     // put all options in
     var $options = array();
@@ -76,9 +55,6 @@ class floatbox_plus {
     // backup dir and file
     var $bkp_folder = '.floatbox.bkp';
 
-    // caching xml data?
-    var $xmlCache = false;
-
     function floatbox_plus() {
         $this->__construct();
     }
@@ -87,6 +63,9 @@ class floatbox_plus {
         //load language
         if (function_exists('load_plugin_textdomain'))
             load_plugin_textdomain('floatboxplus', false, dirname(plugin_basename(__FILE__)) . '/languages');
+
+        // set version
+        $this->version = $this->get_version();
 
         // get options
         $this->options = get_option('floatbox_plus');
@@ -103,6 +82,9 @@ class floatbox_plus {
             add_action('admin_head', array(&$this, 'backup_before_update'), 10, 2);
         }
 
+	// more setup links
+	add_filter('plugin_row_meta', array(&$this, 'register_plugin_links'), 10, 2);
+
         // nagscreen at plugins page
         add_action( 'after_plugin_row', array(&$this, 'plugin_version_nag') );
 
@@ -113,13 +95,13 @@ class floatbox_plus {
         add_action('wp_head', array(&$this, 'add_header'));
         add_action('admin_menu', array(&$this, 'AdminMenu'));
 
-        if (FBP_WPV28) {
+        if (function_exists('wp_enqueue_scripts')) {
             add_action('wp_enqueue_scripts', array(&$this, 'enqueueJS'));
             add_action('wp_enqueue_scripts', array(&$this, 'enqueueStyle'));
         }
 
         //add wp-shortcodes
-        if($this->options['load_gallery'] && FBP_WPV27 == false)
+        if($this->options['load_gallery'] && FBP_WPV28 == true)
         add_filter('attachment_link', array(&$this, 'direct_image_urls_for_galleries'), 10, 2);
 
         // add MCE Editor Button
@@ -148,37 +130,38 @@ class floatbox_plus {
             2
         );
 
-	// playbutton
-	// $_overlayimage = '<img src="'.plugins_url('/floatbox-plus/img/playbutton.png').'" alt="" style="position: absolute; left: '.(($this->options['video_preview_width']/2)-50).'px; top: '.((floor($this->options['video_preview_width']*14/17)/2)-50).'px; margin:0px 0px;" height="100" width="100" border="0">';
+        $this->video['default']['target'] = '<a href="###EMBEDURL###" title="###VIDEOTITLE###" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###VIDEOTITLE###`" class="floatbox" rel="floatbox.%LIGHTID%"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />###PLAYBUTTON###</span></a>';
+
+        $this->video['default']['feed']   = '<img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />';
+        $this->video['default']['link']   = "<a title=\"###VIDEOTITLE###\" href=\"###LINK### \">###PROVIDER### ###SEPERATOR######TITLE###</a>";
 
         $this->video['youtube']['iphone'] = '<object width="###WIDTH###" height="###HEIGHT###"><param name="movie" value="http://www.youtube.com/v/###VIDEOID###"></param><embed src="http://www.youtube.com/v/###VIDEOID###" type="application/x-shockwave-flash" width="###WIDTH###" height="###HEIGHT###"></embed></object>';
-        if ($this->options['youtube_fullscreen'] == true) {
-            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />###PLAYBUTTON###</span></a>';
-        } else {
-            $this->video['youtube']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />###PLAYBUTTON###</span></a>';
-        }
-        $this->video['youtube']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VIDEOID###\">YouTube ###SEPERATOR######TITLE###</a>";
 
-        $this->video['youtubehq']['iphone'] = '<object width="###WIDTH###" height="###HEIGHT###"><param name="movie" value="http://www.youtube.com/v/###VIDEOID###"></param><embed src="http://www.youtube.com/v/###VIDEOID###" type="application/x-shockwave-flash" width="###WIDTH###" height="###HEIGHT###"></embed></object>';
-        if ($this->options['youtube_fullscreen'] == true) {
-            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;fs=1" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />###PLAYBUTTON###</span></a>';
-        } else {
-            $this->video['youtubehq']['target'] = '<a href="http://www.youtube.com/v/###VIDEOID###&amp;autoplay=1&amp;ap=%2526&amp;fmt%3D22&amp;hd=1&amp;" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img src="###IMAGE###" width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" alt="###TITLE###" />###PLAYBUTTON###</span></a>';
-        }
-        $this->video['youtubehq']['link']   = "<a title=\"YouTube\" href=\"http://www.youtube.com/watch?v=###VIDEOID###&amp;ap=%2526&amp;fmt%3D22 \">YouTube ###SEPERATOR######TITLE###</a>";
+    }
 
-        $this->video['vimeo']['target'] = '<a href="http://www.vimeo.com/moogaloop.swf?clip_id=###VIDEOID###" title="###TITLE###" class="floatbox" rel="floatbox.%LIGHTID%" rev="group:%LIGHTID% width:###WIDTH### height:###HEIGHT### scrolling:no caption:`###TITLE###`"><span class="fbp_videopreview" style="width: ###PREVIEWWIDTH###px;"><img width="###PREVIEWWIDTH###" height="###PREVIEWHEIGHT###" src="###IMAGE###" alt="###TITLE###" />###PLAYBUTTON###</span></a>';
-        $this->video['vimeo']['link'] = "<a title=\"vimeo\" href=\"http://www.vimeo.com/###VIDEOID###\">vimeo ###SEPERATOR######TITLE###</a>";
+    function register_plugin_links($links, $file) {
+            $base = plugin_basename(__FILE__);
+            if ($file == $base) {
+                    $links[] = '<a href="options-general.php?page=' . $base .'">' . __('Settings','floatboxplus') . '</a>';
+                    $links[] = '<a href="http://board.splash.de/forumdisplay.php?f=103">' . __('Support','floatboxplus') . '</a>';
+            }
+            return $links;
+    }
 
-        $this->video['video']['flash']['target'] = "<object id=\"flowplayer\" width=\"###WIDTH###\" height=\"###HEIGHT###\" data=\"" . get_option('siteurl') . "/wp-content/plugins/lightview-plus/flowplayer/flowplayer-3.1.1.swf\" type=\"application/x-shockwave-flash\"> <param name=\"movie\" value=\"" . get_option('siteurl') . "/wp-content/plugins/lightview-plus/flowplayer/flowplayer-3.1.1.swf\" /> <param name=\"allowfullscreen\" value=\"true\" /> <param name=\"flashvars\" value='config={\"clip\":\"###VIDEOID###\"}' /></object>";
-        $this->video['video']['quicktime']['target'] = "<object classid=\"clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B\" codebase=\"http://www.apple.com/qtactivex/qtplugin.cab\" width=\"" .  $this->options['video_width'] . "\" height=\"" . 	$this->video['local']['quicktime']['height'] . "\"><param name=\"src\" value=\"".get_option('siteurl')."###VIDEOID###\" /><param name=\"autoplay\" value=\"false\" /><param name=\"pluginspage\" value=\"http://www.apple.com/quicktime/download/\" /><param name=\"controller\" value=\"true\" /><!--[if !IE]> <--><object data=\"".get_option('siteurl')."###VIDEOID###\" width=\"" . $this->options['video_width'] . "\" height=\"" . 	$this->video['local']['quicktime']['height'] . "\" type=\"video/quicktime\"><param name=\"pluginurl\" value=\"http://www.apple.com/quicktime/download/\" /><param name=\"controller\" value=\"true\" /><param name=\"autoplay\" value=\"false\" /></object><!--> <![endif]--></object>";
-        $this->video['video']['target'] = "<object classid=\"clsid:22D6f312-B0F6-11D0-94AB-0080C74C7E95\" codebase=\"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-oleobject\"><param name=\"filename\" value=\"".get_option('siteurl')."###VIDEOID###\" /><param name=\"autostart\" value=\"false\" /><param name=\"showcontrols\" value=\"true\" /><!--[if !IE]> <--><object data=\"".get_option('siteurl')."###VIDEOID###\" width=\"".GENERAL_WIDTH."\" height=\"".VIDEO_HEIGHT."\" type=\"application/x-mplayer2\"><param name=\"pluginurl\" value=\"http://www.microsoft.com/Windows/MediaPlayer/\" /><param name=\"ShowControls\" value=\"true\" /><param name=\"ShowStatusBar\" value=\"true\" /><param name=\"ShowDisplay\" value=\"true\" /><param name=\"Autostart\" value=\"0\" /></object><!--> <![endif]--></object>";
-        $this->video['video']['link'] = "<a title=\"Local Video\" href=\"".get_option('siteurl')."###VIDEOID###\">Download Video</a>";
+    // Returns the plugin version
+    function get_version() {
+            if(!function_exists('get_plugin_data')) {
+                    if(file_exists(ABSPATH . 'wp-admin/includes/plugin.php')) {
+                            require_once(ABSPATH . 'wp-admin/includes/plugin.php'); //2.3+
+                    } elseif (file_exists(ABSPATH . 'wp-admin/admin-functions.php')) {
+                            require_once(ABSPATH . 'wp-admin/admin-functions.php'); //2.1
+                    } else {
+                            return "ERROR: couldn't get version";
+                    }
+            }
+            $data = get_plugin_data(__FILE__, false, false);
 
-        if ( ( is_dir(FBP_CACHEPATH) || ( umask(0022) && @mkdir( FBP_CACHEPATH , 0755, true ) ) ) && FBP_SXML ) {
-            $this->xmlCache = true;
-        }
-
+            return $data['Version'];
     }
 
     function set_plugin_actions($links, $file) {
@@ -265,8 +248,7 @@ class floatbox_plus {
     function install()
     {
         //add default options
-        if (empty($this->options)) {
-            add_option('floatbox_plus', serialize(array(
+        $default = array(
                         'load_gallery' => true,
                         'show_video' => true,
                         'backup_floatbox' => true,
@@ -287,12 +269,22 @@ class floatbox_plus {
                         'video_width' => '500',
                         'video_separator' => '- ',
                         'video_showinfeed' => true,
-                        'floatbox_350' => true
-                    )));
-        } else {
-            // update options for old installs
-            $this->update();
+                        'floatbox_350' => true,
+                        'video_debug' => false
+                    );
+
+        if(!is_array($this->options)) {
+                $this->options = array();
         }
+
+        foreach($default as $k => $v) {
+                if(empty($this->options[$k])) {
+                        $this->options[$k] = $v;
+                }
+        }
+
+        // set options
+        update_option('floatbox_plus', serialize($this->options));
 
         // restore floatbox javascript, if backup exists and not already installed
         $bkp_folder = dirname(__FILE__) . '/../' . $this->bkp_folder;
@@ -352,6 +344,9 @@ class floatbox_plus {
                 $this->options['fb_liveImageResize'] = false;
         if(empty($this->options['floatbox_350']))
                 $this->options['floatbox_350'] = true;
+
+        if(empty($this->options['video_debug']))
+                $this->options['video_debug'] = true;
 
         // update options
         update_option('floatbox_plus', serialize($this->options));
@@ -504,9 +499,9 @@ class floatbox_plus {
 
         // videos
         if($this->options['show_video']) {
-            $pattern['video'][1] = "/\[(youtube|youtubehq|vimeo|video) ([[:graph:]]+) (nolink)\]/";
-            $pattern['video'][2] = "/\[(youtube|youtubehq|vimeo|video) ([[:graph:]]+) ([[:print:]]+)\]/";
-            $pattern['video'][3] = "/\[(youtube|youtubehq|vimeo|video) ([[:graph:]]+)\]/";
+            $pattern['video'][1] = "/\[(youtube|youtubehq|vimeo|bliptv|video) ([[:graph:]]+) (nolink)\]/";
+            $pattern['video'][2] = "/\[(youtube|youtubehq|vimeo|bliptv|video) ([[:graph:]]+) ([[:print:]]+)\]/";
+            $pattern['video'][3] = "/\[(youtube|youtubehq|vimeo|bliptv|video) ([[:graph:]]+)\]/";
             $content = preg_replace_callback($pattern['video'][1], array(&$this, 'video_callback'), $content);
             $content = preg_replace_callback($pattern['video'][2], array(&$this, 'video_callback'), $content);
             $content = preg_replace_callback($pattern['video'][3], array(&$this, 'video_callback'), $content);
@@ -518,291 +513,319 @@ class floatbox_plus {
 
     // video callback logic
     function video_callback($match) {
-        $output = '';
-        //$output = '<div class="lp_videoimage"><div id="lp_playbutton"><img src="' . WP_PLUGIN_URL . '/floatbox-plus/img/playbutton.png" width="100" height="100" alt="" /></div>';
-
-        // insert plugin link
-        if (!is_feed()) {
-            switch ($match[1]) {
-                case "youtube":
-                    if ($this->is_iPhone() == true) {
-                        $output .= $this->video['youtube']['iphone'];
-                    } else {
-                        $output .= $this->video['youtube']['target'];
-                    }
-                    break;
-                case "youtubehq":
-                    if ($this->is_iPhone() == true) {
-                            $output .= $this->video['youtubehq']['iphone'];
-                    } else {
-                            $output .= $this->video['youtubehq']['target'];
-                    }
-                    break;
-                case "vimeo": $output .= $this->video['vimeo']['target'];
-                    break;
-                case "google": $output .= $this->video['google']['target'];
-                    break;
-                case "myvideo": $output .= $this->video['myvideo']['target'];
-                    break;
-                case "clipfish": $output .= $this->video['clipfish']['target'];
-                    break;
-                case "sevenload": $output .= $this->video['sevenload']['target'];
-                    break;
-                case "revver": $output .= $this->video['revver']['target'];
-                    break;
-                case "metacafe": $output .= $this->video['metacafe']['target'];
-                    break;
-                case "yahoo": $output .= $this->video['yahoo']['target'];
-                    break;
-                case "ifilm": $output .= $this->video['ifilm']['target'];
-                    break;
-                case "myspace": $output .= $this->video['myspace']['target'];
-                    break;
-                case "brightcove": $output .= $this->video['brightcove']['target'];
-                    break;
-                case "aniboom": $output .= $this->video['aniboom']['target'];
-                    break;
-                case "guba": $output .= $this->video['guba']['target'];
-                    break;
-                case "gamevideo": $output .= $this->video['gamevideo']['target'];
-                    break;
-                case "vsocial": $output .= $this->video['vsocial']['target'];
-                    break;
-                case "dailymotion": $output .= $this->video['dailymotion']['target']; $match[3] = "nolink";
-                    break;
-                case "garagetv": $output .= $this->video['garage']['target']; $match[3] = "nolink";
-                    break;
-                case "veoh": $output .= $this->video['veoh']['target'];
-                    break;
-                case "gametrailers": $output .= $this->video['gametrailers']['target'];
-                    break;
-                case "video":
-                    if (preg_match("%([[:print:]]+).(mov|qt|MOV|QT)$%", $match[2])) {
-                            $output .= $this->video['local']['quicktime']['target'];
-                            break;
-
-                    } elseif (preg_match("%([[:print:]]+).(wmv|mpg|mpeg|mpe|asf|asx|wax|wmv|wmx|avi|WMV|MPG|MPEG|MPE|ASF|ASX|WAX|WMV|WMX|AVI)$%", $match[2])) {
-                            $output .= $this->video['local']['target'];
-                            break;
-
-                    } elseif (preg_match("%([[:print:]]+).(swf|flv|SWF|FLV)$%", $match[2])) {
-                            $output .= $this->video['local']['flashplayer']['target'];
-                            break;
-                    }
-
-                default:
-                    break;
-            }
-
-            if ($this->options['video_showlink'] == true) {
-                if ($match[3] != "nolink") {
-                    if ($this->options['video_smallink'])
-                    $output .= "<small>";
-
+            $output = '';
+            // insert plugin link
+            if (!is_feed()) {
                     switch ($match[1]) {
-                        case "youtube": $output .= $this->video['youtube']['link'];
-                            break;
-			case "youtubehq": $output .= $this->video['youtubehq']['link'];
-                            break;
-                        case "vimeo": $output .= $this->video['vimeo']['link'];
-                            break;
-                        case "google": $output .= $this->video['google']['link'];
-                            break;
-                        case "myvideo": $output .= $this->video['myvideo']['link'];
-                            break;
-                        case "clipfish": $output .= $this->video['clipfish']['link'];
-                            break;
-                        case "sevenload": $output .= $this->video['sevenload']['link'];
-                            break;
-                        case "revver": $output .= $this->video['revver']['link'];
-                            break;
-                        case "metacafe": $output .= $this->video['metacafe']['link'];
-                            break;
-                        case "yahoo": $output .= $this->video['yahoo']['link'];
-                            break;
-                        case "ifilm": $output .= $this->video['ifilm']['link'];
-                            break;
-                        case "myspace": $output .= $this->video['myspace']['link'];
-                            break;
-                        case "brightcove": $output .= $this->video['brightcove']['link'];
-                            break;
-                        case "aniboom": $output .= $this->video['aniboom']['link'];
-                            break;
-                        case "guba": $output .= $this->video['guba']['link'];
-                            break;
-                        case "gamevideo": $output .= $this->video['gamevideo']['link'];
-                            break;
-                        case "vsocial": $output .= $this->video['vsocial']['link'];
-                            break;
-                        case "veoh": $output .= $this->video['veoh']['link'];
-                            break;
-                        case "gametrailers": $output .= $this->video['gametrailers']['link'];
-                            break;
-                        case "video": $output .= $this->video['video']['link'];
-                            break;
-                        default:
-                            break;
+                            case "youtube":
+                            case "youtubehq":
+                                    if ($this->is_mobile() == true) {
+                                            $output .= $this->video['youtube']['iphone'];
+                                    } else {
+                                            $output .= $this->video['default']['target'];
+                                    }
+                                    break;
+                            case "vimeo": $output .= $this->video['default']['target']; break;
+                            case "bliptv": $output .= $this->video['default']['target']; break;
+                            case "google": $output .= $this->video['google']['target']; break;
+                            case "sevenload": $output .= $this->video['sevenload']['target']; break;
+                            case "revver": $output .= $this->video['revver']['target']; break;
+                            case "metacafe": $output .= $this->video['metacafe']['target']; break;
+                            case "myspace": $output .= $this->video['myspace']['target']; break;
+                            case "brightcove": $output .= $this->video['brightcove']['target']; break;
+                            case "aniboom": $output .= $this->video['aniboom']['target']; break;
+                            case "guba": $output .= $this->video['guba']['target']; break;
+                            case "gamevideo": $output .= $this->video['gamevideo']['target']; break;
+                            case "vsocial": $output .= $this->video['vsocial']['target']; break;
+                            case "garagetv": $output .= $this->video['garage']['target']; $match[3] = "nolink"; break;
+                            case "veoh": $output .= $this->video['veoh']['target']; break;
+                            case "video":
+                                    if (preg_match("%([[:print:]]+).(mov|qt|MOV|QT)$%", $match[2])) {
+                                            $output .= $this->video['local']['quicktime']['target'];
+                                            break;
+
+                                    } elseif (preg_match("%([[:print:]]+).(wmv|mpg|mpeg|mpe|asf|asx|wax|wmv|wmx|avi|WMV|MPG|MPEG|MPE|ASF|ASX|WAX|WMV|WMX|AVI)$%", $match[2])) {
+                                            $output .= $this->video['local']['target'];
+                                            break;
+
+                                    } elseif (preg_match("%([[:print:]]+).(swf|flv|SWF|FLV)$%", $match[2])) {
+                                            $output .= $this->video['local']['flashplayer']['target'];
+                                            break;
+                                    }
+
+                            default:
+                                    break;
                     }
 
-                    if ($this->options['video_smallink'])
-                    $output .= "</small>";
-                }
+                    if ($this->options['video_showlink'] == true) {
+                            if ($match[3] != "nolink") {
+                                    if ($this->options['video_smallink'])
+                                            $output .= "<small>";
+
+                                    switch ($match[1]) {
+                                            case "youtube": $output .= $this->video['default']['link']; break;
+                                            case "youtubehq": $output .= $this->video['default']['link']; break;
+                                            case "vimeo": $output .= $this->video['default']['link']; break;
+                                            case "bliptv": $output .= $this->video['default']['link']; break;
+                                            case "google": $output .= $this->video['google']['link']; break;
+                                            case "sevenload": $output .= $this->video['sevenload']['link']; break;
+                                            case "revver": $output .= $this->video['revver']['link']; break;
+                                            case "metacafe": $output .= $this->video['metacafe']['link']; break;
+                                            case "myspace": $output .= $this->video['myspace']['link']; break;
+                                            case "brightcove": $output .= $this->video['brightcove']['link']; break;
+                                            case "aniboom": $output .= $this->video['aniboom']['link']; break;
+                                            case "guba": $output .= $this->video['guba']['link']; break;
+                                            case "vsocial": $output .= $this->video['vsocial']['link']; break;
+                                            case "veoh": $output .= $this->video['veoh']['link']; break;
+                                            case "video": $output .= $this->video['video']['link']; break;
+                                            default: break;
+                                    }
+
+                                    if ($this->options['video_smallink'])
+                                            $output .= "</small>";
+                            }
+                    }
+            } elseif ($this->options['video_showinfeed'] == true) {
+                    $output .= $this->video['default']['feed']."<br />\n".'[ '.__('There is a video that cannot be displayed in this feed.', 'floatboxplus').' <a href="'.get_permalink().'">'.__('Visit the blog entry to see the video.','floatboxplus').' ]</a>';
             }
-        } elseif ($this->options['video_showinfeed'] == true) {
-            $output .= __('[There is a video that cannot be displayed in this feed. ', 'floatboxplus').'<a href="'.get_permalink().'">'.__('Visit the blog entry to see the video.]','floatboxplus').'</a>';
-        }
 
-        // postprocessing
-        // first replace video_separator
-        $output = str_replace("###SEPERATOR###", $this->options['video_separator'], $output);
+            // postprocessing
+            // first replace video_separator
+            $output = str_replace("###SEPERATOR###", $this->options['video_separator'], $output);
 
-        // special handling of Yahoo! Video IDs
-        if ($match[1] == "yahoo") {
-                $temp = explode(".", $match[2]);
-                $match[2] = $temp[1];
-                $output = str_replace("###YAHOO###", $temp[0], $output);
-        }
-
-        // replace video IDs and text
-        if ($match[3] != "nolink") {
-                $output = str_replace("###TITLE###", $match[3], $output);
-        } else {
-                $output = str_replace("###TITLE###", '', $output);
-        }
-        $output = str_replace("###VIDEOID###", $match[2], $output);
+            // replace video IDs and text
+            if ($match[3] != "nolink") {
+                    $output = str_replace("###TITLE###", $match[3], $output);
+            } else {
+                    $output = str_replace("###TITLE###", '', $output);
+            }
+            $output = str_replace("###VIDEOID###", $match[2], $output);
 
 
-        // replace palceholder with videodata
-        $videodata = $this->get_videodata($match[1], $match[2]);
-        $output = str_replace("###IMAGE###", $videodata['thumbnail'], $output); // Thumbnail
+            // replace palceholder with videodata
+            $videodata = $this->get_cached_videodata($match[1], $match[2]);
+            $output = str_replace("###IMAGE###", $videodata['thumbnail'], $output); // Thumbnail
+            $output = str_replace("###EMBEDURL###", $videodata['embedurl'], $output); // Embed URL
+            $output = str_replace("###LINK###", $videodata['link'], $output); // Link
+            $output = str_replace("###VIDEOTITLE###", $videodata['title'], $output); // Video Title
+            $output = str_replace("###PROVIDER###", $videodata['provider'], $output);
+            if(!empty($videodata['mediatype'])) {
+                    $output = str_replace("###MEDIATYPE###", $videodata['mediatype'], $output);
+            } else {
+                    $output = str_replace("###MEDIATYPE###", 'flash', $output);
+            }
 
-        if(!empty($videodata['width']) && !empty($videodata['height'])) {
-        	$_height=floor($this->options['video_width'] / $videodata['width'] * $videodata['height']);
-        	$_previewheight=floor($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']);
-        	$_previewtop=($_previewheight - 100)/2;
+            if(!empty($videodata['height']) && !empty($videodata['width'])) {
+                $_height=floor($this->options['video_width'] / $videodata['width'] * $videodata['height']);
+                $_previewheight=floor($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']);
+                $_previewtop=($_previewheight - 100)/2;
                 $_previewleft=($this->options['video_preview_width']-100)/2;
+
                 $output = str_replace("###WIDTH###", $this->options['video_width'], $output); // Width
-                $output = str_replace("###HEIGHT###", $_height, $output); // Height
+                $output = str_replace("###HEIGHT###", floor($this->options['video_width'] / $videodata['width'] * $videodata['height']), $output); // Height
                 $output = str_replace("###PREVIEWWIDTH###", $this->options['video_preview_width'], $output); // Preview Width
-                $output = str_replace("###PREVIEWHEIGHT###", $_previewheight, $output); // Preview Height
+                $output = str_replace("###PREVIEWHEIGHT###", floor($this->options['video_preview_width'] / $videodata['width'] * $videodata['height']), $output); // Preview Height
+                $output = str_replace("###LEFT###", $_previewleft, $output); // left
+                $output = str_replace("###TOP###", $_previewtop, $output); // top
+
                 if ($this->options['video_preview_playimage']) {
                     $output = str_replace("###PLAYBUTTON###", '<img class="fbp_videopreviewbutton" src="'.plugins_url('/floatbox-plus/img/playbutton.png').'" alt="play" style="left: '.$_previewleft.'px; top:'.$_previewtop.'px" />', $output); // play-button
                 } else {
                     $output = str_replace("###PLAYBUTTON###", '<span class="fbp_videopreviewplay" style="left: '.$_previewleft.'px; top:'.($_previewtop+23).'px"> ▶ </span>', $output); // play-button
                 }
-	}
-
-        // add HTML comment
-        if (!is_feed())
-                $output .= "\n<!-- generated by WordPress Plugin Floatbox Plus $this->version -->\n";
-
-        //$output .= "</div>";
-
-        return $output;
-    }
-
-    function parseYTVideoEntry($entry) {
-        // TODO: http://www.ibm.com/developerworks/xml/library/x-youtubeapi/
-        $obj= new stdClass;
-
-        // get nodes in media: namespace for media information
-        $media = $entry->children('http://search.yahoo.com/mrss/');
-
-        // video title
-        $obj->title = $media->group->title;
-
-        // get video thumbnail -> 3 biggest thumbnail!
-        $attrs = $media->group->thumbnail[3]->attributes();
-        $obj->thumbnailURL = $attrs['url'];
-        $obj->thumbnailHEIGHT= $attrs['height'];
-        $obj->thumbnailWIDTH= $attrs['width'];
-
-        // return object to caller
-        return $obj;
-    }
-
-    function getXMLData($url){
-        if ($this->xmlCache) {
-            $_cFile = FBP_CACHEPATH.md5($url).'.cache';
-            if (file_exists($_cFile) && ((time() - filemtime($_cFile))/60/60) < 72) {
-                // return cached data
-                return fbp_unserializeSimpleXML(base64_decode(file_get_contents($_cFile)));
-            } else {
-                // fetch and cache data, return data
-                $_xmlObject = @simplexml_load_file($url);
-                if (is_object($_xmlObject)) {
-                    file_put_contents($_cFile, base64_encode(fbp_serializeSimpleXML($_xmlObject)));
-                } else {
-                    file_put_contents($_cFile, '');
-                }
-                return $_xmlObject;
             }
-        } else {
-            return @simplexml_load_file($url);
-        }
+
+
+
+            // add HTML comment
+            $output .= "\n<!-- generated by WordPress Plugin Floatbox Plus $this->version -->\n";
+
+            // got errors during receiving videodata? Show nice placeholder
+            if ($videodata['available'] == false) {
+                            $output = sprintf('<img src="'. @plugins_url('floatbox-plus/img/novideo.png') .'" width="%s" height="%s" alt="'. __('Video not available', 'floatboxplus') .'" /><br />',
+                                                    $this->options['video_preview_width'],
+                                                    floor($this->options['video_preview_width'] / 640 * 360)
+                                                    );
+            }
+
+            // show debug informations under the videos
+            if($this->options['video_debug'] == true ) {
+                    $debug = sprintf('<div style="background-color:#FFC0CB; border:1px solid silver; color:#110000; margin:0 0 1.5em; overflow:auto; padding: 3px;">
+                                                            <strong>Provider:</strong> %s <br />
+                                                            <strong>Title:</strong> %s <br />
+                                                            <strong>Thumbnail URL:</strong> %s <br />
+                                                            <strong>Embed URL:</strong> %s <br />
+                                                            <strong>Link:</strong> %s <br />
+                                                            <strong>Width:</strong> %s px<br />
+                                                            <strong>Height:</strong> %s px<br />
+                                                            <strong>Got data @:</strong> %s<br />
+                                                    </div>',
+                                                    $videodata['provider'],
+                                                    $videodata['title'],
+                                                    $videodata['thumbnail'],
+                                                    $videodata['embedurl'],
+                                                    $videodata['link'],
+                                                    $videodata['width'],
+                                                    $videodata['height'],
+                                                    date('d.n.Y H:i:s', $videodata['timestamp'])
+                                                    );
+
+                    $output .= $debug;
+            }
+
+            return $output;
     }
 
+    // get the video data out of the cache
+    function get_cached_videodata($service, $id) {
+            $videodata = get_post_meta($GLOBALS['post']->ID, '_lvp', true);
+
+            // if no cached data available or data is older than 24 hours, refresh/get data from video provider
+            if(empty($videodata[$service][$id]) || $videodata[$service][$id]['timestamp'] + (60 * 60 * 24) < time() ) {
+                    $videodata[$service][$id] = $this->get_videodata($service, $id);
+                    update_post_meta($GLOBALS['post']->ID, '_lvp', $videodata);
+            }
+
+            return $videodata[$service][$id];
+    }
+
+    // puts the video data into cache
     function get_videodata($service, $id) {
-    switch($service) {
-        case "youtube":
-        case "youtubehq":
-            $api_link = sprintf('http://gdata.youtube.com/feeds/api/videos/%s', $id);
-            $xml = $this->getXMLData($api_link);
-            if (is_object($xml)) {
-                $video = $this->parseYTVideoEntry($xml);
+            switch($service) {
+                    case "youtube":
+                    case "youtubehq":
+                            $api      = sprintf('http://gdata.youtube.com/feeds/api/videos/%s', $id);
+                            $xml      = @simplexml_load_string(wp_remote_fopen($api));
 
-                $output['thumbnail'] = $video->thumbnailURL;
-                // TODO: -> previewsize
-                $output['width'] = $video->thumbnailWIDTH;
-                $output['height'] = $video->thumbnailHEIGHT;
-            } else {
-                // TODO: -> video doesn't exists, maybe an image?
-                // print 'Video existiert nicht mehr...';
+                            if (is_object($xml)) {
+                                    $media    = $xml->children('http://search.yahoo.com/mrss/');
+
+                                    if($media->group->thumbnail) {
+                                            $attribs  = $media->group->thumbnail[3]->attributes();
+
+                                            $output['available']    = true;
+                                            $output['provider']     = 'YouTube';
+                                            $output['mediatype']	= 'flash';
+                                            $output['title']	    = (string) $media->group->title;
+                                            $output['embedurl']	    = sprintf('http://www.youtube.com/v/%s', $id);
+                                            $output['thumbnail']    = (string) $attribs['url'];
+                                            $output['width']        = (int) $attribs['width'];
+                                            $output['height']       = (int) $attribs['height'];
+                                            $output['link']         = sprintf('http://www.youtube.com/watch?v=%s', $id);
+
+                                            // add autoplay
+                                            $output['embedurl'] = sprintf('%s&amp;autoplay=1', $output['embedurl']);
+
+                                            if($service == 'youtubehq')
+                                                    $output['embedurl'] .= '&amp;ap=%2526&amp;fmt%3D22&amp;hd=1';
+                                    } else {
+                                            $output['available'] = false;
+                                    }
+
+                            } else {
+                                    $output['available'] = false;
+                            }
+                            $output['timestamp'] = time();
+
+                            break;
+                    case "vimeo":
+                            // check if $id is numeric
+                            if(!is_numeric($id)) {
+                                    $output['available'] = false;
+                                    return $output;
+                            }
+
+                            // Get preview image from vimeo
+                            $api    = sprintf('http://vimeo.com/api/v2/video/%s.xml', $id);
+                            $video  = @simplexml_load_string(wp_remote_fopen($api));
+
+                            $outout = array();
+                            $output['available']    = true;
+                            $output['provider']     = 'Vimeo';
+                            $output['title']        = (string) $video->video->title;
+                            $output['embedurl']	    = (string) sprintf('http://player.vimeo.com/video/%s', $id);
+                            $output['mediatype']	= 'iframe';
+                            $output['thumbnail']    = (string) $video->video->thumbnail_large;
+                            $output['width']        = (int) $video->video->width;
+                            $output['height']       = (int) $video->video->height;
+                            $output['link']         = sprintf('http://www.vimeo.com/%s', $id);
+                            $output['timestamp'] = time();
+
+                            // add autoplay
+                            $output['embedurl'] = sprintf('%s&amp;autoplay=1', $output['embedurl']);
+
+                            // check response
+                            if(empty($output) || empty($output['width']) || empty($output['height']) || empty($output['thumbnail']) ) {
+                                    $output['available'] = false;
+                                    return $output;
+                            }
+
+                            break;
+                    case "bliptv":
+                            // require SimplePie
+                            require_once(ABSPATH . WPINC . '/feed.php');
+                            $api = sprintf('http://www.blip.tv/file/%s?skin=rss', $id);
+                            $namespace['media'] = 'http://search.yahoo.com/mrss/';
+                            $namespace['blip']  = 'http://blip.tv/dtd/blip/1.0';
+
+                            // fetch feed
+                            $rss = fetch_feed($api);
+
+                            if(is_wp_error($rss)) {
+                                    $output['available'] == false;
+                                    return $output;
+                            }
+
+                            // get items
+                            $item = $rss->get_item();
+
+                            // get media items
+                            $mediaGroup     = $item->get_item_tags($namespace['media'], 'group');
+                            $mediaContent   = $mediaGroup[0]['child'][$namespace['media']]['content'];
+
+                            // get blip items
+                            $blipThumbnail = $item->get_item_tags($namespace['blip'], 'thumbnail_src');
+                            $blipEmbedURL  = $item->get_item_tags($namespace['blip'], 'embedUrl');
+
+                            $output['available']    = true;
+                            $output['provider']     = 'Blip.TV';
+                            $output['title']        = (string) $rss->get_title();
+                            $output['embedurl']     = (string) $blipEmbedURL[0]['data'];
+                            $output['mediatype']	= 'flash';
+                            $output['thumbnail']    = (string) sprintf('http://a.images.blip.tv/%s', $blipThumbnail[0]['data']);
+                            $output['height']       = (int) $mediaContent[count($mediaContent)-1]['attribs']['']['height'];
+                            $output['width']        = (int) $mediaContent[count($mediaContent)-1]['attribs']['']['width'];
+                            $output['link']         = (string) $item->get_link();
+                            $output['timestamp'] = time();
+
+                            // add autoplay
+                            $output['embedurl'] = sprintf('%s&amp;autoStart=true', $output['embedurl']);
+
+                            // check response
+                            if(empty($output)) {
+                                    $output['available'] = false;
+                                    return $output;
+                            }
+
+
+                            break;
+                    case "video":
+                            break;
+                    default: break;
             }
-            break;
-        /*
-        case "youtubehq":
-            
-            $output['thumbnail'] = sprintf('http://img.youtube.com/vi/%s/hqdefault.jpg', $id);
-            $output['width'] = 15.2;
-            $output['height'] = 9;
-            break;
-        */
-        case "vimeo":
-        // check if $id is numeric
-            if(!is_numeric($id))
-                return false;
-
-            // Get preview image from vimeo
-            $api_link = sprintf('http://vimeo.com/api/v2/video/%s.xml', $id);
-            $video = $this->getXMLData($api_link);
-            $outout = array();
-            $output['thumbnail'] = $video->video->thumbnail_large;
-            $output['width'] = $video->video->width;
-            $output['height'] = $video->video->height;
-
-            // check response
-            if(empty($output))
-                return false;
-
-            break;
-        case "video":
-            break;
-        default: break;
+            return $output;
     }
-    return $output;
-}
 
-    function is_iPhone() {
-        $uas = array ( 'iPhone', 'iPod');
+    function is_mobile() {
+            $uas = array ( 'iPhone', 'iPod', 'iPad', 'Android');
 
-        foreach ( $uas as $useragent ) {
-            if (eregi($useragent, $_SERVER['HTTP_USER_AGENT'])) {
-                return true;
-            } else {
-                return false;
+            foreach ( $uas as $useragent ) {
+                    $pattern = sprintf('/%s/', $useragent);
+                    if ( (bool) preg_match($pattern, $_SERVER['HTTP_USER_AGENT'])) {
+                            return true;
+                    }
             }
-        }
+            return false;
     }
 
     function add_header() {
@@ -1003,6 +1026,13 @@ class floatbox_plus {
             // option 'fb_licenseKey'
             // if(!empty($_POST['fb_licenseKey']))
                     $this->options['fb_licenseKey'] = $_POST['fb_licenseKey'];
+
+            // option 'video_debug'
+            if($_POST['video_debug'] == 'true') {
+                    $this->options['video_debug'] = true;
+            } else {
+                    $this->options['video_debug'] = false;
+            }
 
             // update options
             update_option('floatbox_plus', serialize($this->options));
@@ -1299,7 +1329,7 @@ class floatbox_plus {
             <?php printf(__("If you need to change options not mentioned here, you can change the following file %s (the configurator (%s) delievered with floatbox may help to find the options you're interessted in)."), FBP_PATH.'floatbox/options.js', '<a target="_blank" href="'.FBP_URLPATH.'floatbox/configurator.html">link</a>'); ?>
             <?php printf(__("To edit options.js you can try to use the Plugin-Editor of WordPress (only works with the right permissions set): %s"), '<a target="_blank" href="'.get_bloginfo( 'wpurl' ).'/wp-admin/plugin-editor.php?file='.plugin_basename( dirname(__FILE__) ).'/floatbox/options.js">link</a>'); ?>
         </p>
-        
+
         <p><?php _e('For more information about the many other options Floatbox offers (and which aren\'t integrated yet in the plugin), take a look at the homepage:', 'floatboxplus'); ?> <a href="http://randomous.com/tools/floatbox/">Link</a></p>
 
         <h3><?php _e('Video Options', 'floatboxplus'); ?></h3>
@@ -1392,7 +1422,8 @@ class floatbox_plus {
                     </td>
                 </tr>
 
-                <?php // Show link under Videos? ?>
+<!--
+                <?php // Fullscreen ?>
                 <tr valign="top">
                     <th scope="row">
                         <label><?php _e('YouTube: Allow fullscreen?', 'floatboxplus')?></label>
@@ -1407,6 +1438,7 @@ class floatbox_plus {
                         <?php _e('Allow youtube videos to be shown in fullscreen mode (works only in floatbox 3.50 and higher)', 'floatboxplus'); ?>
                     </td>
                 </tr>
+-->
 
                 <?php // play-button image vs text ?>
                 <tr valign="top">
@@ -1422,6 +1454,22 @@ class floatbox_plus {
                         <br />
                         <?php _e('Show the play-button as overlayimage, otherwise the textversion will be used', 'floatboxplus'); ?>
                     </td>
+                </tr>
+
+                <?php // Video Debug ?>
+                <tr valign="top">
+                        <th scope="row">
+                                <label><?php echo _e('Show Video Debug Infos', 'lightviewplus'); ?></label>
+                        </th>
+                        <td>
+                                <select name="video_debug" size="1">
+                                <option value="true" <?php if ($this->options['video_debug'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
+                                <option value="false" <?php if ($this->options['video_debug'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
+                                </select>
+
+                                <br />
+                                <?php _e('Shows video informations, like embed url or image url of the video. Only for debug!', 'lightviewplus'); ?>
+                        </td>
                 </tr>
 
             </tbody>
@@ -1471,15 +1519,17 @@ class floatbox_plus {
 } // end class
 
 /*
-   if function simplexml_load_file is not compiled into php
+   if function simplexml_load_string is not compiled into php
    use simplexml.class.php
 */
-if(!function_exists("simplexml_load_file")) {
-    require_once('libs/simplexml.class.php');
-    function simplexml_load_file($file) {
-        $sx = new simplexml;
-        return $sx->xml_load_file($file);
-    }
+if(!function_exists("simplexml_load_string")) {
+	require_once('libs/simplexml.class.php');
+
+	function simplexml_load_string($file)
+	{
+		$sx = new simplexml;
+		return $sx->xml_load_string($file);
+	}
 }
 
 //initalize class

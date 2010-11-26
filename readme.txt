@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.5
 Tested up to: 3.0.0
-Stable tag: 1.2.22
+Stable tag: 1.3.0
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -84,6 +84,21 @@ If you're using PHP4 or PHP5 without SimpleXML-extension the cache won't work.
 For other questions, take a look at the [support forum](http://board.splash.de/forumdisplay.php?f=103).
 
 == Changelog ==
+
+= 1.3.0 =
+* [FIX] crossport lightview plus 2.5.3
+* [FIX] small YouTube Feed fix
+* [NEW] new vimeo embed code to work with iphone, ipad... (haven't tested it, because I don't own an iPad)
+* [NEW] use of wp_remote_fopen to use curl or fopen
+* [NEW] added blip.tv
+* [FIX] removed deprecated function
+* [NEW] preview picture and a text of video is shown in feeds, instead of the simple text
+* [NEW] Autoplay for all videos
+* [FIX] some small core changes
+* [NEW] added some lines for more security
+* [FIX] Cache for video data
+* [NEW] Debug Option for videos
+* [NEW] Nice placeholder for videos which aren't available. Thanks to Zaur!
 
 = 1.2.21 / 1.2.22 =
 * [UPDATE] downloadurl for floatbox 4.21

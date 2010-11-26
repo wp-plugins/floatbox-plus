@@ -162,7 +162,8 @@ if ( 3664 <= $wp_db_version ) {
 					<option value="youtube">YouTube</option>
 					<option value="youtubehq">YouTube HQ</option>
 
-                                                <option value="vimeo">vimeo</option>
+                                        <option value="vimeo">vimeo</option>
+                                        <option value="bliptv">Blip.TV</option>
                                                 <?php /* <option value="google">Google Video</option>
                                                                     <option value="myspace">Myspace Video</option>
                                                                     <option value="dailymotion">dailymotion</option>
