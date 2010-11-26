@@ -6,8 +6,8 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=C2RBCTVPU9QKJ&lc=DE&item_name=splash%2ede&item_number=WordPress%20Plugin%3a%20Floatbox%20Plus&cn=Mitteilung%20an%20den%20Entwickler&no_shipping=1&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
 Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overlay, fancybox, thickbox
 License: GPL v3, see LICENSE
-Requires at least: 2.5
-Tested up to: 3.0.0
+Requires at least: 2.8
+Tested up to: 3.0.1
 Stable tag: 1.3.0
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
