@@ -31,6 +31,7 @@ do a manual installation of floatbox on your own (see installations instructions
 
 Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
 For Support, please use the [forum](http://board.splash.de/forumdisplay.php?f=103).
+Latest development news: [Twitter](http://twitter.com/cybiox9).
 
 Floatbox Plus is based on the WP-Plugin "Lightview Plus" by [Thorsten Puzich](http://www.puzich.com/wordpress-plugins/lightview).
 

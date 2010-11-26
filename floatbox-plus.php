@@ -144,6 +144,7 @@ class floatbox_plus {
             if ($file == $base) {
                     $links[] = '<a href="options-general.php?page=' . $base .'">' . __('Settings','floatboxplus') . '</a>';
                     $links[] = '<a href="http://board.splash.de/forumdisplay.php?f=103">' . __('Support','floatboxplus') . '</a>';
+                    $links[] = '<a href="http://twitter.com/cybiox9">' . __('Twitter','floatboxplus') . '</a>';
             }
             return $links;
     }
@@ -893,6 +894,9 @@ class floatbox_plus {
 
     function OptionsMenu()
     {
+
+        // TODO: check if there is a newer version of floatbox
+        // http://randomous.com/floatbox/download#v421
 
         if (!empty($_POST)) {
 
