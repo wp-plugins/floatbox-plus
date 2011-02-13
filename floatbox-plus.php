@@ -5,8 +5,8 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.3.0
-Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Because Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed under the terms of <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> it isn't included (not GPL compatible). Just use the included download option or read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
+Version: 1.4.0
+Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Cause the license of Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is not GPL compatible, it isn't bundled with the plugin. Please read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
 /*  Copyright 2009  Oliver Schaal  (email : maverick@unrealextreme.de)
@@ -171,9 +171,8 @@ class floatbox_plus {
             return array_merge(
                 array(
                     sprintf(
-                        '<a href="options-general.php?page=%s">%s</a>',
-                        dirname($plugin).'/floatbox-download.php',
-                        __('Download floatbox(.js)', 'floatboxplus') . '<br />'
+                        '%s',
+                        __('You need to download and install floatbox(.js), see installation instructions.', 'floatboxplus') . '<br />'
                         )
                     ),
                 $links
@@ -236,6 +235,7 @@ class floatbox_plus {
             );
         }
         //add link to downloadpage, only if floatbox isn't installed
+        /*
         if (!$this->check_javascript()) {
             add_options_page('Floatbox Download',
                 (version_compare($GLOBALS['wp_version'], '2.6.999', '>') ? '<img src="' . @plugins_url('floatbox-plus/icon.png') . '" width="10" height="10" alt="Floatbox Plus - Icon" />' : '') . 'Floatbox Download',
@@ -244,6 +244,7 @@ class floatbox_plus {
                 ''
             );
         }
+        */
     }
 
     function install()
@@ -679,12 +680,12 @@ class floatbox_plus {
 
     // get the video data out of the cache
     function get_cached_videodata($service, $id) {
-            $videodata = get_post_meta($GLOBALS['post']->ID, '_lvp', true);
+            $videodata = get_post_meta($GLOBALS['post']->ID, '_fbp', true);
 
             // if no cached data available or data is older than 24 hours, refresh/get data from video provider
             if(empty($videodata[$service][$id]) || $videodata[$service][$id]['timestamp'] + (60 * 60 * 24) < time() ) {
                     $videodata[$service][$id] = $this->get_videodata($service, $id);
-                    update_post_meta($GLOBALS['post']->ID, '_lvp', $videodata);
+                    update_post_meta($GLOBALS['post']->ID, '_fbp', $videodata);
             }
 
             return $videodata[$service][$id];
@@ -718,7 +719,7 @@ class floatbox_plus {
                                             $output['embedurl'] = sprintf('%s&amp;autoplay=1', $output['embedurl']);
 
                                             if($service == 'youtubehq')
-                                                    $output['embedurl'] .= '&amp;ap=%2526&amp;fmt%3D22&amp;hd=1';
+                                                    $output['embedurl'] = sprintf('%s&amp;ap=%2526&amp;fmt%3D22&amp;hd=1', $output['embedurl']);
                                     } else {
                                             $output['available'] = false;
                                     }
@@ -753,7 +754,7 @@ class floatbox_plus {
                             $output['timestamp'] = time();
 
                             // add autoplay
-                            $output['embedurl'] = sprintf('%s&amp;autoplay=1', $output['embedurl']);
+                            $output['embedurl'] = sprintf('%s?autoplay=1', $output['embedurl']);
 
                             // check response
                             if(empty($output) || empty($output['width']) || empty($output['height']) || empty($output['thumbnail']) ) {
@@ -800,7 +801,7 @@ class floatbox_plus {
                             $output['timestamp'] = time();
 
                             // add autoplay
-                            $output['embedurl'] = sprintf('%s&amp;autoStart=true', $output['embedurl']);
+                            $output['embedurl'] = sprintf('%s?autoStart=true', $output['embedurl']);
 
                             // check response
                             if(empty($output)) {
@@ -1053,12 +1054,14 @@ class floatbox_plus {
             // echo error if floatbox js / css isn't copied to plugin dir
             $plugin = plugin_basename(__FILE__);
             if(!$this->check_javascript()) {
-                echo '<div id="message" class="error"><p><strong>' . __('Floatbox Javascript isn\'t copied to the plugin directory. See installation instructions for further details <br />or try the new download option: ', 'floatboxplus') . '</strong>';
+                echo '<div id="message" class="error"><p><strong>' . __('Floatbox Javascript isn\'t copied to the plugin directory. See installation instructions for further details. ', 'floatboxplus') . '</strong>';
+                /*
                 printf(
                         '<a href="options-general.php?page=%s">%s</a>',
                         dirname($plugin).'/floatbox-download.php',
                         __('Download floatbox(.js) from randomous.com', 'floatboxplus') . '<br />'
                         );
+                */
                 echo '</p></div>';
             }
             ?>

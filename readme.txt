@@ -7,8 +7,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=C2RBC
 Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overlay, fancybox, thickbox
 License: GPL v3, see LICENSE
 Requires at least: 2.8
-Tested up to: 3.0.1
-Stable tag: 1.3.0
+Tested up to: 3.0.5
+Stable tag: 1.4.0
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -24,10 +24,9 @@ This plugin automatically enhance image links to use Floatbox, videos from youtu
 No other (external) JavaScript-Libraries (like Mootools/Prototype, Scriptaculous/JQuery) are needed. Unlike Lightview Plus
 this plugin should work with other plugins using prototyp/scriptaculous like Referrer Detector (the reason, why i made this fork).
 
-Cause Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is licensed
-under the terms of Creative Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/)
-it is not included (not GPL compatible). You have two options, let the plugin download/install floatbox for you or
-do a manual installation of floatbox on your own (see installations instructions).
+Cause the license of Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is not GPL compatible, it isn't bundled with the plugin.
+To get the plugin working you need to do a manual installation of floatbox on your own (see installations instructions). 
+As requested by the developer of Floatbox, the download/install option inside the plugin is deactivated in Floatbox Plus 1.4.0+.
 
 Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
 For Support, please use the [forum](http://board.splash.de/forumdisplay.php?f=103).
@@ -85,6 +84,10 @@ If you're using PHP4 or PHP5 without SimpleXML-extension the cache won't work.
 For other questions, take a look at the [support forum](http://board.splash.de/forumdisplay.php?f=103).
 
 == Changelog ==
+
+= 1.4.0 =
+* [UPDATE] As requested by the developer of Floatbox, the download/install option inside the plugin is deactivated in Floatbox Plus 1.4.0+.
+* [FIX] vimeo code (video should play again)
 
 = 1.3.0 =
 * [FIX] crossport lightview plus 2.5.3

@@ -8,7 +8,7 @@ if (!function_exists('is_admin')) {
 // do not change anything here ;)
 $_floatbox['dirname'] = 'floatbox';
 $_floatbox['destinationdir'] = 'floatbox-plus/floatbox/';
-$_floatbox['download_url'] = 'http://randomous.com/floatbox/floatbox_421.zip';
+$_floatbox['download_url'] = 'http://randomous.com/floatbox/floatbox_423.zip';
 
 function fbp_download($feedback = '') {
     global $wp_filesystem, $_floatbox;
