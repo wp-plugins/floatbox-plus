@@ -8,7 +8,7 @@ Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overla
 License: GPL v3, see LICENSE
 Requires at least: 2.8
 Tested up to: 3.0.5
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -30,7 +30,7 @@ As requested by the developer of Floatbox, the download/install option inside th
 
 Please report bugs and/or feature-request to our ticket-system: [Bugtracker/Wiki](http://trac.splash.de/floatboxplus).
 For Support, please use the [forum](http://board.splash.de/forumdisplay.php?f=103).
-Latest development news: [Twitter](http://twitter.com/cybiox9).
+Latest development news: [Twitter](http://twitter.com/cybiox9) or [blog](http://blog.splash.de).
 
 Floatbox Plus is based on the WP-Plugin "Lightview Plus" by [Thorsten Puzich](http://www.puzich.com/wordpress-plugins/lightview).
 
@@ -84,6 +84,9 @@ If you're using PHP4 or PHP5 without SimpleXML-extension the cache won't work.
 For other questions, take a look at the [support forum](http://board.splash.de/forumdisplay.php?f=103).
 
 == Changelog ==
+
+= 1.4.1 =
+* [FIX] YouTubeHQ
 
 = 1.4.0 =
 * [UPDATE] As requested by the developer of Floatbox, the download/install option inside the plugin is deactivated in Floatbox Plus 1.4.0+.
