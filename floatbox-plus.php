@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.4.2
+Version: 1.4.3
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Cause the license of Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is not GPL compatible, it isn't bundled with the plugin. Please read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -1022,7 +1022,7 @@ class floatbox_plus {
             }
 
             // option 'floatbox_350'
-            if($_POST['floatbox_350'] == 'true') {
+            if (version_compare($_localversion, '3.50') >= 0) {
                 $this->options['floatbox_350'] = true;
             } else {
                 $this->options['floatbox_350'] = false;
@@ -1045,6 +1045,19 @@ class floatbox_plus {
             // echo successfull update
             echo '<div id="message" class="updated fade"><p><strong>' . __('Options saved.', 'floatboxplus') . '</strong></p></div>';
         }
+        
+
+        if(file_exists(dirname(__FILE__).'/floatbox/floatbox.js')) {
+            $_dump = file_get_contents (dirname(__FILE__).'/floatbox/floatbox.js', NULL, NULL, 83, 32);
+            preg_match('/Floatbox v([0-9.]+)/i', $_dump, $_matches);
+            $_localversion = $_matches[1];
+            $_dump = file_get_contents ('http://randomous.com/floatbox/download');
+            preg_match('/Latest version is ([0-9.]+)/i', $_dump, $_matches);
+            $_remoteversion = $_matches[1];
+            if (version_compare($_remoteversion, $_localversion) > 0)
+            echo '<div id="message" class="updated fade"><p><strong>' . __("You're using floatbox version: ", 'floatboxplus') . $_localversion . ', ' . __("latest version is: ", 'floatboxplus') . '<a href="http://randomous.com/floatbox/download">' . $_remoteversion . '</a> (please update)</strong></p></div>';
+        }
+
 
         ?>
 <div class="wrap">

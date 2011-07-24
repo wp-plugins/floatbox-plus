@@ -7,8 +7,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=C2RBC
 Tags: lightview, images, lightbox, photo, image, ajax, picture, floatbox, overlay, fancybox, thickbox
 License: GPL v3, see LICENSE
 Requires at least: 2.8
-Tested up to: 3.0.5
-Stable tag: 1.4.2
+Tested up to: 3.2.1
+Stable tag: 1.4.3
 
 Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html.
 
@@ -84,6 +84,9 @@ If you're using PHP4 or PHP5 without SimpleXML-extension the cache won't work.
 For other questions, take a look at the [support forum](http://board.splash.de/forumdisplay.php?f=103).
 
 == Changelog ==
+
+= 1.4.3 =
+* [FIX] see 1.4.2
 
 = 1.4.2 =
 * [NEW] floatbox versioncheck
