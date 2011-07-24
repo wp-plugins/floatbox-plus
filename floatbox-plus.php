@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.4.1
+Version: 1.4.2
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Cause the license of Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is not GPL compatible, it isn't bundled with the plugin. Please read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -25,6 +25,9 @@ Description: Seamless integration of Floatbox (jscript similar to Lightview/Ligh
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+// TODO: logoless player: ?modestbranding=1
+// http://youtube-global.blogspot.com/2011/06/next-step-in-embedded-videos-hd-preview.html */
 
 
 if (!function_exists('is_admin')) {
@@ -895,9 +898,6 @@ class floatbox_plus {
 
     function OptionsMenu()
     {
-
-        // TODO: check if there is a newer version of floatbox
-        // http://randomous.com/floatbox/download#v421
 
         if (!empty($_POST)) {
 
