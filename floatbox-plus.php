@@ -5,7 +5,7 @@ Plugin URI: http://blog.splash.de/plugins/floatbox-plus
 Author: Oliver Schaal
 Author URI: http://blog.splash.de/
 Website link: http://blog.splash.de/
-Version: 1.4.3
+Version: 1.4.4
 Description: Seamless integration of Floatbox (jscript similar to Lightview/Lightbox/Shadowbox/Fancybox/Thickbox) to create nice overlay display images/videos without the need to change html. Cause the license of Floatbox by <a href="http://randomous.com/tools/floatbox/">Byron McGregor</a> is not GPL compatible, it isn't bundled with the plugin. Please read the instructions for manual installation on <a href="http://blog.splash.de/plugins/floatbox-plus">my website</a> or in the readme.txt.
 */
 
@@ -897,7 +897,19 @@ class floatbox_plus {
     }
 
     function OptionsMenu()
-    {
+    {       
+        
+        $_localversion = "3.51";
+        if(file_exists(dirname(__FILE__).'/floatbox/floatbox.js')) {
+            $_dump = file_get_contents (dirname(__FILE__).'/floatbox/floatbox.js', NULL, NULL, 83, 32);
+            preg_match('/Floatbox v([0-9.]+)/i', $_dump, $_matches);
+            $_localversion = $_matches[1];
+            $_dump = file_get_contents ('http://randomous.com/floatbox/download');
+            preg_match('/Latest version is ([0-9.]+)/i', $_dump, $_matches);
+            $_remoteversion = $_matches[1];
+            if (version_compare($_remoteversion, $_localversion) > 0)
+            echo '<div id="message" class="updated fade"><p><strong>' . __("You're using floatbox version: ", 'floatboxplus') . $_localversion . ', ' . __("latest version is: ", 'floatboxplus') . '<a href="http://randomous.com/floatbox/download">' . $_remoteversion . '</a> (please update)</strong></p></div>';
+        }
 
         if (!empty($_POST)) {
 
@@ -1045,19 +1057,6 @@ class floatbox_plus {
             // echo successfull update
             echo '<div id="message" class="updated fade"><p><strong>' . __('Options saved.', 'floatboxplus') . '</strong></p></div>';
         }
-        
-
-        if(file_exists(dirname(__FILE__).'/floatbox/floatbox.js')) {
-            $_dump = file_get_contents (dirname(__FILE__).'/floatbox/floatbox.js', NULL, NULL, 83, 32);
-            preg_match('/Floatbox v([0-9.]+)/i', $_dump, $_matches);
-            $_localversion = $_matches[1];
-            $_dump = file_get_contents ('http://randomous.com/floatbox/download');
-            preg_match('/Latest version is ([0-9.]+)/i', $_dump, $_matches);
-            $_remoteversion = $_matches[1];
-            if (version_compare($_remoteversion, $_localversion) > 0)
-            echo '<div id="message" class="updated fade"><p><strong>' . __("You're using floatbox version: ", 'floatboxplus') . $_localversion . ', ' . __("latest version is: ", 'floatboxplus') . '<a href="http://randomous.com/floatbox/download">' . $_remoteversion . '</a> (please update)</strong></p></div>';
-        }
-
 
         ?>
 <div class="wrap">
@@ -1102,22 +1101,6 @@ class floatbox_plus {
                     </td>
                 </tr>
                 <?php endif; ?>
-
-                <?php // floatbox_350 ?>
-                <tr valign="top">
-                    <th scope="row">
-                        <label><?php echo __('Do you use Floatbox 3.50 or above?', 'floatboxplus')?></label>
-                    </th>
-                    <td>
-                        <select name="floatbox_350" size="1">
-                            <option value="true" <?php if ($this->options['floatbox_350'] == true ) { ?>selected="selected"<?php } ?>><?php _e('yes', 'floatboxplus'); ?></option>
-                            <option value="false" <?php if ($this->options['floatbox_350'] == false ) { ?>selected="selected"<?php } ?>><?php _e('no', 'floatboxplus'); ?></option>
-                        </select>
-
-                        <br />
-                        <?php echo __('Cause there are some major changes in Floatbox 3.50 (and above), the plugin needs to know which version you have', 'floatboxplus'); ?>
-                    </td>
-                </tr>
 
                 <?php // Activate Movies? ?>
                 <tr valign="top">
